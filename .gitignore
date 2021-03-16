@@ -27,3 +27,4 @@ vendor
 /vagrant/phpbb-install-config.yml
 .vagrant
 .idea
+pthranking/*
