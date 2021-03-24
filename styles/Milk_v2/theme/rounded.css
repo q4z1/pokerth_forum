@@ -1,0 +1,99 @@
+.forabg, .forumbg {
+    border-radius: 0 0 10px 10px;
+}
+
+li.header {
+    border-radius: 10px 10px 0 0;
+}
+
+li.row:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+li.row:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+li.row:only-child {
+    border-radius: 10px;
+}
+
+#inner-wrap {
+    border-radius: 10px;
+}
+
+input.button1, a.button1, input.button2, a.button2, input.button3, .specialbutton, .button {
+    border-radius: 25px;
+}
+
+.post {
+    border-radius: 10px;
+}
+
+.rules {
+    border-radius: 10px;
+}
+
+.codebox code, blockquote {
+    border-radius: 10px;
+}
+
+select {
+    border-radius: 25px;
+}
+
+.inputbox[type=text], .inputbox[type=url], .inputbox[type=password] {
+    border-radius: 25px;
+}
+
+textarea {
+    border-radius: 10px;
+}
+
+.panel {
+    border-radius: 10px;
+}
+
+.search-box .inputbox {
+    border-radius: 25px 0 0 25px;
+}
+
+.search-box button.button-search {
+    border-radius: 0;
+}
+
+.search-box a.button-search-end {
+    border-radius: 0 25px 25px 0;
+}
+
+.pagination li span {
+    border-radius: 10px;
+}
+
+.forumlist_grid li.row, 
+.grid_image_container, 
+.forumlist_grid_forum_image, 
+.grid_colour_overlay,
+.grid_tile_full_bg_img {
+    border-radius: 15px;
+}
+
+.tile_row_2:before  {
+    border-radius: 2px;
+}
+
+.forumlist_grid .forabg {
+    border-radius: 10px;
+}
+
+.viewtopic_wrapper {
+    border-radius: 10px;
+}
+
+.tile_row_1 {
+    border-radius: 5px;
+}
+
+.grid_unread {
+    border-radius: 3px;
+}

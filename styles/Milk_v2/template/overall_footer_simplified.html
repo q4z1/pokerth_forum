@@ -1,0 +1,128 @@
+
+            <div>
+                <a id="bottom" class="anchor" accesskey="z"></a>
+                <!-- IF not S_IS_BOT -->{RUN_CRON_TASK}<!-- ENDIF -->
+            </div>
+
+            <script type="text/javascript" src="{T_JQUERY_LINK}"></script>
+
+            <!-- IF S_ALLOW_CDN -->
+                <script type="text/javascript">window.jQuery || document.write('\x3Cscript src="{T_ASSETS_PATH}/javascript/jquery.min.js?assets_version={T_ASSETS_VERSION}">\x3C/script>');</script>
+            <!-- ENDIF -->
+
+            <script type="text/javascript" src="{T_ASSETS_PATH}/javascript/core.js?assets_version={T_ASSETS_VERSION}"></script>
+            <!-- INCLUDEJS forum_fn.js -->
+            <!-- INCLUDEJS ajax.js -->
+
+            <!-- IF S_ALLOW_CDN -->
+                <script type="text/javascript">
+                    (function($){
+                        var $fa_cdn = $('head').find('link[rel="stylesheet"]').first(),
+                            $span = $('<span class="fa" style="display:none"></span>').appendTo('body');
+                        if ($span.css('fontFamily') !== 'FontAwesome' ) {
+                            $fa_cdn.after('<link href="{T_ASSETS_PATH}/css/font-awesome.min.css" rel="stylesheet">');
+                            $fa_cdn.remove();
+                        }
+                        $span.remove();
+                    })(jQuery);
+                </script>
+            <!-- ENDIF -->
+
+
+            <!-- EVENT overall_footer_after -->
+
+            <!-- IF S_PLUPLOAD --><!-- INCLUDE plupload.html --><!-- ENDIF -->
+            {$SCRIPTS}
+
+            <!-- IF STYLE_SETTINGS_CONFIG_DARK_TOGGLE -->
+            	<!-- INCLUDEJS js.cookie.js -->
+            <!-- ENDIF -->
+
+            <script>                
+              // ************************************************
+              // clear mechanism (for testing)
+              // localStorage.removeItem('user_colour_selection');
+              // ************************************************                
+              console.log("storage value:" + localStorage.user_colour_selection)
+              FDSetClass();
+              FDSetSwitch();
+              
+              localStorage.getItem("user_colour_selection")                
+
+              function FDSetClass() {
+                  {% if STYLE_SETTINGS_CONFIG_BASE_COLOUR == 'Dark' %}
+                      console.log("FD Base: Dark");
+                      {% if STYLE_SETTINGS_CONFIG_ALLOW_USER_COLOUR %}
+                          console.log("FD: Override allowed");
+                          if(localStorage.user_colour_selection == 'dark') {
+                              console.log("FD: User selection: Dark");
+                              $("body").addClass('fd_dark');
+                              localStorage.setItem("user_colour_selection", "dark");
+                          } else {
+                              if (localStorage.user_colour_selection == 'cbu') {
+                                  console.log("FD: cbu. Removing dark class...");
+                                  $("body").removeClass('fd_dark');
+                              } else {
+                                  console.log("FD: Value is empty. Setting to dark...");
+                                  $("body").addClass('fd_dark');
+                                  localStorage.setItem("user_colour_selection", "dark");                                       
+                              }                                                          
+                          }
+                      {% else %}
+                          console.log("FD: Override not allowed");
+                          console.log("Apply dark");
+                          $("body").addClass('fd_dark');
+                          localStorage.setItem("user_colour_selection", "dark");
+                      {% endif %}
+                  {% else %}
+                      console.log("FD Base: Light");
+                      {% if STYLE_SETTINGS_CONFIG_ALLOW_USER_COLOUR %}
+                          console.log("FD: Override allowed");
+                          if(localStorage.user_colour_selection == 'dark') {
+                              console.log("FD: User selection: Dark");
+                              $("body").addClass('fd_dark');
+                              localStorage.setItem("user_colour_selection", "dark");
+                          } else {
+                              console.log("FD: User selection: Empty");
+                          }                        
+                      {% else %}
+                          console.log("FD: Override not allowed");
+                          console.log("FD: Do nothing");
+                      {% endif %}
+                  {% endif %}
+              }
+
+              function FDSetSwitch() {
+                  if ($("body").hasClass('fd_dark')) {
+                      $("a#dark_toggle_link i").addClass("fa-lightbulb-o");
+                  } else {
+                      $("a#dark_toggle_link i").addClass("fa-moon-o");
+                  }
+              }
+
+              function FDSwitchLink() {
+                  if(localStorage.user_colour_selection == 'dark') {
+                      // Dark
+                      $("a#dark_toggle_link i").removeClass("fa-lightbulb-o");
+                      $("a#dark_toggle_link i").addClass("fa-moon-o");
+                      $("body").removeClass('fd_dark');
+                      localStorage.setItem("user_colour_selection", "cbu");
+                      console.log("Dark preference CBU (cleared by user)");
+                  } else {
+                      // Light
+                      $("a#dark_toggle_link i").removeClass("fa-moon-o");
+                      $("a#dark_toggle_link i").addClass("fa-lightbulb-o");
+                      localStorage.setItem("user_colour_selection", "dark");
+                  }
+              }                                    
+
+              {% if STYLE_SETTINGS_CONFIG_ALLOW_USER_COLOUR %}
+                  $("a#dark_toggle_link").click(function() {
+                      FDSwitchLink();
+                      FDSetClass();
+                  });
+              {% endif %}
+          </script>                
+
+</body>
+</html>

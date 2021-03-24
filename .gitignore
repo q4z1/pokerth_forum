@@ -1,4 +1,5 @@
 *~
+accounts/*
 /phpunit.xml
 cache/*
 !cache/.htaccess
@@ -14,8 +15,7 @@ install/schemas/schema.json
 language/*
 !language/en
 store/*
-styles/*
-ranking/*
+pthranking/*
 !styles/prosilver
 !styles/all
 node_modules

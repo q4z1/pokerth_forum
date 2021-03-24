@@ -1,0 +1,91 @@
+/* New code for new things */
+#inner-wrap {
+	background: #FFFFFF;
+	position: relative;
+	margin-top: -50px !important;
+	z-index: 3;
+}
+
+#inner-wrap:after {
+	content: "";
+	display: table;
+	clear: both;
+	height: 0;
+}
+
+.viewtopic_wrapper {
+	padding: 10px 10px 5px;
+}
+
+.sub-forumlist ul {
+	float: left;
+	list-style-type: none;
+	margin-left: 20px !important;
+}
+
+.sub-forumlist li {
+	line-height: 1.5em;
+}
+
+body.force_rounded_avatars span.lastpostavatar img.avatar {
+    border-radius: 25px;
+}
+
+.viewtopic_wrapper .phpbb-ads-center {
+	padding: 15px;
+}
+
+span.forumlist_mods {
+	display: inline-block;
+	margin-top: 8px;
+}
+
+.forumlist_mods a {
+	display: inline-block !important;
+	margin-bottom: 5px;
+	border-radius: 15px;
+	background: rgba(0,0,0,.05);
+	padding: 5px 12px 5px 30px !important;
+}
+
+.forumlist_mods a:hover {
+	text-decoration: none !important;
+	background: rgba(0,0,0,.1);
+}
+
+.fd_dark .forumlist_mods a {background: rgba(0,0,0,.25);}
+.fd_dark .forumlist_mods a:hover {background: rgba(0,0,0,.3);}
+
+
+.forumlist_mods a i {
+	margin-right: 5px;
+	margin-left: -23px;
+	padding: 5px 4px;
+	position: absolute;
+	font-size: 8px;
+	color: #FFFFFF !important;
+	border-radius: 50%;
+	background: rgba(0,0,0,0.2);
+}
+
+
+.forumlist_mods a i:before {
+	padding-right: 0px !important;
+}
+
+
+.headerbar_overlay_container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+span.forum_description {
+	width: 100%;
+	display: block;
+}
+
+.outline_button {
+	border: 2px solid rgba(255,255,255,.4);
+	border-radius: 9999px;
+}

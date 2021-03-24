@@ -1,0 +1,37 @@
+<!-- INCLUDE overall_header_simplified.html -->
+
+<div class="login_container">
+	<div class="login_container_left">
+    	<div class="login_container_left_section_content fancy_panel animated fadeIn">
+        	<div class="login_container_padding">
+                <form id="login_forum" method="post" action="{S_LOGIN_ACTION}">
+                {S_FORM_TOKEN}
+                        <h2 class="login-title">{L_LOGIN}</h2>
+                        <p>{L_LOGIN_FORUM}</p>
+                        <fieldset class="fields1">
+                            <!-- IF LOGIN_ERROR -->
+                                <dl>
+                                    <dt>&nbsp;</dt>
+                                    <dd class="error">{LOGIN_ERROR}</dd>
+                                </dl>
+                            <!-- ENDIF -->
+
+                            <label for="password">{L_PASSWORD}{L_COLON}</label></dt>
+                                <input type="password" tabindex="1" id="password" name="password" size="25" class="inputbox" autocomplete="off" />
+								{S_LOGIN_REDIRECT}
+								{S_FORM_TOKEN_LOGIN}
+                                {S_HIDDEN_FIELDS}
+                                <br /><br />
+                                <input type="submit" name="login" id="login" class="button1 specialbutton" value="{L_LOGIN}" tabindex="2" />
+                                <div class="login_form_forgot_link">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i> <a href="{U_INDEX}">{L_BACK_TO_PREV}</a>
+                                </div>                                   
+                        </fieldset>
+                </form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- INCLUDE overall_footer_simplified.html -->

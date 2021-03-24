@@ -1,0 +1,133 @@
+<div class="forumlist_grid<!-- IF STYLE_SETTINGS_CONFIG_GRID_TILE_FULL --> grid_tile_full<!-- ENDIF -->">
+
+<!-- BEGIN forumrow -->
+
+	<!-- IF (forumrow.S_IS_CAT and not forumrow.S_FIRST_ROW) or forumrow.S_NO_CAT  -->
+			</ul>
+
+			</div>
+		</div>
+	<!-- ENDIF -->
+
+	<!-- EVENT forumlist_body_category_header_before -->
+	<!-- IF forumrow.S_IS_CAT or forumrow.S_FIRST_ROW  or forumrow.S_NO_CAT  -->
+
+	<!-- EVENT forumlist_body_category_header_row_prepend -->
+	<span class="grid_cat_title">
+	<!-- IF forumrow.S_IS_CAT -->
+			<a href="{forumrow.U_VIEWFORUM}" class="cat_title">{forumrow.FORUM_NAME}</a>
+		<!-- ELSE -->
+			{L_FORUM}
+	<!-- ENDIF -->
+	</span>
+	<!-- EVENT forumlist_body_category_header_row_append -->
+
+		<div class="forabg">
+			<div class="inner">
+			<ul class="topiclist forums">
+	<!-- ENDIF -->
+	<!-- EVENT forumlist_body_category_header_after -->
+
+	<!-- IF not forumrow.S_IS_CAT -->
+		<!-- EVENT forumlist_body_forum_row_before -->
+		<li class="row row_{forumrow.FORUM_ID}<!-- IF forumrow.AVATAR_IMG --> has_last_post_avatar<!-- ENDIF -->">
+			<!-- EVENT forumlist_body_forum_row_prepend -->
+
+			<div class="grid_image_container">
+				<!-- IF STYLE_SETTINGS_CONFIG_GRID_TILE_FULL -->
+					<div class="grid_tile_full_bg_img"></div>
+					<style type="text/css">
+						.row_{forumrow.FORUM_ID} .grid_tile_full_bg_img {
+							background-image: url('{forumrow.FORUM_IMAGE_SRC}');
+						}
+					</style>
+				<!-- ENDIF -->
+
+                    <a href="{forumrow.U_VIEWFORUM}" class="tile_inner">
+
+						<!-- IF not STYLE_SETTINGS_CONFIG_GRID_TILE_FULL -->
+						<div class="tile_row_1 tile_has_icon" <!-- IF forumrow.FORUM_IMAGE -->style="background-image: url('{forumrow.FORUM_IMAGE_SRC}');"<!-- ENDIF -->">
+						</div>
+						<!-- ENDIF -->
+
+						<div class="tile_row_2">
+
+							<div class="tile_title">
+
+									<div class="tile_forum_name">
+									<!-- IF forumrow.S_UNREAD_FORUM -->
+									<span class="grid_unread">{L_NEW_POSTS}</span>
+									<!-- ENDIF -->										
+										{forumrow.FORUM_NAME}
+									
+									</div>
+
+								<!-- IF forumrow.FORUM_DESC --><span class="forum_description">{forumrow.FORUM_DESC}</span> <!-- ENDIF -->
+							</div>	
+
+							<!-- IF forumrow.CLICKS -->
+							<div class="tile_row_100">
+								<span class="mini_number">
+									{forumrow.CLICKS}
+								</span>
+								<span class="mini_label">
+									{L_REDIRECTS}
+								</span>
+
+							</div>
+							<!-- ELSE -->
+								<div class="tile_row_25">
+									<span class="mini_number">
+										{forumrow.TOPICS}
+									</span>
+									<span class="mini_label">
+										{L_TOPICS}
+									</span>
+								</div>
+								<div class="tile_row_25">
+									<span class="mini_number">
+										{forumrow.POSTS}
+									</span>
+									<span class="mini_label">
+										{L_POSTS}
+									</span>
+								</div>
+								<!-- IF forumrow.LAST_POST_TIME -->
+								<div class="tile_row_50">
+									<span class="mini_date">
+										<time datetime="{forumrow.LAST_POST_TIME_RFC3339}">{forumrow.LAST_POST_TIME}</time>
+									</span>
+									<span class="mini_label">
+										{L_LAST_POST}
+									</span>
+								</div>
+								<!-- ENDIF -->
+							<!-- ENDIF -->
+						</div>
+
+                    </a>
+
+            </div>
+
+			<!-- EVENT forumlist_body_forum_row_append -->
+		</li>
+		<!-- EVENT forumlist_body_forum_row_after -->
+	<!-- ENDIF -->
+
+	<!-- IF forumrow.S_LAST_ROW -->
+			</ul>
+
+			</div>
+		</div>
+	<!-- EVENT forumlist_body_last_row_after -->
+	<!-- ENDIF -->
+
+<!-- BEGINELSE -->
+	<div class="panel">
+		<div class="inner">
+		<strong>{L_NO_FORUMS}</strong>
+		</div>
+	</div>
+<!-- END forumrow -->
+
+</div>
