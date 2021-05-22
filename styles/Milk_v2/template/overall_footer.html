@@ -52,16 +52,11 @@
             </div>
 
             <div class="copyright_bar" dir="ltr" style="height:47px">
-                Powered by <a href="https://www.pokerth.net/">PokerTH</a> <span class="planetstyles_credit<!-- IF STYLE_SETTINGS_CONFIG_CREDIT_LINE --> planetstyles_credit_hidden<!-- ENDIF -->">&bull; Design by <a href="http://www.planetstyles.net">PlanetStyles</a></span>
+                Powered by <a href="https://www.pokerth.net/">PokerTH</a> <span></span>
                 <!-- EVENT overall_footer_copyright_prepend -->
                 <!-- IF TRANSLATION_INFO --><br />{{ TRANSLATION_INFO }}<!-- ENDIF -->
                 <!-- EVENT overall_footer_copyright_append -->
                 <!-- IF DEBUG_OUTPUT --><br />{{ DEBUG_OUTPUT }}<!-- ENDIF -->
-                <form action="https://www.paypal.com/donate" method="post" target="_top" style="float:right">
-                    <input type="hidden" name="hosted_button_id" value="AKEUZAJR7DBMN">
-                    <input type="image" src="https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button">
-                    <img alt="" border="0" src="https://www.paypal.com/en_DE/i/scr/pixel.gif" width="1" height="1" zgvhh4xtn="">
-                </form>
             </div>
 
             </div> <!-- /#wrap -->
@@ -97,7 +92,7 @@
                 // clear mechanism (for testing)
                 // localStorage.removeItem('user_colour_selection');
                 // ************************************************                
-                console.log("storage value:" + localStorage.user_colour_selection)
+                // console.log("storage value:" + localStorage.user_colour_selection)
                 FDSetClass();
                 FDSetSwitch();
                 
@@ -105,43 +100,43 @@
 
                 function FDSetClass() {
                     {% if STYLE_SETTINGS_CONFIG_BASE_COLOUR == 'Dark' %}
-                        console.log("FD Base: Dark");
+                        // console.log("FD Base: Dark");
                         {% if STYLE_SETTINGS_CONFIG_ALLOW_USER_COLOUR %}
-                            console.log("FD: Override allowed");
+                            // console.log("FD: Override allowed");
                             if(localStorage.user_colour_selection == 'dark') {
-                                console.log("FD: User selection: Dark");
+                                // console.log("FD: User selection: Dark");
                                 $("html").addClass('fd_dark');
                                 localStorage.setItem("user_colour_selection", "dark");
                             } else {
                                 if (localStorage.user_colour_selection == 'cbu') {
-                                    console.log("FD: cbu. Removing dark class...");
+                                    // console.log("FD: cbu. Removing dark class...");
                                     $("html").removeClass('fd_dark');
                                 } else {
-                                    console.log("FD: Value is empty. Setting to dark...");
+                                    // console.log("FD: Value is empty. Setting to dark...");
                                     $("html").addClass('fd_dark');
                                     localStorage.setItem("user_colour_selection", "dark");                                       
                                 }                                                          
                             }
                         {% else %}
-                            console.log("FD: Override not allowed");
-                            console.log("Apply dark");
+                            // console.log("FD: Override not allowed");
+                            // console.log("Apply dark");
                             $("html").addClass('fd_dark');
                             localStorage.setItem("user_colour_selection", "dark");
                         {% endif %}
                     {% else %}
-                        console.log("FD Base: Light");
+                        // console.log("FD Base: Light");
                         {% if STYLE_SETTINGS_CONFIG_ALLOW_USER_COLOUR %}
-                            console.log("FD: Override allowed");
+                            // console.log("FD: Override allowed");
                             if(localStorage.user_colour_selection == 'dark') {
-                                console.log("FD: User selection: Dark");
+                                // console.log("FD: User selection: Dark");
                                 $("html").addClass('fd_dark');
                                 localStorage.setItem("user_colour_selection", "dark");
                             } else {
-                                console.log("FD: User selection: Empty");
+                                // console.log("FD: User selection: Empty");
                             }                        
                         {% else %}
-                            console.log("FD: Override not allowed");
-                            console.log("FD: Do nothing");
+                            // console.log("FD: Override not allowed");
+                            // console.log("FD: Do nothing");
                         {% endif %}
                     {% endif %}
                 }
@@ -161,7 +156,7 @@
                         $("a#dark_toggle_link i").addClass("fa-moon-o");
                         $("html").removeClass('fd_dark');
                         localStorage.setItem("user_colour_selection", "cbu");
-                        console.log("Dark preference CBU (cleared by user)");
+                        // console.log("Dark preference CBU (cleared by user)");
                     } else {
                         // Light
                         $("a#dark_toggle_link i").removeClass("fa-moon-o");
@@ -329,7 +324,7 @@
         				"transition-delay": transitiondelay,
         				"animation-delay": transitiondelay
         			});
-        			 console.log(transitiondelay);
+        			 // console.log(transitiondelay);
                 });             
             </script>
             <!-- ENDIF -->

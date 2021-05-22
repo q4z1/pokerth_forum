@@ -43,7 +43,7 @@
               // clear mechanism (for testing)
               // localStorage.removeItem('user_colour_selection');
               // ************************************************                
-              console.log("storage value:" + localStorage.user_colour_selection)
+            //   console.log("storage value:" + localStorage.user_colour_selection)
               FDSetClass();
               FDSetSwitch();
               
@@ -51,16 +51,16 @@
 
               function FDSetClass() {
                   {% if STYLE_SETTINGS_CONFIG_BASE_COLOUR == 'Dark' %}
-                      console.log("FD Base: Dark");
+                    //   console.log("FD Base: Dark");
                       {% if STYLE_SETTINGS_CONFIG_ALLOW_USER_COLOUR %}
                           console.log("FD: Override allowed");
                           if(localStorage.user_colour_selection == 'dark') {
-                              console.log("FD: User selection: Dark");
+                            //   console.log("FD: User selection: Dark");
                               $("body").addClass('fd_dark');
                               localStorage.setItem("user_colour_selection", "dark");
                           } else {
                               if (localStorage.user_colour_selection == 'cbu') {
-                                  console.log("FD: cbu. Removing dark class...");
+                                //   console.log("FD: cbu. Removing dark class...");
                                   $("body").removeClass('fd_dark');
                               } else {
                                   console.log("FD: Value is empty. Setting to dark...");
@@ -69,25 +69,25 @@
                               }                                                          
                           }
                       {% else %}
-                          console.log("FD: Override not allowed");
-                          console.log("Apply dark");
+                        //   console.log("FD: Override not allowed");
+                        //   console.log("Apply dark");
                           $("body").addClass('fd_dark');
                           localStorage.setItem("user_colour_selection", "dark");
                       {% endif %}
                   {% else %}
                       console.log("FD Base: Light");
                       {% if STYLE_SETTINGS_CONFIG_ALLOW_USER_COLOUR %}
-                          console.log("FD: Override allowed");
+                        //   console.log("FD: Override allowed");
                           if(localStorage.user_colour_selection == 'dark') {
-                              console.log("FD: User selection: Dark");
+                            //   console.log("FD: User selection: Dark");
                               $("body").addClass('fd_dark');
                               localStorage.setItem("user_colour_selection", "dark");
                           } else {
-                              console.log("FD: User selection: Empty");
+                            //   console.log("FD: User selection: Empty");
                           }                        
                       {% else %}
-                          console.log("FD: Override not allowed");
-                          console.log("FD: Do nothing");
+                        //   console.log("FD: Override not allowed");
+                        //   console.log("FD: Do nothing");
                       {% endif %}
                   {% endif %}
               }
@@ -107,7 +107,7 @@
                       $("a#dark_toggle_link i").addClass("fa-moon-o");
                       $("body").removeClass('fd_dark');
                       localStorage.setItem("user_colour_selection", "cbu");
-                      console.log("Dark preference CBU (cleared by user)");
+                    //   console.log("Dark preference CBU (cleared by user)");
                   } else {
                       // Light
                       $("a#dark_toggle_link i").removeClass("fa-moon-o");
