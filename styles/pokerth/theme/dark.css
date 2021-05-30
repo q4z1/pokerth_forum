@@ -1,0 +1,346 @@
+/* high-contrast text */
+.fd_dark h2, 
+.fd_dark .panel-container h2, 
+.fd_dark .tabs .activetab > a, 
+.fd_dark .tabs .activetab > a:hover, 
+.fd_dark .tabs .tab a:hover, 
+.fd_dark .navigation .active-subsection a, 
+.fd_dark .navigation .active-subsection a:hover, 
+.fd_dark .navigation a:hover, 
+.fd_dark .panel-container, 
+.fd_dark label:hover, 
+.fd_dark fieldset dl:hover dt label, 
+.fd_dark dl.faq dt, 
+.fd_dark h3, 
+.fd_dark .content h2, 
+.fd_dark .panel h2, 
+.fd_dark fieldset.polls dl.voted, 
+.fd_dark .button .icon, 
+.fd_dark .inputbox, 
+.fd_dark textarea, 
+.fd_dark .message-box textarea, 
+.fd_dark .panel-container table.table1 thead th, 
+.fd_dark a.button1, 
+.fd_dark input.button1, 
+.fd_dark input.button3, 
+.fd_dark a.button2, 
+.fd_dark input.button2, 
+.fd_dark a.button1:hover, 
+.fd_dark input.button1:hover, 
+.fd_dark a.button2:hover, 
+.fd_dark input.button2:hover, 
+.fd_dark input.button3:hover, 
+.fd_dark .postbody .content, 
+.fd_dark .pagination li a, 
+.fd_dark select, 
+.fd_dark .button .icon, 
+.fd_dark .button-secondary, 
+.fd_dark .global_read_mine:after, 
+.fd_dark .global_read_locked_mine:after, 
+.fd_dark .global_unread_mine:after, 
+.fd_dark .global_unread_locked_mine:after, 
+.fd_dark .announce_read_mine:after, 
+.fd_dark .announce_read_locked_mine:after, 
+.fd_dark .announce_unread_mine:after, 
+.fd_dark .announce_unread_locked_mine:after, 
+.fd_dark .sticky_read_mine:after, 
+.fd_dark .sticky_read_locked_mine:after, 
+.fd_dark .sticky_unread_mine:after, 
+.fd_dark .sticky_unread_locked_mine:after, 
+.fd_dark .topic_read_mine:after, 
+.fd_dark .topic_read_hot_mine:after, 
+.fd_dark .topic_unread_mine:after, 
+.fd_dark .topic_unread_hot_mine:after, 
+.fd_dark .topic_read_locked_mine:after, 
+.fd_dark .topic_unread_locked_mine:after, 
+.fd_dark .dropdown-extended .header, 
+.fd_dark .dropdown-extended .footer, 
+.fd_dark .pagination li.ellipsis span, 
+.fd_dark .icon.icon-black, 
+.fd_dark a:hover .icon.icon-black, 
+.fd_dark .minitabs a:hover, 
+.fd_dark .minitabs .activetab > a, 
+.fd_dark .minitabs .activetab > .fd_dark a:hover,
+.fd_dark li.row strong  {
+	color: #CCCCCC !important;
+	
+}
+
+
+/* subtle text */
+html.fd_dark body, 
+.fd_dark .copyright, 
+.fd_dark ul.topiclist li, 
+.fd_dark .panel, 
+.fd_dark label, 
+.fd_dark dd label, 
+.fd_dark .signature, 
+.fd_dark .postprofile, 
+.fd_dark .postprofile strong, 
+.fd_dark dl.details dd, 
+.fd_dark dl.details dt, 
+.fd_dark .content, 
+.fd_dark .postbody, 
+.fd_dark fieldset.polls dl, 
+.fd_dark dl.file dd, 
+.fd_dark table.table1 td, 
+.fd_dark .dropdown-extended ul li:hover,
+.fd_dark .mini_label, 
+.fd_dark .mini_number, 
+.fd_dark .forumlist_grid .forum_description {
+	color: #838b98;
+	
+}
+
+
+html.fd_dark {
+	background-color: #101216 !important;
+}
+
+
+/* Light bg colours */
+.fd_dark .navbar_o_header .navbar, 
+.fd_dark .forabg, 
+.fd_dark .forumbg, 
+.fd_dark li.row, 
+.fd_dark .bg1, 
+.fd_dark .bg2, 
+.fd_dark .bg3, 
+.fd_dark .tabs .activetab > a, 
+.fd_dark .tabs a:hover, 
+.fd_dark ul.cplist, 
+.fd_dark .panel, 
+.fd_dark blockquote blockquote, 
+.fd_dark .panel blockquote, 
+.fd_dark .panel blockquote blockquote blockquote, 
+.fd_dark .panel .codebox, 
+.fd_dark .dropdown .dropdown-contents, 
+.fd_dark .jumpbox-cat-link, 
+.fd_dark .jumpbox-sub-link, 
+.fd_dark .jumpbox-forum-link, 
+.fd_dark .cp-main .message-box textarea, 
+.fd_dark fieldset.quick-login input.inputbox, 
+.fd_dark .fancy_panel,
+.fd_dark .dropdown-extended .header,
+.fd_dark .forumlist_grid .grid_image_container,
+.fd_dark  body.content_block_header_stripe li.header {
+	background: #242a36 !important;
+	
+}
+
+/* Dark bg colours */
+.fd_dark #inner-wrap, 
+.fd_dark.navbar_o_header .navbar,
+.fd_dark .panel-container .panel, 
+.fd_dark .navigation .active-subsection a, 
+.fd_dark .navigation a:hover, 
+.fd_dark .cp-mini, 
+.fd_dark .codebox,
+.fd_dark .codebox code, 
+.fd_dark blockquote, 
+.fd_dark blockquote blockquote blockquote, 
+.fd_dark .panel blockquote blockquote, 
+.fd_dark .attachbox, 
+.fd_dark .message-box textarea, 
+.fd_dark .phpbb_alert, 
+.fd_dark select, 
+.fd_dark .minitabs a:hover, 
+.fd_dark .minitabs .activetab > a, 
+.fd_dark .minitabs .activetab > a:hover, 
+.fd_dark .cp-main .pm, 
+.fd_dark .bg3 .topicreview .bg2, 
+.fd_dark .bg3 .topicreview .bg1 {
+	background-color: #171b24 !important;
+	
+}
+
+/* Middle grey (dark bg) */
+.fd_dark .tabs .tab > a {
+	background: rgba(255,255,255,0.04);
+	
+}
+
+/* Middle grey (light bg) */
+.fd_dark .navigation a, 
+.fd_dark .minitabs .tab > a {
+	background: rgba(0,0,0,0.15);
+	
+}
+
+
+
+
+
+/* Really light elements (buttons / forms etc) */
+.fd_dark .inputbox, 
+.fd_dark .button, 
+.fd_dark a.button1, 
+.fd_dark input.button1, 
+.fd_dark input.button3, 
+.fd_dark a.button2, 
+.fd_dark input.button2, 
+.fd_dark .pagination li a {
+	background: rgba(255,255,255,0.1);
+	
+}
+
+/* button hover */
+.fd_dark .button:hover, 
+.fd_dark a.button1:hover, 
+.fd_dark input.button1:hover, 
+.fd_dark a.button2:hover, 
+.fd_dark input.button2:hover, 
+.fd_dark input.button3:hover,  
+.fd_dark .search-results li:hover, 
+.fd_dark .search-results li.active {
+	background: rgba(255,255,255,0.2);
+	
+}
+
+
+/* Super subtle borders */
+.fd_dark .forumbg, 
+.fd_dark .forabg, 
+.fd_dark .navbar_o_header .navbar, 
+.fd_dark .post, 
+.fd_dark .bg3, 
+.fd_dark .panel blockquote, 
+.fd_dark .panel blockquote, 
+.fd_dark .panel .codebox,
+.fd_dark .login_form_forgot_link,
+.fd_dark .forumlist_grid .grid_image_container {
+	border: 1px solid rgba(255,255,255,0.04);
+	
+}
+
+.fd_dark li.row, 
+.fd_dark ul.linklist li, 
+.fd_dark h3, 
+.fd_dark ul.linklist, 
+.fd_dark ul.topiclist dd, 
+.fd_dark .postprofile, 
+.fd_dark .signature, 
+.fd_dark .tabs .activetab > a, 
+.fd_dark .tabs .activetab > a:hover, 
+.fd_dark .panel-container h3, 
+.fd_dark .panel-container .panel li.row, 
+.fd_dark .panel-container hr, 
+.fd_dark .cp-menu hr, 
+.fd_dark table.table1 tbody tr, 
+.fd_dark table.table1 tbody td, 
+.fd_dark hr, 
+.fd_dark .panel h2, 
+.fd_dark .content h2, 
+.fd_dark .codebox, 
+.fd_dark .codebox p, 
+.fd_dark fieldset.polls dl, 
+.fd_dark .attach-image img, 
+.fd_dark .attachbox, 
+.fd_dark .attachbox dd, 
+.fd_dark .inputbox, 
+.fd_dark .phpbb_alert, 
+.fd_dark a.button1, 
+.fd_dark input.button1, 
+.fd_dark input.button3, 
+.fd_dark a.button2, 
+.fd_dark input.button2, 
+.fd_dark a.button1:hover, 
+.fd_dark input.button1:hover, 
+.fd_dark a.button2:hover, 
+.fd_dark input.button2:hover, 
+.fd_dark input.button3:hover, 
+.fd_dark .dropdown li.separator, 
+.fd_dark select, 
+.fd_dark .dropdown li, 
+.fd_dark .dropdown li li, 
+.fd_dark .jumpbox .dropdown li, 
+.fd_dark .dropdown-extended .header, 
+.fd_dark .dropdown-extended .footer, 
+.fd_dark input.button1:focus, 
+.fd_dark input.button2:focus, 
+.fd_dark input.button3:focus, 
+.fd_dark .caret, 
+.fd_dark .pm .postprofile, 
+.fd_dark .sidebar_content, 
+.fd_dark .profile_widget_list,
+.fd_dark .button {
+	border-color: rgba(255,255,255,0.04);
+	
+}
+
+
+/*A less subtle border for overlapping elements (dropdowns) */
+.fd_dark .dropdown .dropdown-contents {
+	border-color: rgba(255,255,255,0.15);
+	
+}
+
+
+
+
+/* Super subtle hover effects */
+.fd_dark li.row:hover, 
+.fd_dark .dropdown-extended ul li:hover, 
+.fd_dark table.table1 tbody tr:hover, 
+.fd_dark table.table1 tbody tr.hover {
+	background: rgba(0,0,0,0.05) !important;
+	
+}
+
+
+/* Hacky overrides here, because..reasons */
+.fd_dark li.row.reported, 
+.fd_dark p.post-notice, 
+.fd_dark .rules {
+	background-color: rgba(211,17,65,0.2) !important;
+	color: #BC2A4D;
+	
+}
+
+.fd_dark .dropdown .pointer-inner, 
+.fd_dark .jumpbox .dropdown .pointer-inner {
+	border-color: #242a36 transparent;
+	
+}
+
+
+.fd_dark input#keywords::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #CCCCCC;
+}
+.fd_dark input#keywords::-moz-placeholder { /* Firefox 19+ */
+  color: #CCCCCC;
+}
+.fd_dark input#keywords:-ms-input-placeholder { /* IE 10+ */
+  color: #CCCCCC;
+}
+.fd_dark input#keywords:-moz-placeholder { /* Firefox 18- */
+  color: #CCCCCC;
+}
+
+.fd_dark input#search_keywords::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #CCCCCC;
+}
+.fd_dark input#search_keywords::-moz-placeholder { /* Firefox 19+ */
+  color: #CCCCCC;
+}
+.fd_dark input#search_keywords:-ms-input-placeholder { /* IE 10+ */
+  color: #CCCCCC;
+}
+.fd_dark input#search_keywords:-moz-placeholder { /* Firefox 18- */
+  color: #CCCCCC;
+}
+
+
+/* Ajustments */
+.fd_dark .badge {
+	border: 1px solid #242A36;
+}
+
+.fd_dark ul.cplist {
+	border-top: none;
+}
+
+.fd_dark .forumlist_grid ul.forums {margin: 0; padding: 0; background: none;}
+.fd_dark .forumlist_grid .forabg {background: none !important; border: none;}
+.fd_dark .forumlist_grid li.row {background: none !important;}
+.fd_dark .forumlist_grid li.row:hover {background: none !important;}

@@ -1,0 +1,447 @@
+
+/* Icon images
+---------------------------------------- */
+
+.contact-icon						{ background-image: url("./images/icons_contact.png"); }
+
+/* Profile & navigation icons */
+.pm-icon							{ background-position: 0 0; }
+.email-icon							{ background-position: -21px 0; }
+.jabber-icon						{ background-position: -80px 0; }
+.phpbb_icq-icon						{ background-position: -61px 0 ; }
+.phpbb_wlm-icon						{ background-position: -182px 0; }
+.phpbb_aol-icon						{ background-position: -244px 0; }
+.phpbb_website-icon					{ background-position: -40px 0; }
+.phpbb_youtube-icon					{ background-position: -98px 0; }
+.phpbb_facebook-icon				{ background-position: -119px 0; }
+.phpbb_googleplus-icon				{ background-position: -140px 0; }
+.phpbb_skype-icon					{ background-position: -161px 0; }
+.phpbb_twitter-icon					{ background-position: -203px 0; }
+.phpbb_yahoo-icon					{ background-position: -224px 0; }
+
+/* Forum icons & Topic icons */
+.global_read {
+	background-image: url("./images/icons/png/icon_read.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read.svg"); /* Modern browsers */
+}
+.global_read_mine {
+	background-image: url("./images/icons/png/icon_read_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_mine.svg"); /* Modern browsers */
+}
+.global_read_locked {
+	background-image: url("./images/icons/png/icon_read_locked.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_locked.svg"); /* Modern browsers */
+}
+.global_read_locked_mine {
+	background-image: url("./images/icons/png/icon_read_locked_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_locked_mine.svg"); /* Modern browsers */
+}
+
+.global_unread {
+	background-image: url("./images/icons/png/icon_unread.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread.svg"); /* Modern browsers */
+}
+.global_unread_mine {
+	background-image: url("./images/icons/png/icon_unread_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_mine.svg"); /* Modern browsers */
+}
+.global_unread_locked {
+	background-image: url("./images/icons/png/icon_unread_locked.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_locked.svg"); /* Modern browsers */
+}
+.global_unread_locked_mine {
+	background-image: url("./images/icons/png/icon_unread_locked_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_locked_mine.svg"); /* Modern browsers */
+}
+
+.announce_read {
+	background-image: url("./images/icons/png/icon_read.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read.svg"); /* Modern browsers */
+}
+.announce_read_mine {
+	background-image: url("./images/icons/png/icon_read_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_mine.svg"); /* Modern browsers */
+}
+.announce_read_locked {
+	background-image: url("./images/icons/png/icon_read_locked.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_locked.svg"); /* Modern browsers */
+}
+.announce_read_locked_mine {
+	background-image: url("./images/icons/png/icon_read_locked_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_locked_mine.svg"); /* Modern browsers */
+}
+
+.announce_unread {
+	background-image: url("./images/icons/png/icon_unread.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread.svg"); /* Modern browsers */
+}
+.announce_unread_mine {
+	background-image: url("./images/icons/png/icon_unread_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_mine.svg"); /* Modern browsers */
+}
+.announce_unread_locked {
+	background-image: url("./images/icons/png/icon_unread_locked.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_locked.svg"); /* Modern browsers */
+}
+.announce_unread_locked_mine {
+	background-image: url("./images/icons/png/icon_unread_locked_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_locked_mine.svg"); /* Modern browsers */
+}
+
+.forum_link {
+	background-image: url("./images/icons/png/forum_link.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/forum_link.svg"); /* Modern browsers */
+}
+
+.forum_read {
+	background-image: url("./images/icons/png/icon_read.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read.svg"); /* Modern browsers */
+}
+.forum_read_locked {
+	background-image: url("./images/icons/png/icon_read_locked.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_locked.svg"); /* Modern browsers */
+}
+.forum_read_subforum {
+	background-image: url("./images/icons/png/icon_read.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read.svg"); /* Modern browsers */
+}
+
+.forum_unread {
+	background-image: url("./images/icons/png/icon_unread.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread.svg"); /* Modern browsers */
+}
+.forum_unread_locked {
+	background-image: url("./images/icons/png/icon_unread_locked.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_locked.svg"); /* Modern browsers */
+}
+.forum_unread_subforum {
+	background-image: url("./images/icons/png/icon_unread.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread.svg"); /* Modern browsers */
+}
+
+
+.sticky_read {
+	background-image: url("./images/icons/png/icon_read.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read.svg"); /* Modern browsers */
+}
+.sticky_read_mine {
+	background-image: url("./images/icons/png/icon_read_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_mine.svg"); /* Modern browsers */
+}
+.sticky_read_locked {
+	background-image: url("./images/icons/png/icon_read_locked.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_locked.svg"); /* Modern browsers */
+}
+.sticky_read_locked_mine {
+	background-image: url("./images/icons/png/icon_read_locked_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_locked_mine.svg"); /* Modern browsers */
+}
+
+.sticky_unread {
+	background-image: url("./images/icons/png/icon_unread.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread.svg"); /* Modern browsers */
+}
+.sticky_unread_mine {
+	background-image: url("./images/icons/png/icon_unread_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_mine.svg"); /* Modern browsers */
+}
+.sticky_unread_locked {
+	background-image: url("./images/icons/png/icon_unread_locked.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_locked.svg"); /* Modern browsers */
+}
+.sticky_unread_locked_mine {
+	background-image: url("./images/icons/png/icon_unread_locked_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_locked_mine.svg"); /* Modern browsers */
+}
+
+.topic_moved {
+	background-image: url("./images/icons/png/forum_link.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/forum_link.svg"); /* Modern browsers */
+}
+
+.topic_read {
+	background-image: url("./images/icons/png/icon_read.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read.svg"); /* Modern browsers */
+}
+.topic_read_mine {
+	background-image: url("./images/icons/png/icon_read_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_mine.svg"); /* Modern browsers */
+}
+.topic_read_hot {
+	background-image: url("./images/icons/png/icon_read_hot.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_hot.svg"); /* Modern browsers */
+}
+.topic_read_hot_mine {
+	background-image: url("./images/icons/png/icon_read_hot_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_hot_mine.svg"); /* Modern browsers */
+}
+.topic_read_locked {
+	background-image: url("./images/icons/png/icon_read_locked.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_locked.svg"); /* Modern browsers */
+}
+.topic_read_locked_mine {
+	background-image: url("./images/icons/png/icon_read_locked_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read_locked_mine.svg"); /* Modern browsers */
+}
+
+.topic_unread {
+	background-image: url("./images/icons/png/icon_unread.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread.svg"); /* Modern browsers */
+}
+.topic_unread_mine {
+	background-image: url("./images/icons/png/icon_unread_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_mine.svg"); /* Modern browsers */
+}
+.topic_unread_hot {
+	background-image: url("./images/icons/png/icon_unread_hot.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_hot.svg"); /* Modern browsers */
+}
+.topic_unread_hot_mine {
+	background-image: url("./images/icons/png/icon_unread_hot_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_hot_mine.svg"); /* Modern browsers */
+}
+.topic_unread_locked {
+	background-image: url("./images/icons/png/icon_unread_locked.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_locked.svg"); /* Modern browsers */
+}
+.topic_unread_locked_mine {
+	background-image: url("./images/icons/png/icon_unread_locked_mine.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread_locked_mine.svg"); /* Modern browsers */
+}
+
+.pm_read {
+	background-image: url("./images/icons/png/icon_read.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_read.svg"); /* Modern browsers */
+}
+.pm_unread {
+	background-image: url("./images/icons/png/icon_unread.png"); /* IE8 + below */
+	background-image: linear-gradient(transparent, transparent), url("./images/icons/svg/icon_unread.svg"); /* Modern browsers */
+}
+
+
+
+
+
+/* ------- New Forum & Topic Icons (Pulsing) ------- */
+
+/* Switches */
+.css_icons_enabled  dl.row-item {background-image: none;}
+.css_icons_disabled .forums .row-item:before, .css_icons_disabled .topics .row-item:before, .css_icons_disabled .pmlist .row-item:before, .css_icons_disabled .cplist .row-item:before, .css_icons_disabled .forums .row-item:after, .css_icons_disabled .topics .row-item:after, .css_icons_disabled .pmlist .row-item:after, .css_icons_disabled .cplist .row-item:after {display: none;}
+
+
+.forums .row-item:before, .topics .row-item:before, 
+.pmlist .row-item:before, .cplist .row-item:before {
+	font-family: FontAwesome;
+	color: #FFFFFF;
+	text-align: center;
+	position: absolute;
+	left: 11px;
+	top: 7px;
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+	border: 1px solid rgba(0,0,0,0.1);
+	color: rgba(0,0,0,0.1);
+}
+
+/* Adjustments for dark UI */
+.fd_dark .forums .row-item:before, .fd_dark .topics .row-item:before, 
+.fd_dark .pmlist .row-item:before, .fd_dark .cplist .row-item:before {
+	border: 1px solid rgba(255,255,255,.15);
+	color: rgba(255,255,255,.15);
+}
+
+
+
+/* Rows with 'last topic subject' have an extra 10px padding top, so we need to account for this with bigger top value */
+.forums .row_has_subject .row-item:before {
+	top: 17px;
+}
+
+/* Spotted topics */
+.global_read_mine:after, .global_read_locked_mine:after, .global_unread_mine:after, .global_unread_locked_mine:after, .announce_read_mine:after, .announce_read_locked_mine:after, .announce_unread_mine:after, .announce_unread_locked_mine:after, .sticky_read_mine:after, .sticky_read_locked_mine:after, .sticky_unread_mine:after, .sticky_unread_locked_mine:after, .topic_read_mine:after, .topic_read_hot_mine:after, .topic_unread_mine:after, .topic_unread_hot_mine:after, .topic_read_locked_mine:after, .topic_unread_locked_mine:after {
+	position: absolute;
+	top: 8px;
+	left: 35px;
+	font-family: FontAwesome;
+	content: "\f111";
+	font-size: 6px;
+	width: 6px;
+	height: 6px;
+	border: 2px solid #ffffff;
+	border-radius: 6px;
+	color: rgba(0,0,0,0.1);
+	background: #FFFFFF;
+}
+
+/* Adjustments for dark UI */
+.fd_dark .global_read_mine:after, 
+.fd_dark .global_read_locked_mine:after, 
+.fd_dark .global_unread_mine:after, 
+.fd_dark .global_unread_locked_mine:after, 
+.fd_dark .announce_read_mine:after, 
+.fd_dark .announce_read_locked_mine:after, 
+.fd_dark .announce_unread_mine:after, 
+.fd_dark .announce_unread_locked_mine:after, 
+.fd_dark .sticky_read_mine:after, 
+.fd_dark .sticky_read_locked_mine:after, 
+.fd_dark .sticky_unread_mine:after, 
+.fd_dark .sticky_unread_locked_mine:after, 
+.fd_dark .topic_read_mine:after, 
+.fd_dark .topic_read_hot_mine:after, 
+.fd_dark .topic_unread_mine:after, 
+.fd_dark .topic_unread_hot_mine:after, 
+.fd_dark .topic_read_locked_mine:after, 
+.fd_dark .topic_unread_locked_mine:after {
+	border: 2px solid #252F39;
+	color: rgba(255,255,255,.1) !important;
+	background: #242A36 !important;
+}
+
+
+
+
+/* Set the icons */            				 /* Megaphone */
+.global_read:before							{content: "\f0a1";}
+.global_read_mine:before					{content: "\f0a1";}
+.global_read_locked:before					{content: "\f0a1";}
+.global_read_locked_mine:before				{content: "\f0a1";}
+.global_unread:before						{content: "\f0a1";}
+.global_unread_mine:before					{content: "\f0a1";}
+.global_unread_locked:before				{content: "\f0a1";}
+.global_unread_locked_mine:before			{content: "\f0a1";}
+
+											/* Megaphone */
+.announce_read:before						{content: "\f0a1";}
+.announce_read_mine:before					{content: "\f0a1";}
+.announce_read_locked:before				{content: "\f0a1";}
+.announce_read_locked_mine:before			{content: "\f0a1";}
+.announce_unread:before						{content: "\f0a1";}
+.announce_unread_mine:before				{content: "\f0a1";}
+.announce_unread_locked:before				{content: "\f0a1";}
+.announce_unread_locked_mine:before			{content: "\f0a1";}
+
+											/* External link */
+.forum_link:before							{content: "\f08e";}
+
+											/* Speech Bubble */
+.forum_read:before							{content: "\f068";}
+.forum_read_subforum:before					{content: "\f068";}
+
+											/* Check */
+.forum_unread:before						{content: "\f00c";}
+.forum_unread_subforum:before				{content: "\f00c";}
+
+											/* Pin */
+.sticky_read:before							{content: "\f08d";}
+.sticky_read_mine:before					{content: "\f08d";}
+.sticky_read_locked:before					{content: "\f08d";}
+.sticky_read_locked_mine:before				{content: "\f08d";}
+
+.sticky_unread:before						{content: "\f08d";}
+.sticky_unread_mine:before					{content: "\f08d";}
+.sticky_unread_locked:before				{content: "\f08d";}
+.sticky_unread_locked_mine:before			{content: "\f08d";}
+
+											/* Right arrow */
+.topic_moved:before							{content: "\f061";}
+
+											/* Envelope */
+.pm_read:before 							{content: "\f0e0";}
+.pm_unread:before 							{content: "\f0e0";}
+
+											/* Bar */
+.topic_read:before							{content: "\f068";}
+.topic_read_mine:before						{content: "\f068";}
+.topic_read_hot:before						{content: "\f068";}
+.topic_read_hot_mine:before					{content: "\f068";}
+											/* Tick */
+.topic_unread:before						{content: "\f00c";}
+.topic_unread_mine:before					{content: "\f00c";}
+.topic_unread_hot:before					{content: "\f00c";}
+.topic_unread_hot_mine:before				{content: "\f00c";}
+
+											/* Cross */
+.forum_read_locked:before					{content: "\f00d";}
+.forum_unread_locked:before					{content: "\f00d";}
+.topic_read_locked:before					{content: "\f00d";}
+.topic_read_locked_mine:before				{content: "\f00d";}
+.topic_unread_locked:before					{content: "\f00d";}
+.topic_unread_locked_mine:before			{content: "\f00d";}
+
+/* Forum link and moved topics */
+.forum_link:before, .topic_moved:before {
+	border: 1px solid #0090f5 !important;
+	color: #0090f5 !important;
+}
+
+/* Unread States */
+.global_unread:before, .global_unread_mine:before, .announce_unread:before, .announce_unread_mine:before, .forum_unread:before, .forum_unread_subforum:before, .sticky_unread:before, .sticky_unread_mine:before, .pm_unread:before, .topic_unread:before, .topic_unread_mine:before, .topic_unread_hot:before, .topic_unread_hot_mine:before {
+	animation: UnreadPulse 1.4s infinite;
+	border: 1px solid #84bd00 !important;
+	color: #84bd00 !important;
+}
+
+/* Unread (dot) States */
+.global_unread:after, .global_unread_mine:after, .announce_unread:after, .announce_unread_mine:after, .forum_unread:after, .forum_unread_subforum:after, .sticky_unread:after, .sticky_unread_mine:after, .pm_unread:after, .topic_unread:after, .topic_unread_mine:after, .topic_unread_hot:after, .topic_unread_hot_mine:after {
+	color: #84bd00 !important;
+	background-color: #FFFFFF;
+}
+
+/* Override unread locked with red */
+.global_unread_locked:before, .global_unread_locked_mine:before, .announce_unread_locked:before, .announce_unread_locked_mine:before, .forum_unread_locked:before, .sticky_unread_locked:before, .sticky_unread_locked_mine:before, .topic_unread_locked:before, .topic_unread_locked_mine:before {
+	animation: UnreadLockedPulse 1.4s infinite;
+	border: 1px solid #bd0000 !important;
+	color: #bd0000 !important;
+}
+
+/* Unread (locked) states */
+.global_unread_locked:after, .global_unread_locked_mine:after, .announce_unread_locked:after, .announce_unread_locked_mine:after, .forum_unread_locked:after, .sticky_unread_locked:after, .sticky_unread_locked_mine:after, .topic_unread_locked:after, .topic_unread_locked_mine:after {
+	color: #bd0000 !important;
+	background-color: #FFFFFF;
+}
+
+
+
+.forum_link {
+
+}
+
+
+/* Box shadow for unread pulse icons */
+@keyframes UnreadPulse {
+	0% {
+	  -moz-box-shadow: 0 0 0 0 rgba(132,189,0,0.4);
+	  box-shadow: 0 0 0 0 rgba(132,189,0,0.4);
+	  -webkit-box-shadow: 0 0 0 0 rgba(132,189,0,0.4);
+	}
+	70% {
+		-moz-box-shadow: 0 0 0 8px rgba(132,189,0,0);
+		box-shadow: 0 0 0 8px rgba(132,189,0, 0);
+		-webkit-box-shadow: 0 0 0 8px rgba(132,189,0,0);
+	}
+	100% {
+		-moz-box-shadow: 0 0 0 0 rgba(132,189,0,0);
+		box-shadow: 0 0 0 0 rgba(132,189,0,0);
+		-webkit-box-shadow: 0 0 0 0 rgba(132,189,0,0);
+	}
+}
+
+/* Box shadow for unread pulse icons */
+@keyframes UnreadLockedPulse {
+	0% {
+	  -moz-box-shadow: 0 0 0 0 rgba(189,0,0,0.4);
+	  box-shadow: 0 0 0 0 rgba(189,0,0,0.4);
+-webkit-box-shadow: 0 0 0 0 rgba(189,0,0,0.4);
+	}
+	70% {
+		-moz-box-shadow: 0 0 0 8px rgba(189,0,0,0);
+		box-shadow: 0 0 0 8px rgba(189,0,0, 0);
+		-webkit-box-shadow: 0 0 0 8px rgba(189,0,0,0);
+	}
+	100% {
+		-moz-box-shadow: 0 0 0 0 rgba(189,0,0,0);
+		box-shadow: 0 0 0 0 rgba(189,0,0,0);
+		-webkit-box-shadow: 0 0 0 0 rgba(189,0,0,0);
+	}
+}
