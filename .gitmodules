@@ -1,6 +1,6 @@
 [submodule "live"]
 	path = live
-	url = https://github.com/pokerth/pokerth-live.git
+	url = git@github.com:pokerth/pokerth-live.git
 [submodule "pthranking"]
 	path = pthranking
 	url = git@github.com:q4z1/pokerth_ranking.git

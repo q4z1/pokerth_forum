@@ -1,5 +1,6 @@
 *~
 accounts/*
+.gitmodules
 /phpunit.xml
 cache/*
 !cache/.htaccess
