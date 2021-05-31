@@ -1,0 +1,31 @@
+{
+    "name": "inquies/pokerth",
+    "type": "phpbb-extension",
+    "description": "PokerTH Helper Extension",
+    "homepage": "https://github.com/q4z1/pokerth",
+    "version": "0.1.0",
+    "time": "2021-05-31",
+    "keywords": ["phpbb", "extension", "pokerth", "helper"],
+    "license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "q4z1",
+            "email": "webmaster@pokerth.net",
+            "homepage": "https://pokerth.net",
+            "role": "Lead Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.3.0",
+        "composer/installers": "~1.11"
+    },
+    "require-dev": {
+        "phpbb/epv": "dev-master"
+    },
+    "extra": {
+        "display-name": "PokerTH Helper Extension",
+        "soft-require": {
+            "phpbb/phpbb": "~3.3.4"
+        }
+    }
+}

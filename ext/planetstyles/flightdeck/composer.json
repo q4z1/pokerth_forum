@@ -1,0 +1,23 @@
+{
+    "name": "planetstyles/flightdeck",
+    "type": "phpbb-extension",
+    "description": "Control Panel for Milk v2 Theme",
+	"homepage": "http://www.planetstyles.net",
+    "version": "2.0.6",
+    "license": "Private use only",
+    "authors": [
+        {
+            "name": "PlanetStyles",
+	    "homepage": "http://www.planetstyles.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "extra": {
+        "display-name": "PlanetStyles Flight Deck (v2)",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.1.0"
+        }
+    }
+}

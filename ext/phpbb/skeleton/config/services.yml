@@ -1,0 +1,36 @@
+imports:
+    - { resource: console.yml }
+    - { resource: skeletons.yml }
+
+services:
+    phpbb.skeleton.controller:
+        class: phpbb\skeleton\controller\main
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@language'
+            - '@request'
+            - '@phpbb.skeleton.helper.packager'
+            - '@phpbb.skeleton.helper.validator'
+            - '@template'
+            - '@user'
+
+    phpbb.skeleton.helper.packager:
+        class: phpbb\skeleton\helper\packager
+        arguments:
+            - '@service_container'
+            - '@phpbb.skeleton.collection'
+            - '%core.root_path%'
+
+    phpbb.skeleton.helper.validator:
+        class: phpbb\skeleton\helper\validator
+        arguments:
+            - '@language'
+
+    phpbb.skeleton.listener:
+        class: phpbb\skeleton\event\main_listener
+        arguments:
+            - '@controller.helper'
+            - '@template'
+        tags:
+            - { name: event.listener }

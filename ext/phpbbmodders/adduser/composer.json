@@ -1,0 +1,38 @@
+{
+    "name": "phpbbmodders/adduser",
+    "type": "phpbb-extension",
+    "description": "Allows administrators to add users to their forum",
+    "homepage": "https://github.com/phpbbmodders/phpBB-3.1-ext-adduser",
+    "version": "1.0.4",
+    "time": "2017-02-13",
+    "keywords": [
+        "phpbb",
+        "extension",
+        "add user"
+    ],
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Rich McGirr",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "phpbb/phpbb": ">=3.1.0-RC2,<3.2"
+    },
+    "require-dev": {
+        "phpbb/epv": "dev-master"
+    },
+    "extra": {
+        "display-name": "Add User",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.1.0-RC2,<3.3"
+        },
+        "version-check": {
+            "host": "www.phpbb.com",
+            "directory": "/customise/db/extension/acp_add_user_2",
+            "filename": "version_check"
+        }
+    }
+}
