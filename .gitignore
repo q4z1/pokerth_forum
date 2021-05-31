@@ -13,8 +13,6 @@ install/schemas/schema.json
 language/*
 !language/en
 store/*
-pthranking/*
-live/*
 !styles/prosilver
 !styles/all
 node_modules
