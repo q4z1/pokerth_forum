@@ -1,6 +1,3 @@
-[submodule "pthranking"]
-	path = pthranking
-	url = https://github.com/q4z1/pokerth_ranking.git
 [submodule "live"]
 	path = live
 	url = https://github.com/pokerth/pokerth-live.git
