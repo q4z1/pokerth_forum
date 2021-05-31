@@ -5,7 +5,8 @@ cache/*
 !cache/.htaccess
 !cache/index.html
 composer.phar
-config*.php*
+/config.php
+log_file_analysis/config/upload_defs.php
 ext/*
 files/*
 images/avatars/gallery/*
@@ -29,3 +30,4 @@ vendor
 .vagrant
 .idea
 pthranking/*
+.vscode/
