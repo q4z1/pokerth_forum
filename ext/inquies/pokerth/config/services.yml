@@ -6,3 +6,7 @@ services:
             - '@controller.helper'
             - '@template'
             - '@user'
+    inquies.pokerth.listener:
+        class: inquies\pokerth\event\listener
+        tags:
+            - { name: event.listener }
