@@ -243,7 +243,8 @@ class listener implements EventSubscriberInterface
 			// check the whole darn thang now for any TLD's
 			// at least those that >seem< to match from the array
 			// and have not been excluded above
-			preg_match_all("#(([a-z0-9\-_]+)@)?([a-z]{3,6}://)?(((?:www.)?\b[a-z0-9\-_]+)\.($tld_list)(\.($tld_list))?\b)#i", $check_text, $match);
+			// preg_match_all("#(([a-z0-9\-_]+)@)?([a-z]{3,6}://)?(((?:www.)?\b[a-z0-9\-_]+)\.($tld_list)(\.($tld_list))?\b)#i", $check_text, $match);
+			preg_match_all("#(\S*@\S+|(((?:www.)?\b[a-z0-9\-_]+)\.($tld_list)(\.($tld_list))?\b)|([a-z]{3,6}:\/\/)\S*|www\S*)#i", $check_text, $match);
 
 			// we have a match..uhoh, someone's being naughty
 			// time to slap 'em up side the head
