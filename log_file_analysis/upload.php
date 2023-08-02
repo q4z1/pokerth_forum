@@ -14,7 +14,7 @@ if((!empty($_FILES["pdb_file"])) && ($_FILES['pdb_file']['error'] == 0)) {
 // 		$db = new PDO("sqlite:admin.db");
 
 		// delete old id: db entry and files
-		$query_1 = $db->prepare("SELECT ID FROM log_file_analysis_upload_admin WHERE TIMESTAMPDIFF(SECOND,Timestamp,CURRENT_TIMESTAMP()) > ".SEC_COUNT_ID." AND ID<>'".SPECIAL_ID."'");
+		$query_1 = $db->prepare("SELECT ID FROM log_file_analysis_upload_admin WHERE TIMESTAMPDIFF(SECOND,Timestamp,CURRENT_TIMESTAMP()) > ".SEC_COUNT_ID);
 		// $query_1 = $db->prepare("SELECT ID FROM Sessions WHERE strftime('%s','now')-strftime('%s',Timestamp) > ".SEC_COUNT_ID);
 		if($query_1->execute()) {
 			while($row_1 = $query_1->fetch(PDO::FETCH_ASSOC)) {
@@ -53,9 +53,9 @@ if((!empty($_FILES["pdb_file"])) && ($_FILES['pdb_file']['error'] == 0)) {
 		if($row_1 = $query_1->fetch(PDO::FETCH_ASSOC)) {
 			$count_id = $row_1['count_id'];
 		} else {
-			$count_id = COUNT_ID;
+			$count_id = 0;
 		}
-		if($count_id < COUNT_ID) {
+		if(true) {
 	
 			if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
 			  $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
@@ -84,10 +84,10 @@ if((!empty($_FILES["pdb_file"])) && ($_FILES['pdb_file']['error'] == 0)) {
 					if($ext == "pdb") {
 
 						// check sqlite-header
-						$header_string = bin2hex(file_get_contents($_FILES['pdb_file']['tmp_name'],NULL,NULL,0,16));
-						$max_emb_payload_frac = hexdec(bin2hex(file_get_contents($_FILES['pdb_file']['tmp_name'],NULL,NULL,21,1)));
-						$min_emb_payload_frac = hexdec(bin2hex(file_get_contents($_FILES['pdb_file']['tmp_name'],NULL,NULL,22,1)));
-						$reserved = hexdec(bin2hex(file_get_contents($_FILES['pdb_file']['tmp_name'],NULL,NULL,68,24)));
+						$header_string = bin2hex(file_get_contents($_FILES['pdb_file']['tmp_name'],true,NULL,0,16));
+						$max_emb_payload_frac = hexdec(bin2hex(file_get_contents($_FILES['pdb_file']['tmp_name'],true,NULL,21,1)));
+						$min_emb_payload_frac = hexdec(bin2hex(file_get_contents($_FILES['pdb_file']['tmp_name'],true,NULL,22,1)));
+						$reserved = hexdec(bin2hex(file_get_contents($_FILES['pdb_file']['tmp_name'],true,NULL,68,24)));
 						if($header_string=="53514c69746520666f726d6174203300" & $max_emb_payload_frac==64 & $min_emb_payload_frac==32 & $reserved==0) {
 
 							// generate id
