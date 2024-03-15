@@ -111,3 +111,6 @@ abbr[title] {
 	text-decoration: none;
 }
 
+div[id*='div_post_reput']{
+	display: none;
+}

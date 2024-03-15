@@ -2,7 +2,7 @@
 
 define('DB', 'pokerth');
 define('DB_USER', 'root');
-define('DB_PWD', 'm4551m05');
+define('DB_PWD', 'RayHunDat553lm1s');
 
 define('COUNT_IP', 100);
 define('SEC_COUNT_IP', (24 * 60 * 60)); // 15 hours
