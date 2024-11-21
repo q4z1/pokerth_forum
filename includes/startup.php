@@ -20,7 +20,8 @@ if (!defined('IN_PHPBB'))
 
 // Report all errors, except notices and deprecation messages
 $level = E_ALL & ~E_NOTICE & ~E_DEPRECATED;
-error_reporting($level);
+//error_reporting($level);
+error_reporting(E_ERROR | E_PARSE);
 
 /**
 * Minimum Requirement: PHP 7.1.3
