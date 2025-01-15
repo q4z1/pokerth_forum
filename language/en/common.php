@@ -131,7 +131,7 @@ $lang = array_merge($lang, array(
 	'BBCODE_GUIDE'			=> 'BBCode guide',
 	'BCC'					=> 'BCC',
 	'BIRTHDAYS'				=> 'Birthdays',
-	'BOARD_BAN_PERM'		=> 'You have been <strong>permanently</strong> banned from this board.<br /><br />Please contact the %2$sBoard Administrator%3$s for more information.',
+	'BOARD_BAN_PERM'		=> 'You have been <strong>permanently</strong> banned from this board.<br /><br /><h4 style="color: red">If you are using a VPN, please disable it, as we are receiving a lot of Spam from VPN IP-Addresses.</h4><br><br>Please contact the %2$sBoard Administrator%3$s for more information.',
 	'BOARD_BAN_REASON'		=> 'Reason given for ban: <strong>%s</strong>',
 	'BOARD_BAN_TIME'		=> 'You have been banned from this board until <strong>%1$s</strong>.<br /><br />Please contact the %2$sBoard Administrator%3$s for more information.',
 	'BOARD_DISABLE'			=> 'Sorry but this board is currently unavailable.',
