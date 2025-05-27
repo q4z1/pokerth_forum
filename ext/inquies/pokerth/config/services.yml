@@ -7,6 +7,9 @@ services:
             - '@template'
             - '@user'
     inquies.pokerth.listener:
+        arguments:
+            - '@dbal.conn'
+            - '@request'
         class: inquies\pokerth\event\listener
         tags:
             - { name: event.listener }
