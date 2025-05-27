@@ -1,8 +1,10 @@
 <?php
+include "../config.php";
+
 
 define('DB', 'pokerth');
-define('DB_USER', 'root');
-define('DB_PWD', 'RayHunDat553lm1s');
+define('DB_USER', $dbuser);
+define('DB_PWD', $dbpasswd);
 
 define('COUNT_IP', 100);
 define('SEC_COUNT_IP', (24 * 60 * 60)); // 15 hours
