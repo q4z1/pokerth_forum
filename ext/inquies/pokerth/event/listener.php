@@ -33,9 +33,18 @@ class listener implements EventSubscriberInterface
     {
         return [
             'core.ucp_activate_after' => 'afterActivation',
-            'core.ucp_register_data_after' => 'afterReg'
+            'core.ucp_register_data_after' => 'afterReg',
+            'core.permissions' => 'add_permission'
         ];
     }
+
+	// Add administrative permissions to allow post deletion
+	public function add_permission($event)
+	{
+		$permissions = $event['permissions'];
+		$permissions['u_delete_my_account_posts'] = array('lang' => 'ACL_U_DELETE_MY_ACCOUNT_POSTS', 'cat' => 'profile');
+		$event['permissions'] = $permissions;
+	}
 
     /**
      *
@@ -43,23 +52,12 @@ class listener implements EventSubscriberInterface
      */
     public function afterActivation($event)
     {
-        // file_put_contents("/var/www/pokerth_test/pth_helper.log", "afterActivation event=" . var_export($event, true) . "\n", FILE_APPEND);
-        // if($event['message'] != 'ACCOUNT_ACTIVE'){
-        //     file_put_contents("/var/www/pokerth_test/pth_helper.log", "afterActivation event message=" . var_export($event, true) . "\n", FILE_APPEND);
-        //     return;
-        // } 
-
-        // $p = Player::selectRaw('player_id, username')
-        // ->where('email', $phpbb_user->user_email)
-        // ->first();
         $sql = 'SELECT `player_id` FROM `'.$this->dbname.'`.`player`
             WHERE username = \''.$event['user_row']['username'].'\';';
         $result = $this->db->sql_query($sql);
         $player = $this->db->sql_fetchrow($result);
         if(!$player) {
-            // @TODO: What todo if player not found? Should be answered by ACCOUNT_ACTIVE message.
-            // $event['error'] = ["The username is suspended until next season."];
-            // $this->db->sql_freeresult($result);
+            // @TODO: What todo if player not found? so far this event is only triggered by success = player always found.
             return;
         }
         $this->db->sql_freeresult($result);

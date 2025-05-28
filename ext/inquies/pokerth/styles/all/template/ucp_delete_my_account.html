@@ -1,0 +1,32 @@
+<!-- INCLUDE ucp_header.html -->
+<form id="ucp" method="post" action="{S_UCP_ACTION}" {S_FORM_ENCTYPE}>
+	<h2>{L_DELETE_MY_ACCOUNT}</h2>
+	<div class="panel">
+		<div class="inner">
+			<p>{L_DELETE_MY_ACCOUNT_TEXT}</p>
+			<fieldset>
+				<p><input type="checkbox" name="delete" value="true" /> {L_REALY_DELETE}</p>
+				<p><input type="checkbox" name="understand" value="true" /> {L_UNDERSTAND_DELETE}</p>
+				<!-- IF S_CAN_DELPOSTS -->
+				<p><input type="checkbox" name="remove_posts" value="true" /> {L_DELETE_MY_POSTS}</p>
+				<!-- ENDIF -->
+				<p>
+				<div style="color: red; text-align: left; padding-bottom: 1em; font-size: larger;"><i>After account
+						deletion your
+						username will be unavailable for re-registraion until next season!</i></div>
+				</p>
+				<dl>
+					<dt>{L_ENTER_PASSWORD}</dt>
+					<dd><input type="password" id="password" name="password" value="{PASSWORD}" class="inputbox"
+							placeholder="{L_ENTER_PASSWORD_HERE}" maxlength="64" autocomplete="off" /></dd>
+				</dl>
+			</fieldset>
+			<fieldset class="submit-buttons">
+				{S_FORM_TOKEN}
+				<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp;<input type="submit"
+					name="submit" value="{L_SUBMIT}" class="button1" />
+			</fieldset>
+		</div>
+	</div>
+</form>
+<!-- INCLUDE ucp_footer.html -->
