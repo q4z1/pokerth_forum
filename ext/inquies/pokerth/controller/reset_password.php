@@ -111,6 +111,21 @@ class reset_password
 		$this->dbname = $this->request->server('HTTP_HOST') == "test.pokerth.net" ? "pokerth_ranking_test" : "pokerth_ranking";
 	}
 
+		/**
+	 * Init controller
+	 */
+	protected function init_controller()
+	{
+		$this->language->add_lang('ucp');
+
+		if (!$this->config['allow_password_reset'])
+		{
+			throw new http_exception(Response::HTTP_OK, 'UCP_PASSWORD_RESET_DISABLED', [
+				'<a href="mailto:' . htmlspecialchars($this->config['board_contact'], ENT_COMPAT) . '">',
+				'</a>'
+			]);
+		}
+	}
 
 	/**
 	 * Remove reset token for specified user
@@ -137,11 +152,11 @@ class reset_password
 	 */
 	public function reset()
 	{
+		$this->init_controller();
+
 		$submit			= $this->request->is_set_post('submit');
 		$reset_token	= $this->request->variable('token', '');
 		$user_id		= $this->request->variable('u', 0);
-
-		$this->language->add_lang('password_reset', 'inquies/pokerth');
 
 		if (empty($reset_token))
 		{
