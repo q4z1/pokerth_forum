@@ -1,0 +1,3 @@
+password_reset_route:
+    path: /password_reset/{name}
+    defaults: { _controller: inquies.pokerth.reset_password:reset, name: "reset_password" }

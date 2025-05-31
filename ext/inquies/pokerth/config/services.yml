@@ -1,11 +1,27 @@
 services:
-    inquies.pokerth.controller:
-        class: inquies\pokerth\controller\main
+    # inquies.pokerth.main:
+    #     class: inquies\pokerth\controller\main
+    #     arguments:
+    #         - '@config'
+    #         - '@controller.helper'
+    #         - '@template'
+    #         - '@user'
+    inquies.pokerth.reset_password:
+        class: inquies\pokerth\controller\reset_password
         arguments:
             - '@config'
             - '@controller.helper'
+            - '@language'
+            - '@request'
             - '@template'
             - '@user'
+            - '@log'
+            - '@dbal.conn'
+            - '@passwords.manager'
+            - '@dispatcher'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '%tables.users%'
     inquies.pokerth.listener:
         arguments:
             - '@dbal.conn'
