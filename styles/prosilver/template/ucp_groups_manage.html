@@ -1,6 +1,6 @@
 <!-- INCLUDE ucp_header.html -->
 
-<h2<!-- IF GROUP_COLOR --> style="color:#{GROUP_COLOR};"<!-- ENDIF -->>{L_USERGROUPS}<!-- IF GROUP_NAME --> :: {GROUP_NAME}<!-- ENDIF --></h2>
+<h2<!-- IF GROUP_COLOUR --> style="color:#{GROUP_COLOUR};"<!-- ENDIF -->>{L_USERGROUPS}<!-- IF GROUP_NAME --> :: {GROUP_NAME}<!-- ENDIF --></h2>
 
 <form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
 
@@ -52,6 +52,7 @@
 	<h3>{L_GROUP_SETTINGS_SAVE}</h3>
 
 	<fieldset>
+	<!-- EVENT ucp_group_settings_before -->
 	<dl>
 		<dt><label for="group_colour">{L_GROUP_COLOR}{L_COLON}</label><br /><span>{L_GROUP_COLOR_EXPLAIN}</span></dt>
 		<dd>
@@ -65,6 +66,7 @@
 		<dt><label for="group_rank">{L_GROUP_RANK}{L_COLON}</label></dt>
 		<dd><select name="group_rank" id="group_rank">{S_RANK_OPTIONS}</select></dd>
 	</dl>
+	<!-- EVENT ucp_group_settings_after -->
 	</fieldset>
 
 	</div>

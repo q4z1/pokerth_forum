@@ -44,7 +44,7 @@ $lang = array_merge($lang, array(
 	'BOARD_STYLE'					=> 'Board style',
 	'CUSTOM_DATEFORMAT'				=> 'Custom…',
 	'DEFAULT_DATE_FORMAT'			=> 'Date format',
-	'DEFAULT_DATE_FORMAT_EXPLAIN'	=> 'The date format is the same as the PHP <code><a href="https://secure.php.net/manual/function.date.php">date()</a></code> function.',
+	'DEFAULT_DATE_FORMAT_EXPLAIN'	=> 'The syntax uses the same format as the PHP <a href="https://www.php.net/manual/datetime.format.php">date functions</a>.',
 	'DEFAULT_LANGUAGE'				=> 'Default language',
 	'DEFAULT_STYLE'					=> 'Default style',
 	'DEFAULT_STYLE_EXPLAIN'			=> 'The default style for new users.',
@@ -386,7 +386,7 @@ $lang = array_merge($lang, array(
 	'ACP_LOAD_SETTINGS_EXPLAIN'	=> 'Here you can enable and disable certain board functions to reduce the amount of processing required. On most servers there is no need to disable any functions. However on certain systems or in shared hosting environments it may be beneficial to disable capabilities you do not really need. You can also specify limits for system load and active sessions beyond which the board will go offline.',
 
 	'ALLOW_CDN'						=> 'Allow usage of third party content delivery networks',
-	'ALLOW_CDN_EXPLAIN'				=> 'If this setting is enabled, some files will be served from external third party servers instead of your server. This reduces the network bandwidth required by your server, but may present a privacy issue for some board administrators. In a default phpBB installation, this includes loading “jQuery” and the font “Open Sans” from Google’s content delivery network.',
+	'ALLOW_CDN_EXPLAIN'				=> 'If this setting is enabled, some files will be served from external third party servers instead of your server. This reduces the network bandwidth used by your server, but may present a privacy issue in some countries. In a default phpBB installation, this includes loading “jQuery” and the font “Open Sans” from Google’s content delivery network. This also applies to the “Font Awesome” font, which phpBB and some extensions use to render icons.',
 	'ALLOW_LIVE_SEARCHES'			=> 'Allow live searches',
 	'ALLOW_LIVE_SEARCHES_EXPLAIN'	=> 'If this setting is enabled, users are provided with keyword suggestions as they type in certain fields throughout the board.',
 	'CUSTOM_PROFILE_FIELDS'			=> 'Custom profile fields',
@@ -493,8 +493,8 @@ $lang = array_merge($lang, array(
 	'SMILIES_PATH_EXPLAIN'		=> 'Path under your phpBB root directory, e.g. <samp>images/smilies</samp>.',
 	'UPLOAD_ICONS_PATH'			=> 'Extension group icons storage path',
 	'UPLOAD_ICONS_PATH_EXPLAIN'	=> 'Path under your phpBB root directory, e.g. <samp>images/upload_icons</samp>.',
-	'USE_SYSTEM_CRON'		=> 'Run periodic tasks from system cron',
-	'USE_SYSTEM_CRON_EXPLAIN'		=> 'When off, phpBB will arrange for periodic tasks to be run automatically. When on, phpBB will not schedule any periodic tasks by itself; a system administrator must arrange for <code>bin/phpbbcli.php cron:run</code> to be run by the system cron facility at regular intervals (e.g. every 5 minutes).',
+	'USE_SYSTEM_CRON'			=> 'Run periodic tasks from operating system cron',
+	'USE_SYSTEM_CRON_EXPLAIN'	=> 'When disabled, phpBB will arrange for periodic tasks to be run automatically. When enabled, phpBB will not schedule any periodic tasks by itself; a system administrator must arrange for <code>bin/phpbbcli.php cron:run</code> to be run by the operating system cron facility at regular intervals (e.g. every 5 minutes).',
 ));
 
 // Security Settings
