@@ -369,8 +369,7 @@ class adduser_module
 			'L_USERNAME_EXPLAIN'	=> $this->user->lang($this->config['allow_name_chars'] . '_EXPLAIN', $this->user->lang('CHARACTERS', (int) $this->config['min_name_chars']), $this->user->lang('CHARACTERS', (int) $this->config['max_name_chars'])),
 			'L_ADD_USER_EXPLAIN'	=> sprintf($this->user->lang['ADD_USER_EXPLAIN'], '<a href="' . append_sid("{$phpbb_admin_path}index.$phpEx", 'i=acp_board&amp;mode=registration') . '">', '</a>'),
 			'L_REG_COND'		=> $l_reg_cond,
-			'L_MOD_VERSION'		=> sprintf($this->user->lang['MOD_VERSION'] , $this->config['adduser_version']),
-
+			
 			'S_USER_ADD'		=> true,
 			'S_GROUP_OPTIONS'	=> $s_group_options,
 			'S_LANG_OPTIONS'	=> language_select($data['lang']),
@@ -402,24 +401,24 @@ class adduser_module
 		$max = strlen($lowercase) - 1;
 		for ($x = 0; $x < abs($length/3); $x++)
 		{
-			$pword_string .= $lowercase{mt_rand(0, $max)};
+			$pword_string .= $lowercase[mt_rand(0, $max)];
 		}
 		$max = strlen($uppercase) - 1;
 		for ($x = 0; $x < abs($length/3); $x++)
 		{
-			$pword_string .= $uppercase{mt_rand(0, $max)};
+			$pword_string .= $uppercase[mt_rand(0, $max)];
 		}
 		$max = strlen($numbers) - 1;
 		for ($x = 0; $x < abs($length/3); $x++)
 		{
-			$pword_string .= $numbers{mt_rand(0, $max)};
+			$pword_string .= $numbers[mt_rand(0, $max)];
 		}
 		if ($type == 'PASS_TYPE_SYMBOL')
 		{
 			$max = strlen($specialcharacters) - 1;
 			for ($x = 0; $x < abs($length/3); $x++)
 			{
-				$pword_string .= $specialcharacters{mt_rand(0, $max)};
+				$pword_string .= $specialcharacters[mt_rand(0, $max)];
 			}
 		}
 
