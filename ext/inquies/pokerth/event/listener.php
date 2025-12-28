@@ -124,6 +124,13 @@ class listener implements EventSubscriberInterface
 
         if(is_array($event['error']) && count($event['error']) > 0) return;
 
+        // Restrict password characters to allowed set for new registrations
+        if (!preg_match('/^[A-Za-z0-9.,_-]+$/', $event['data']['new_password']))
+        {
+            $event['error'] = ["Password contains invalid characters. Only letters, numbers and the characters . , _ - are allowed."];
+            return;
+        }
+
         $sql = '
             INSERT INTO `'.$this->dbname.'`.`player` (`username`, `password`, `email`, `created`, `blocked`, `active`)
             VALUES(

@@ -262,6 +262,12 @@ class reset_password
 			{
 				$errors[] = $data['password_confirm'] ? 'NEW_PASSWORD_ERROR' : 'NEW_PASSWORD_CONFIRM_EMPTY';
 			}
+
+			// Restrict password characters to allowed set
+			if (!preg_match('/^[A-Za-z0-9.,_-]+$/', $data['new_password']))
+			{
+				$errors[] = 'Password contains invalid characters. Only letters, numbers and the characters . , _ - are allowed.';
+			}
 			if (empty($errors))
 			{
 				$sql_ary = [
