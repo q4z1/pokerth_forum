@@ -8,6 +8,8 @@ class listener implements EventSubscriberInterface
 {
     protected $db;
     protected $request;
+    protected $template;
+    protected $phpbb_root_path;
 
     protected $dbname;
 
@@ -15,12 +17,17 @@ class listener implements EventSubscriberInterface
     * Constructor
     *
     * @param \phpbb\db\driver\driver_interface      $db             Database object
+    * @param \phpbb\request\request                 $request        Request object
+    * @param \phpbb\template\template               $template       Template object
+    * @param string                                 $phpbb_root_path Path to phpBB root
     * @access public
     */
-    public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\request\request $request)
+    public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, $phpbb_root_path)
     {
         $this->request = $request;
         $this->db = $db;
+        $this->template = $template;
+        $this->phpbb_root_path = $phpbb_root_path;
         $this->dbname = $this->request->server('HTTP_HOST') == "test.pokerth.net" ? "pokerth_ranking_test" : "pokerth_ranking";
     }
 
@@ -34,7 +41,8 @@ class listener implements EventSubscriberInterface
         return [
             'core.ucp_activate_after' => 'afterActivation',
             'core.ucp_register_data_after' => 'afterReg',
-            'core.permissions' => 'add_permission'
+            'core.permissions' => 'add_permission',
+            'core.page_header' => 'add_pth_assets'
         ];
     }
 
@@ -45,6 +53,65 @@ class listener implements EventSubscriberInterface
 		$permissions['u_delete_my_account_posts'] = array('lang' => 'ACL_U_DELETE_MY_ACCOUNT_POSTS', 'cat' => 'profile');
 		$event['permissions'] = $permissions;
 	}
+
+    /**
+     * Cache-Busting für PTH Vue.js Assets
+     * Liest das Laravel Mix Manifest und setzt Template-Variablen mit versionierten URLs
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function add_pth_assets($event)
+    {
+        $manifest_path = $this->phpbb_root_path . 'pthranking/public/mix-manifest.json';
+        $manifest = [];
+
+        // Mix-Manifest laden (enthält versionierte Dateinamen mit Hash)
+        if (file_exists($manifest_path))
+        {
+            $manifest_content = @file_get_contents($manifest_path);
+            if ($manifest_content !== false)
+            {
+                $manifest = json_decode($manifest_content, true);
+                if (!is_array($manifest))
+                {
+                    $manifest = [];
+                }
+            }
+        }
+
+        // Template-Variablen für versionierte Assets setzen
+        $this->template->assign_vars([
+            'PTH_JS_URL'         => $this->get_asset_url('/js/pth.js', $manifest),
+            'PTH_INJECTIONS_URL' => $this->get_asset_url('/js/injections.js', $manifest),
+        ]);
+    }
+
+    /**
+     * Holt die versionierte URL für ein Asset
+     *
+     * @param string $path Der relative Pfad zum Asset (z.B. '/js/pth.js')
+     * @param array $manifest Das Mix-Manifest Array
+     * @return string Die versionierte URL
+     */
+    private function get_asset_url($path, $manifest)
+    {
+        // Wenn das Asset im Mix-Manifest existiert, versionierte URL verwenden
+        if (isset($manifest[$path]))
+        {
+            return '/pthranking' . $manifest[$path];
+        }
+
+        // Fallback: Datei-Timestamp als Cache-Buster verwenden
+        $file_path = $this->phpbb_root_path . 'pthranking/public' . $path;
+        if (file_exists($file_path))
+        {
+            $timestamp = filemtime($file_path);
+            return '/pthranking' . $path . '?v=' . $timestamp;
+        }
+
+        // Wenn nichts funktioniert, Original-URL zurückgeben
+        return '/pthranking' . $path;
+    }
 
     /**
      *
