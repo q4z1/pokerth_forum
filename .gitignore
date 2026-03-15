@@ -28,5 +28,6 @@ vendor
 .idea
 .vscode/
 download/client/
+download/tracker/
 live
 pthranking
