@@ -62,28 +62,24 @@ class listener implements EventSubscriberInterface
      */
     public function add_pth_assets($event)
     {
-        $manifest_path = $this->phpbb_root_path . 'pthranking/public/mix-manifest.json';
-        $manifest = [];
+        // Vite erzeugt stabile Dateinamen – kein Manifest nötig.
+        // Cache-Busting via Dateizeitstempel.
+        $base = $this->phpbb_root_path . 'pthranking/public';
 
-        // Mix-Manifest laden (enthält versionierte Dateinamen mit Hash)
-        if (file_exists($manifest_path))
+        $vars = [
+            'PTH_CSS_URL'        => $this->get_asset_url('/css/pth.css', $base),
+            'PTH_JS_URL'         => $this->get_asset_url('/js/pth.js', $base),
+            'PTH_INJECTIONS_URL' => $this->get_asset_url('/js/injections.js', $base),
+        ];
+
+        // Spectool CSS + JS nur auf der Spectool-Seite in den <head> laden
+        $request_uri = $this->request->server('REQUEST_URI');
+        if (strpos($request_uri, '/spectool') !== false)
         {
-            $manifest_content = @file_get_contents($manifest_path);
-            if ($manifest_content !== false)
-            {
-                $manifest = json_decode($manifest_content, true);
-                if (!is_array($manifest))
-                {
-                    $manifest = [];
-                }
-            }
+            $vars['PTH_SPECTOOL_CSS_URL'] = $this->get_asset_url('/css/spectool.css', $base);
         }
 
-        // Template-Variablen für versionierte Assets setzen
-        $this->template->assign_vars([
-            'PTH_JS_URL'         => $this->get_asset_url('/js/pth.js', $manifest),
-            'PTH_INJECTIONS_URL' => $this->get_asset_url('/js/injections.js', $manifest),
-        ]);
+        $this->template->assign_vars($vars);
     }
 
     /**
@@ -93,23 +89,13 @@ class listener implements EventSubscriberInterface
      * @param array $manifest Das Mix-Manifest Array
      * @return string Die versionierte URL
      */
-    private function get_asset_url($path, $manifest)
+    private function get_asset_url($path, $base)
     {
-        // Wenn das Asset im Mix-Manifest existiert, versionierte URL verwenden
-        if (isset($manifest[$path]))
-        {
-            return '/pthranking' . $manifest[$path];
-        }
-
-        // Fallback: Datei-Timestamp als Cache-Buster verwenden
-        $file_path = $this->phpbb_root_path . 'pthranking/public' . $path;
+        $file_path = $base . $path;
         if (file_exists($file_path))
         {
-            $timestamp = filemtime($file_path);
-            return '/pthranking' . $path . '?v=' . $timestamp;
+            return '/pthranking' . $path . '?v=' . filemtime($file_path);
         }
-
-        // Wenn nichts funktioniert, Original-URL zurückgeben
         return '/pthranking' . $path;
     }
 

@@ -198,7 +198,8 @@ a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, 
 <!-- EVENT overall_header_stylesheets_after -->
 {STYLE_SETTINGS_HTML_4}
 
-<link href="/pthranking/css/app.css" rel="stylesheet">
+<link href="{PTH_CSS_URL}" rel="stylesheet">
+<!-- IF PTH_SPECTOOL_CSS_URL --><link href="{PTH_SPECTOOL_CSS_URL}" rel="stylesheet"><!-- ENDIF -->
 </head>
 <body id="phpbb" class="nojs notouch section-{SCRIPT_NAME} {S_CONTENT_DIRECTION} {BODY_CLASS}<!-- IF STYLE_SETTINGS_CONFIG_SIDEBARS and STYLE_SETTINGS_CONFIG_SIDEBAR_PLACEMENT == 'Right Only' --> sidebar-right-only<!-- ELSEIF STYLE_SETTINGS_CONFIG_SIDEBARS and STYLE_SETTINGS_CONFIG_SIDEBAR_PLACEMENT == 'Left Only' --> sidebar-left-only<!-- ELSEIF STYLE_SETTINGS_CONFIG_SIDEBARS --> sidebar-both<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_LAYOUT_TYPE --> body-layout-{STYLE_SETTINGS_CONFIG_LAYOUT_TYPE}<!-- ENDIF --> content_block_header_<!-- IF STYLE_SETTINGS_CONFIG_CONTENT_BLOCK_HEADER == 'Stripe' -->stripe<!-- ELSE -->block<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_HIGH_CONTRAST_LINKS --> high_contrast_links<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_NAVBAR_POSITION == 'Inside Header' --> navbar_i_header<!-- ELSE --> navbar_o_header<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_ROUNDED_AVATARS --> force_rounded_avatars<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_CSS_IMAGE_REPLACE --> css_icons_disabled<!-- ELSE --> css_icons_enabled<!-- ENDIF -->">
 

@@ -66,9 +66,10 @@
                 <!-- IF not S_IS_BOT -->{RUN_CRON_TASK}<!-- ENDIF -->
             </div>
 
-            <script type="text/javascript" src="{PTH_JS_URL}"></script>
-            <script type="text/javascript" src="{PTH_INJECTIONS_URL}"></script>
+            <!-- IF PTH_JS_URL --><script type="module" src="{PTH_JS_URL}"></script><!-- ENDIF -->
+            <!-- IF PTH_INJECTIONS_URL --><script type="module" src="{PTH_INJECTIONS_URL}"></script><!-- ENDIF -->
 
+            <script type="text/javascript" src="{T_JQUERY_LINK}"></script>
             <script type="text/javascript" src="{T_ASSETS_PATH}/javascript/core.js?assets_version={T_ASSETS_VERSION}"></script>
 
 			<!-- IF STYLE_SETTINGS_CONFIG_PARALLAX_HEADER -->

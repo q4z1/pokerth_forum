@@ -1151,9 +1151,6 @@ body.content_block_header_stripe li.header {
 a.scrollToTop, a.scrollTopTop:hover {
 	color: #FFFFFF !important;
 }
-
-/* Collapsible Panels
----------------------------------------- */
 body.content_block_header_block .forabg .collapse-trigger a,
 body.content_block_header_block .forumbg .collapse-trigger a,
 body.content_block_header_block .sidebar_box .collapse-trigger a,
