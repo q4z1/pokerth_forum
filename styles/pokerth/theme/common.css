@@ -376,6 +376,12 @@ a.header-avatar img {
 	width: auto;
 }
 
+/* pth.css global reset sets img to display:block – restore inline for posting icons */
+fieldset.fields1 img,
+#smiley-box img {
+        display: inline;
+}
+
 a.header-avatar span:after {
 	content: '\f0dd';
 	display: inline-block;
