@@ -710,6 +710,10 @@ fieldset.polls dd div {
 	max-width: 100%;
 }
 
+.postprofile dt img {
+	display: inline-block;
+}
+
 dd.profile-contact {
 	overflow: visible;
 }
