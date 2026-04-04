@@ -370,7 +370,7 @@ a.header-avatar:hover {
 }
 
 a.header-avatar img {
-	margin-bottom: 2px;
+        display: inline;
 	max-height: 20px;
 	vertical-align: middle;
 	width: auto;
