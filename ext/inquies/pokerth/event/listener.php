@@ -77,6 +77,7 @@ class listener implements EventSubscriberInterface
         if (strpos($request_uri, '/spectool') !== false)
         {
             $vars['PTH_SPECTOOL_CSS_URL'] = $this->get_asset_url('/css/spectool.css', $base);
+            $vars['PTH_SPECTOOL_JS_URL']  = $this->get_asset_url('/js/spectool.js', $base);
         }
 
         $this->template->assign_vars($vars);
