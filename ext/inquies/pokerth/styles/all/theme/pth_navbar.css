@@ -1,0 +1,55 @@
+/*
+ * PokerTH Extension – Navbar customizations
+ * Theme-independent CSS, safe from Milk v2 updates.
+ */
+
+/* ------------------------------------------------------------------ */
+/* FAQ dropdown: caret indicator on the trigger link                   */
+/* ------------------------------------------------------------------ */
+#nav-main > li.dropdown-container > a.dropdown-trigger::after {
+    content: " \f0d7";         /* fa-caret-down */
+    font-family: FontAwesome;
+    font-size: 0.75em;
+    vertical-align: middle;
+}
+
+/* ------------------------------------------------------------------ */
+/* Mobile: nested FAQ sub-dropdown inside the hamburger menu           */
+/*                                                                     */
+/* When the FAQ <li> is collapsed into #quick-links by the responsive  */
+/* JS, its inner .dropdown is rendered inline so it stays accessible.  */
+/* ------------------------------------------------------------------ */
+#quick-links .dropdown-contents li.dropdown-container > a.dropdown-trigger::after {
+    content: none;             /* no caret inside hamburger */
+}
+
+#quick-links .dropdown-contents li.dropdown-container > a.dropdown-trigger {
+    font-weight: 600;
+}
+
+#quick-links .dropdown-contents li.dropdown-container .pointer,
+#quick-links .dropdown-contents li.dropdown-container .pointer-inner {
+    display: none;
+}
+
+#quick-links .dropdown-contents li.dropdown-container .dropdown {
+    position: static;
+    display: block;
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+    width: 100%;
+}
+
+#quick-links .dropdown-contents li.dropdown-container .dropdown-contents {
+    display: block;
+    position: static;
+    max-height: none;
+    overflow: visible;
+}
+
+#quick-links .dropdown-contents li.dropdown-container .dropdown-contents li {
+    padding-left: 1.25em;
+}
