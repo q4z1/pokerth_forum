@@ -4,3 +4,6 @@
 [submodule "pthranking"]
 	path = pthranking
 	url = git@github.com:q4z1/pokerth_ranking.git
+[submodule "webclient"]
+	path = webclient
+	url = https://github.com/narmod/pokerth-web-client.git
