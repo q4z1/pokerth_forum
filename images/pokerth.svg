@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="PokerTH">
+    <title>PokerTH</title>
+    <defs>
+        <clipPath id="pth-chip">
+            <circle cx="64" cy="64" r="62"/>
+        </clipPath>
+    </defs>
+
+    <!-- chip body -->
+    <circle cx="64" cy="64" r="62" fill="#a81f24"/>
+
+    <!-- white edge segments -->
+    <g clip-path="url(#pth-chip)">
+        <circle cx="64" cy="64" r="55" fill="none" stroke="#f4efe4" stroke-width="16"
+                stroke-dasharray="30 27.6" transform="rotate(-15 64 64)"/>
+    </g>
+
+    <!-- gold ring -->
+    <circle cx="64" cy="64" r="48" fill="#f0c419"/>
+    <circle cx="64" cy="64" r="42" fill="#a81f24"/>
+
+    <!-- TH -->
+    <text x="64" y="83" text-anchor="middle"
+          font-family="'Arial Black', Arial, Helvetica, sans-serif" font-weight="900"
+          font-size="52" letter-spacing="-2" fill="#ffffff">TH</text>
+
+    <!-- POKER band -->
+    <rect x="12" y="53" width="104" height="22" rx="3" fill="#a81f24" stroke="#f0c419" stroke-width="3"/>
+    <text x="64" y="69" text-anchor="middle"
+          font-family="'Arial Black', Arial, Helvetica, sans-serif" font-weight="900"
+          font-size="15" letter-spacing="1" fill="#ffffff">POKER</text>
+</svg>
