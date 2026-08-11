@@ -1,0 +1,33 @@
+User-agent: *
+
+# Interne Bereiche und Verzeichnisse ohne eigenständigen Inhalt
+Disallow: /adm/
+Disallow: /bin/
+Disallow: /cache/
+Disallow: /config/
+Disallow: /docs/
+Disallow: /ext/
+Disallow: /includes/
+Disallow: /language/
+Disallow: /phpbb/
+Disallow: /store/
+Disallow: /upd/
+Disallow: /vendor/
+
+# Skripte, die nur für angemeldete Benutzer sinnvoll sind bzw. bei jedem
+# Aufruf neue URLs erzeugen und damit nur Crawl-Budget kosten
+Disallow: /cron.php
+Disallow: /mcp.php
+Disallow: /posting.php
+Disallow: /report.php
+Disallow: /search.php
+Disallow: /ucp.php
+Disallow: /viewonline.php
+
+# Session-IDs und Sortier-/Ansichtsparameter erzeugen Duplikate derselben Seite
+Disallow: /*?sid=
+Disallow: /*&sid=
+Disallow: /*?view=
+Disallow: /*&view=
+
+Sitemap: https://www.pokerth.net/sitemap.xml
