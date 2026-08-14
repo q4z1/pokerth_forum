@@ -44,10 +44,14 @@ class listener implements EventSubscriberInterface
         return [
             'core.ucp_activate_after' => 'afterActivation',
             'core.ucp_register_data_after' => 'afterReg',
+            'core.ucp_profile_reg_details_data' => 'preventEmailChange',
             'core.ucp_profile_reg_details_validate' => 'validateRegDetails',
             'core.ucp_profile_reg_details_sql_ary' => 'afterRegDetails',
             'core.permissions' => 'add_permission',
-            'core.page_header' => 'add_pth_assets'
+            'core.page_header' => [
+                ['add_pth_assets'],
+                ['lock_email_field'],
+            ]
         ];
     }
 
@@ -205,6 +209,32 @@ class listener implements EventSubscriberInterface
         $this->db->sql_freeresult($result);
 
         // file_put_contents("/var/www/pokerth_test/pth_helper.log", "afterReg=data: " . $sql . "\n", FILE_APPEND);
+    }
+
+    /**
+     * The email address exists in both the phpBB and the ranking db, so it
+     * must not be changed through the forum alone. Discard whatever was
+     * submitted and keep the address the account already has.
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function preventEmailChange($event)
+    {
+        $data = $event['data'];
+        $data['email'] = $this->user->data['user_email'];
+        $event['data'] = $data;
+    }
+
+    /**
+     * Render the email address as plain text instead of an input field.
+     * Runs on core.page_header, which fires after the UCP module has assigned
+     * its own template variables, so this assignment wins.
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function lock_email_field($event)
+    {
+        $this->template->assign_var('S_CHANGE_EMAIL', false);
     }
 
     /**
