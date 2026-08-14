@@ -28,6 +28,7 @@ services:
             - '@request'
             - '@template'
             - '%core.root_path%'
+            - '@user'
         class: inquies\pokerth\event\listener
         tags:
             - { name: event.listener }

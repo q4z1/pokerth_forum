@@ -10,6 +10,7 @@ class listener implements EventSubscriberInterface
     protected $request;
     protected $template;
     protected $phpbb_root_path;
+    protected $user;
 
     protected $dbname;
 
@@ -20,14 +21,16 @@ class listener implements EventSubscriberInterface
     * @param \phpbb\request\request                 $request        Request object
     * @param \phpbb\template\template               $template       Template object
     * @param string                                 $phpbb_root_path Path to phpBB root
+    * @param \phpbb\user                            $user           User object
     * @access public
     */
-    public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, $phpbb_root_path)
+    public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, $phpbb_root_path, \phpbb\user $user)
     {
         $this->request = $request;
         $this->db = $db;
         $this->template = $template;
         $this->phpbb_root_path = $phpbb_root_path;
+        $this->user = $user;
         $this->dbname = $this->request->server('HTTP_HOST') == "test.pokerth.net" ? "pokerth_ranking_test" : "pokerth_ranking";
     }
 
@@ -41,6 +44,8 @@ class listener implements EventSubscriberInterface
         return [
             'core.ucp_activate_after' => 'afterActivation',
             'core.ucp_register_data_after' => 'afterReg',
+            'core.ucp_profile_reg_details_validate' => 'validateRegDetails',
+            'core.ucp_profile_reg_details_sql_ary' => 'afterRegDetails',
             'core.permissions' => 'add_permission',
             'core.page_header' => 'add_pth_assets'
         ];
@@ -200,5 +205,50 @@ class listener implements EventSubscriberInterface
         $this->db->sql_freeresult($result);
 
         // file_put_contents("/var/www/pokerth_test/pth_helper.log", "afterReg=data: " . $sql . "\n", FILE_APPEND);
+    }
+
+    /**
+     * Restrict password characters to the set the game client supports
+     * when the password is changed via UCP -> Profile -> Edit account settings.
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function validateRegDetails($event)
+    {
+        $data = $event['data'];
+
+        if (empty($data['new_password'])) return;
+
+        if (!preg_match('/^[A-Za-z0-9.,_-]+$/', $data['new_password']))
+        {
+            $error = $event['error'];
+            $error[] = "Password contains invalid characters. Only letters, numbers and the characters . , _ - are allowed.";
+            $event['error'] = $error;
+        }
+    }
+
+    /**
+     * Keep the ranking db password in sync when it is changed via
+     * UCP -> Profile -> Edit account settings. Without this the new password
+     * only works on the website, but not in the game clients.
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function afterRegDetails($event)
+    {
+        $data = $event['data'];
+
+        if (empty($data['new_password'])) return;
+
+        // The phpBB users table is only updated after this event, so
+        // $this->user->data still holds the username the player row is keyed on.
+        $username = $this->db->sql_escape($this->user->data['username']);
+        $password = $this->db->sql_escape($data['new_password']);
+
+        $sql = 'UPDATE `'.$this->dbname.'`.`player`
+            SET `password` = AES_ENCRYPT(\''.$password.'\', \''.APP_SALT.'\')
+            WHERE `username` = \''.$username.'\'';
+        $result = $this->db->sql_query($sql);
+        $this->db->sql_freeresult($result);
     }
 }
