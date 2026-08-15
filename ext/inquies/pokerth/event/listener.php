@@ -48,11 +48,50 @@ class listener implements EventSubscriberInterface
             'core.ucp_profile_reg_details_validate' => 'validateRegDetails',
             'core.ucp_profile_reg_details_sql_ary' => 'afterRegDetails',
             'core.permissions' => 'add_permission',
+            'core.user_setup' => 'drop_url_sid',
             'core.page_header' => [
                 ['add_pth_assets'],
                 ['lock_email_field'],
             ]
         ];
+    }
+
+    /**
+     * Hält die Session-ID im Cookie statt in jeder URL.
+     *
+     * phpBB hängt die sid nur dann an alle Links, wenn der Client kein Cookie
+     * schickt (phpbb/session.php:266). Ein Crawler, der Cookies ignoriert,
+     * bekommt dadurch mit jeder Antwort eine neue sid — und damit werden aus
+     * den immer gleichen 102 Links der Startseite 102 URLs, die er noch nie
+     * gesehen hat. Er stellt sie in die Queue, holt sie, bekommt wieder eine
+     * neue sid, und geht nie aus: Was monatelang wie ein Angriff aussah, war
+     * ein Crawler, der nicht terminieren konnte.
+     *
+     * Für die Bots aus seiner eigenen Liste unterdrückt phpBB das längst
+     * (phpbb/session.php:682), es erkennt nur keinen Crawler, der einen
+     * Browser-User-Agent fälscht. Hier gilt dieselbe Regel für jeden Client
+     * ohne Cookies.
+     *
+     * Besucher mit Cookies laufen gar nicht erst in diesen Zweig, deren Links
+     * waren nie betroffen.
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function drop_url_sid($event)
+    {
+        // Das ACP baut die sid bewusst in seine Links ein, das bleibt so.
+        // adm/index.php definiert die Konstante vor dem require der common.php.
+        if (defined('NEED_SID'))
+        {
+            return;
+        }
+
+        global $SID, $_SID;
+
+        // Genau das Paar, das phpBB selbst für einen erkannten Bot setzt.
+        // append_sid() nimmt bei leerem $_SID seine Abkürzung und hängt nichts an.
+        $SID = '?sid=';
+        $_SID = '';
     }
 
 	// Add administrative permissions to allow post deletion
