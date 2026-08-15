@@ -1,3 +1,12 @@
+# Bytespider (ByteDance) sammelt Trainingsdaten und schickt im Gegenzug nichts
+# zurück: keine Verweise, keine Nennung, keine Besucher. Am 14./15.08.2026 kamen
+# aus dem Adressraum von Byteplus Pte Ltd zehntausende Anfragen pro Stunde, mit
+# gefälschter Chrome-Kennung statt der eigenen, und unter Missachtung der unten
+# stehenden sid-Regeln. Diese Zeilen halten das fest; wirksam wird die Ablehnung
+# erst durch die Sperre der Netzblöcke.
+User-agent: Bytespider
+Disallow: /
+
 User-agent: *
 
 # Interne Bereiche und Verzeichnisse ohne eigenständigen Inhalt
