@@ -262,6 +262,20 @@ a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, 
 	#vue-header { min-height: 250px; }
 	@media (min-width: 768px) { #vue-header { min-height: 150px; } }
 
+	/* Die grossen Tabellen der App-Seiten. Beide Tags stehen bereits im
+	   ausgelieferten HTML, die Reservierung greift also vor dem Mounten –
+	   anders als eine min-height innerhalb der Komponente, die erst wirkt,
+	   wenn Vue schon gerendert hat, und den Sprung dadurch nur verdoppelt.
+	   Endhöhen aus der Messung auf produktiv. */
+	leaderboard-component,
+	downloads-component { display: block; }
+	leaderboard-component { min-height: 3056px; }
+	downloads-component  { min-height: 1474px; }
+	@media (min-width: 768px) {
+		leaderboard-component { min-height: 2548px; }
+		downloads-component  { min-height: 1039px; }
+	}
+
 	/* injections.js hängt nachträglich eine Länderflagge unter den
 	   Benutzernamen (<br> + 24x14-Bild). Der Block bekommt die Endhöhe sofort. */
 	.postprofile { min-height: 50px; }
