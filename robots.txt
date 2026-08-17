@@ -23,15 +23,27 @@ Disallow: /store/
 Disallow: /upd/
 Disallow: /vendor/
 
+# Ausnahme: Jede Seite lädt sieben Stylesheets aus /ext/ (Navbar, Pages).
+# Sperrt man sie mit, rendert Google die Seiten ohne Layout und bewertet sie
+# entsprechend. Die längere Regel gewinnt gegen Disallow: /ext/.
+Allow: /ext/*.css
+Allow: /ext/*.js
+
 # Skripte, die nur für angemeldete Benutzer sinnvoll sind bzw. bei jedem
 # Aufruf neue URLs erzeugen und damit nur Crawl-Budget kosten
 Disallow: /cron.php
 Disallow: /mcp.php
+Disallow: /memberlist.php
 Disallow: /posting.php
 Disallow: /report.php
 Disallow: /search.php
 Disallow: /ucp.php
 Disallow: /viewonline.php
+
+# Avatare sind Beiwerk und liegen ohnehin nur als Miniatur vor. Anhänge
+# (download/file.php?id=) bleiben bewusst offen, das sind Screenshots aus
+# den Beiträgen.
+Disallow: /download/file.php?avatar=
 
 # Session-IDs und Sortier-/Ansichtsparameter erzeugen Duplikate derselben Seite
 Disallow: /*?sid=
