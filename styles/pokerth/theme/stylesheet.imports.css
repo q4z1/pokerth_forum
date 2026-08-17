@@ -22,7 +22,9 @@
 @import url("icons_forums_topics.css?v=milk2.1.10");
 
 /* Custom Additions */
-@import url("animate.css?v=milk2.1.10");
+/* animate.css NICHT hier einbinden: overall_header.html verlinkt sie bereits
+   separat (Zeile ~125). Doppelt geladen waren das 70,6 KB, und zwar die
+   grösste Einzeldatei im render-blockierenden Stylesheet. */
 @import url("tooltipster.bundle.min.css?v=milk2.1.10");
 @import url("tooltipster-sideTip-borderless.min.css?v=milk2.1.10");
 

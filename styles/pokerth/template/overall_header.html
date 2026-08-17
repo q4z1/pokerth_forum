@@ -51,8 +51,31 @@
 
 <!-- Das Header-Bild ist auf jeder Seite das LCP-Element, wird aber erst von
      parallax.js angefordert und traf damit als eine der letzten Ressourcen ein.
-     Der Preload zieht es an den Anfang der Warteschlange. -->
-<!-- IF FORUM_HEADER --><link rel="preload" as="image" href="{FORUM_HEADER}"><!-- ENDIF -->
+     Der Preload zieht es an den Anfang der Warteschlange.
+
+     Zusätzlich wird hier die Breitenstufe gewählt: die Vorlagen sind 1536 px
+     breit, ein Telefon braucht davon einen Bruchteil. Der Controller kennt die
+     Stufen 640, 1024 und 1536 und liefert WebP, wo der Browser es annimmt.
+     Die gewählte URL landet in window.pthHeaderSrc; das Skript direkt hinter
+     der Headerbar setzt damit data-image-src, bevor parallax.js startet. -->
+<!-- IF FORUM_HEADER -->
+<script type="text/javascript">
+	(function () {
+		var css = window.innerWidth || document.documentElement.clientWidth || 1280;
+		var need = css * Math.min(window.devicePixelRatio || 1, 2);
+		var step = need <= 640 ? 640 : (need <= 1024 ? 1024 : 1536);
+
+		window.pthHeaderSrc = '{FORUM_HEADER}' + ('{FORUM_HEADER}'.indexOf('?') === -1 ? '?' : '&') + 'w=' + step;
+
+		var l = document.createElement('link');
+		l.rel = 'preload';
+		l.as = 'image';
+		l.href = window.pthHeaderSrc;
+		document.head.appendChild(l);
+	})();
+</script>
+<noscript><link rel="preload" as="image" href="{FORUM_HEADER}"></noscript>
+<!-- ENDIF -->
 
 <!-- IF STYLE_SETTINGS_CONFIG_FONT_FAMILY == 'Roboto Slab' -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,500&display=swap" rel="stylesheet">
@@ -122,7 +145,14 @@ a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, 
 <!-- ENDIF -->
 
 <!-- IF not STYLE_SETTINGS_CONFIG_DISABLE_CSS_ANIMATIONS -->
-<link href="{T_THEME_PATH}/animate.css" rel="stylesheet" />
+<!-- animate.css (71 KB) liefert nur Einblend-Effekte und blockiert als
+     gewöhnliches Stylesheet trotzdem den ersten Paint. Über media="print"
+     lädt der Browser sie mit niedriger Priorität und ohne zu blockieren;
+     onload schaltet sie scharf. Kommt sie zu spät, erscheinen die Elemente
+     ohne Einblendung – die Effekte sind reine Opazität, an der Höhe ändert
+     sich nichts, es entsteht also keine Verschiebung. -->
+<link href="{T_THEME_PATH}/animate.css" rel="stylesheet" media="print" onload="this.media='all';this.onload=null" />
+<noscript><link href="{T_THEME_PATH}/animate.css" rel="stylesheet" /></noscript>
 <style type="text/css">
 	#nav-main, #logo, #site-description h1, #site-description p, #nav-breadcrumbs, #page-body {
 		transform: translateY(-15px);
@@ -283,7 +313,17 @@ a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, 
 
             <div class="headerbar<!-- IF STYLE_SETTINGS_CONFIG_NAVBAR_POSITION == 'Inside Header' --> has_navbar<!-- ENDIF -->" role="banner"
 				<!-- IF STYLE_SETTINGS_CONFIG_PARALLAX_HEADER --> data-parallax="scroll" data-image-src="{FORUM_HEADER}"<!-- ENDIF -->>
-				
+				<!-- IF STYLE_SETTINGS_CONFIG_PARALLAX_HEADER -->
+				<script type="text/javascript">
+					/* Auf die im <head> gewählte Breitenstufe umbiegen, solange
+					   parallax.js noch nicht gelaufen ist. Fällt das Skript im
+					   Head aus, bleibt data-image-src auf dem Original. */
+					if (window.pthHeaderSrc) {
+						document.currentScript.parentNode.setAttribute('data-image-src', window.pthHeaderSrc);
+					}
+				</script>
+				<!-- ENDIF -->
+
 				<div class="forum_header">
 
 					<div class="headerbar_overlay_container<!-- IF STYLE_SETTINGS_CONFIG_HEADER_EFFECT == 'Colour Overlay' --> headerbar_overlay_active<!-- ELSEIF STYLE_SETTINGS_CONFIG_HEADER_EFFECT == 'Darken' --> headerbar_overlay_darken<!-- ENDIF -->">
