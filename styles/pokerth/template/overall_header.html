@@ -224,6 +224,14 @@ a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, 
 	/* Das Discord-Widget lädt fremd und braucht seine 500 px von Anfang an. */
 	#discw { min-height: 500px; }
 
+	/* Die Download-Karte im Header kommt aus einer Vue-Komponente und klappt
+	   beim Mounten auf. Gemessene Endhöhen: 250 px mobil, 150 px ab Tablet.
+	   Für #rightcolumn wurde dasselbe versucht und wieder verworfen – die
+	   Spalte ist je nach Seite unterschiedlich hoch, eine feste Reservierung
+	   hat den CLS auf dem Leaderboard von 0,038 auf 0,193 verschlechtert. */
+	#vue-header { min-height: 250px; }
+	@media (min-width: 768px) { #vue-header { min-height: 150px; } }
+
 	/* injections.js hängt nachträglich eine Länderflagge unter den
 	   Benutzernamen (<br> + 24x14-Bild). Der Block bekommt die Endhöhe sofort. */
 	.postprofile { min-height: 50px; }
