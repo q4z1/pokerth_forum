@@ -189,6 +189,20 @@ class listener implements EventSubscriberInterface
             $vars['PTH_SPECTOOL_JS_URL']  = $this->get_asset_url('/js/spectool.js', $base);
         }
 
+        // Auf klassischen phpBB-Seiten steuert das Vue-Bundle nur die
+        // Seitenleiste bei – dort darf es hinter dem load-Event nachkommen,
+        // damit es forum_fn.js nicht den Main-Thread wegnimmt. Auf den
+        // Controller-Routen der Pages-Erweiterung ist es der Seiteninhalt
+        // selbst und muss sofort laden.
+        $route = (string) $this->symfony_request->attributes->get('_route');
+        $is_app_page = $route !== '' && strpos($route, 'phpbb_pages_') === 0;
+
+        if (!$is_app_page)
+        {
+            $vars['PTH_JS_DEFER'] = true;
+            $vars['PTH_JS_URL_JSON'] = "'" . $vars['PTH_JS_URL'] . "','" . $vars['PTH_INJECTIONS_URL'] . "'";
+        }
+
         $this->template->assign_vars($vars);
     }
 

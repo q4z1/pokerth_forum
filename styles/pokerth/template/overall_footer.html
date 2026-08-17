@@ -66,12 +66,11 @@
                 <!-- IF not S_IS_BOT -->{RUN_CRON_TASK}<!-- ENDIF -->
             </div>
 
-            <!-- IF PTH_JS_URL --><script type="module" src="{PTH_JS_URL}"></script><!-- ENDIF -->
-            <!-- IF PTH_INJECTIONS_URL --><script type="module" src="{PTH_INJECTIONS_URL}"></script><!-- ENDIF -->
-            <!-- IF PTH_SPECTOOL_JS_URL --><script type="module" src="{PTH_SPECTOOL_JS_URL}"></script><!-- ENDIF -->
-
             <script type="text/javascript" src="{T_JQUERY_LINK}"></script>
             <script type="text/javascript" src="{T_ASSETS_PATH}/javascript/core.js?assets_version={T_ASSETS_VERSION}"></script>
+
+            <!-- Die Vue-Bundles stehen bewusst ganz unten, hinter den phpBB-Skripten. -->
+
 
 			<!-- IF STYLE_SETTINGS_CONFIG_PARALLAX_HEADER -->
             	<!-- INCLUDEJS parallax.js -->
@@ -235,6 +234,39 @@
 
             <!-- IF S_PLUPLOAD --><!-- INCLUDE plupload.html --><!-- ENDIF -->
             {$SCRIPTS}
+
+            <!-- Vue-Bundles zuletzt: pth.js ist 1,2 MB und hat vorher die
+                 Leitung belegt, bevor forum_fn.js überhaupt geladen war. Die
+                 Navbar klappte dadurch erst nach 14 s von zwei Zeilen auf eine
+                 zusammen – der grösste CLS-Posten. Hinter den phpBB-Skripten
+                 passiert das vor dem ersten Paint.
+
+                 Auf Forenseiten steuert das Bundle nur die Seitenleiste bei
+                 und wird deshalb zusätzlich erst nach dem load-Event geholt;
+                 der Platz für die Komponenten ist im Header reserviert, das
+                 Nachrücken verschiebt also nichts. Auf den Controller-Routen
+                 der Pages-Erweiterung ist es der Seiteninhalt und lädt sofort. -->
+            <!-- IF PTH_JS_DEFER -->
+            <script type="text/javascript">
+                (function () {
+                    var srcs = [{PTH_JS_URL_JSON}];
+                    var load = function () {
+                        for (var i = 0; i < srcs.length; i++) {
+                            var s = document.createElement('script');
+                            s.type = 'module';
+                            s.src = srcs[i];
+                            document.body.appendChild(s);
+                        }
+                    };
+                    if (document.readyState === 'complete') { load(); }
+                    else { window.addEventListener('load', load); }
+                })();
+            </script>
+            <!-- ELSE -->
+            <!-- IF PTH_JS_URL --><script type="module" src="{PTH_JS_URL}"></script><!-- ENDIF -->
+            <!-- IF PTH_INJECTIONS_URL --><script type="module" src="{PTH_INJECTIONS_URL}"></script><!-- ENDIF -->
+            <!-- ENDIF -->
+            <!-- IF PTH_SPECTOOL_JS_URL --><script type="module" src="{PTH_SPECTOOL_JS_URL}"></script><!-- ENDIF -->
 
             <!-- IF STYLE_SETTINGS_CONFIG_HEADER_PARTICLES -->
                 <style>

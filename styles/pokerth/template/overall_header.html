@@ -44,29 +44,39 @@
 </script>
 <!-- ENDIF -->
 
+<!-- Die Schrift kommt von einem fremden Host: ohne preconnect fallen DNS,
+     TCP und TLS erst an, wenn der Parser den <link> erreicht. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Das Header-Bild ist auf jeder Seite das LCP-Element, wird aber erst von
+     parallax.js angefordert und traf damit als eine der letzten Ressourcen ein.
+     Der Preload zieht es an den Anfang der Warteschlange. -->
+<!-- IF FORUM_HEADER --><link rel="preload" as="image" href="{FORUM_HEADER}"><!-- ENDIF -->
+
 <!-- IF STYLE_SETTINGS_CONFIG_FONT_FAMILY == 'Roboto Slab' -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,500&display=swap" rel="stylesheet">
     <style type="text/css">body {font-family: "Roboto Slab", Arial, Helvetica, sans-serif; font-size: 14px;}</style>
 <!-- ELSEIF STYLE_SETTINGS_CONFIG_FONT_FAMILY == 'Bubbler One' -->
-	<link href="https://fonts.googleapis.com/css?family=Bubbler+One:300,400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Bubbler+One:300,400,500&display=swap" rel="stylesheet">
     <style type="text/css">body {font-family: "Bubbler One", Arial, Helvetica, sans-serif; font-size: 18px;}</style>
 <!-- ELSEIF STYLE_SETTINGS_CONFIG_FONT_FAMILY == 'Dosis' -->
-	<link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500&display=swap" rel="stylesheet">
     <style type="text/css">body {font-family: "Dosis", Arial, Helvetica, sans-serif; font-size: 16px;}</style>
 <!-- ELSEIF STYLE_SETTINGS_CONFIG_FONT_FAMILY == 'Exo 2' -->
-	<link href="https://fonts.googleapis.com/css?family=Exo+2:300,400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Exo+2:300,400,500&display=swap" rel="stylesheet">
 	<style type="text/css">body {font-family: "Exo 2", Arial, Helvetica, sans-serif; font-size: 15px;}</style>
 <!-- ELSEIF STYLE_SETTINGS_CONFIG_FONT_FAMILY == 'Raleway' -->
-	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500&display=swap" rel="stylesheet">
     <style type="text/css">body {font-family: "Raleway", Arial, Helvetica, sans-serif; font-size: 14px;}</style>
 <!-- ELSEIF STYLE_SETTINGS_CONFIG_FONT_FAMILY == 'Rubik' -->
-	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500&display=swap" rel="stylesheet">
     <style type="text/css">body {font-family: "Rubik", Arial, Helvetica, sans-serif; font-size: 14px;}</style>
 <!-- ELSEIF STYLE_SETTINGS_CONFIG_FONT_FAMILY == 'Quicksand' -->
-	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500&display=swap" rel="stylesheet">
     <style type="text/css">body {font-family: "Quicksand", Arial, Helvetica, sans-serif; font-size: 14px;}</style>
 <!-- ELSE -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
     <style type="text/css">body {font-family: "Roboto", Arial, Helvetica, sans-serif; font-size: 14px;}</style>
 <!-- ENDIF -->
 
@@ -200,8 +210,57 @@ a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, 
 
 <link href="{PTH_CSS_URL}" rel="stylesheet">
 <!-- IF PTH_SPECTOOL_CSS_URL --><link href="{PTH_SPECTOOL_CSS_URL}" rel="stylesheet"><!-- ENDIF -->
+
+<!-- Platzreservierung gegen Layout-Verschiebungen (CLS).
+     Alles hier drin ist erst nach dem ersten Paint da und schiebt sonst den
+     Rest der Seite nach unten. Die Werte stammen aus der Messung mit
+     Puppeteer bei 412 px Breite. Nur min-height, damit nichts gestaucht wird. -->
+<style type="text/css">
+	/* Custom-Elements sind bis zum Mounten von Vue unsichtbar und klappen
+	   dann auf – Höhe vorab freihalten. */
+	champion-of-day-component { display: block; min-height: 165px; }
+	adverts-component:not(:empty) { display: block; min-height: 155px; }
+
+	/* Das Discord-Widget lädt fremd und braucht seine 500 px von Anfang an. */
+	#discw { min-height: 500px; }
+
+	/* injections.js hängt nachträglich eine Länderflagge unter den
+	   Benutzernamen (<br> + 24x14-Bild). Der Block bekommt die Endhöhe sofort. */
+	.postprofile { min-height: 50px; }
+
+	/* Der Parallax-Header bekommt seine Höhe erst, wenn das Teaser-Bild da ist.
+	   Gemessener Verlauf bei 412 px: 179 -> 289 -> 389 -> 539 px, der letzte
+	   Sprung nach 13,6 s. Das verschiebt die komplette Seite darunter und war
+	   der größte Einzelposten beim CLS. Endhöhen aus der Messung:
+	   412 px -> 539, 768 px -> 557, ab 1024 px wächst sie praktisch nicht mehr. */
+	@media (max-width: 767px) {
+		.headerbar { min-height: 539px; }
+	}
+	@media (min-width: 768px) and (max-width: 1023px) {
+		.headerbar { min-height: 557px; }
+	}
+
+	/* Die Navbar rendert zunächst mehrzeilig (gemessen 98 px) und fällt erst
+	   auf eine Zeile (38 px) zusammen, wenn forum_fn.js die überzähligen
+	   Einträge ausblendet und #nav-main die Klasse "compact" gibt. Der Sprung
+	   verschiebt die ganze Seite und trat je nach Ladereihenfolge mal vor,
+	   mal nach dem ersten Paint ein. Hier wird die Endhöhe vorweggenommen,
+	   bis das Skript übernimmt; bleibt es aus, ist die Leiste einzeilig
+	   beschnitten – die Quick-Links stehen als erster Eintrag weiter bereit. */
+	@media (max-width: 767px) {
+		#nav-main:not(.compact) { max-height: 38px; overflow: hidden; }
+	}
+</style>
 </head>
 <body id="phpbb" class="nojs notouch section-{SCRIPT_NAME} {S_CONTENT_DIRECTION} {BODY_CLASS}<!-- IF STYLE_SETTINGS_CONFIG_SIDEBARS and STYLE_SETTINGS_CONFIG_SIDEBAR_PLACEMENT == 'Right Only' --> sidebar-right-only<!-- ELSEIF STYLE_SETTINGS_CONFIG_SIDEBARS and STYLE_SETTINGS_CONFIG_SIDEBAR_PLACEMENT == 'Left Only' --> sidebar-left-only<!-- ELSEIF STYLE_SETTINGS_CONFIG_SIDEBARS --> sidebar-both<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_LAYOUT_TYPE --> body-layout-{STYLE_SETTINGS_CONFIG_LAYOUT_TYPE}<!-- ENDIF --> content_block_header_<!-- IF STYLE_SETTINGS_CONFIG_CONTENT_BLOCK_HEADER == 'Stripe' -->stripe<!-- ELSE -->block<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_HIGH_CONTRAST_LINKS --> high_contrast_links<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_NAVBAR_POSITION == 'Inside Header' --> navbar_i_header<!-- ELSE --> navbar_o_header<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_ROUNDED_AVATARS --> force_rounded_avatars<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_CSS_IMAGE_REPLACE --> css_icons_disabled<!-- ELSE --> css_icons_enabled<!-- ENDIF -->">
+
+<script type="text/javascript">
+	/* phpBB nimmt die nojs-Klasse erst weg, wenn core.js läuft. Bis dahin
+	   rendert die Navbar in der aufgeklappten Variante für Browser ohne
+	   JavaScript – gemessen 306 px statt 130 px – und fällt danach sichtbar
+	   zusammen. Zwei Zeilen hier oben erledigen das vor dem ersten Paint. */
+	document.body.className = document.body.className.replace(/\bnojs\b/, 'hasjs');
+</script>
 
 <!-- EVENT overall_header_body_before -->
     <div id="wrap" class="wrap">
