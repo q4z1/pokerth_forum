@@ -29,6 +29,9 @@ services:
             - '@template'
             - '%core.root_path%'
             - '@user'
+            - '@controller.helper'
+            - '@symfony_request'
+            - '%core.table_prefix%'
         class: inquies\pokerth\event\listener
         tags:
             - { name: event.listener }

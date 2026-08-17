@@ -3,6 +3,7 @@
 namespace inquies\pokerth\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class listener implements EventSubscriberInterface
 {
@@ -11,6 +12,9 @@ class listener implements EventSubscriberInterface
     protected $template;
     protected $phpbb_root_path;
     protected $user;
+    protected $controller_helper;
+    protected $symfony_request;
+    protected $pages_table;
 
     protected $dbname;
 
@@ -22,15 +26,23 @@ class listener implements EventSubscriberInterface
     * @param \phpbb\template\template               $template       Template object
     * @param string                                 $phpbb_root_path Path to phpBB root
     * @param \phpbb\user                            $user           User object
+    * @param \phpbb\controller\helper               $controller_helper Controller helper, baut Routen-URLs
+    * @param \phpbb\symfony_request                 $symfony_request Symfony-Request, liefert die aktive Route
+    * @param string                                 $table_prefix   Tabellenpräfix des Boards
     * @access public
     */
-    public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, $phpbb_root_path, \phpbb\user $user)
+    public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, $phpbb_root_path, \phpbb\user $user, \phpbb\controller\helper $controller_helper, \phpbb\symfony_request $symfony_request, $table_prefix)
     {
         $this->request = $request;
         $this->db = $db;
         $this->template = $template;
         $this->phpbb_root_path = $phpbb_root_path;
         $this->user = $user;
+        $this->controller_helper = $controller_helper;
+        $this->symfony_request = $symfony_request;
+        // Nicht %phpbb.pages.tables.pages%, damit der Container auch dann noch
+        // baut, wenn die Pages-Erweiterung einmal deaktiviert wird.
+        $this->pages_table = $table_prefix . 'pages';
         $this->dbname = $this->request->server('HTTP_HOST') == "test.pokerth.net" ? "pokerth_ranking_test" : "pokerth_ranking";
     }
 
@@ -52,8 +64,57 @@ class listener implements EventSubscriberInterface
             'core.page_header' => [
                 ['add_pth_assets'],
                 ['lock_email_field'],
+                ['set_pages_canonical'],
             ]
         ];
+    }
+
+    /**
+     * Setzt ein Canonical für die Seiten der Pages-Erweiterung.
+     *
+     * Dieselbe Seite ist über vier URLs erreichbar: die eigentliche Route
+     * (/app.php/leaderboard), die Legacy-Route aus Pages 1.0
+     * (/app.php/page/leaderboard) und beide noch einmal ohne app.php, weil
+     * nginx dorthin umschreibt. Alle vier antworten mit 200 und ohne
+     * Canonical – die Google Search Console meldet sie entsprechend als
+     * "Duplikat – vom Nutzer nicht als kanonisch festgelegt".
+     *
+     * viewtopic.php und Co. setzen U_CANONICAL selbst, die Erweiterung tut es
+     * nicht. Der Style rendert die Variable bereits, sobald sie gefüllt ist.
+     *
+     * Kanonisch ist die dynamische Route. controller.helper baut sie in der
+     * Form, die auch intern verlinkt wird – mit app.php, solange im ACP kein
+     * URL-Rewriting aktiv ist, und ohne, sobald es eingeschaltet wird.
+     */
+    public function set_pages_canonical()
+    {
+        $route = $this->symfony_request->attributes->get('_route');
+
+        if ($route === 'phpbb_pages_main_controller')
+        {
+            // Legacy-Route /page/{route}: auf die dynamische Route derselben Seite zeigen.
+            $page_route = $this->symfony_request->attributes->get('route');
+            $sql = 'SELECT page_id FROM ' . $this->pages_table . "
+                WHERE page_route = '" . $this->db->sql_escape((string) $page_route) . "'";
+            $result = $this->db->sql_query($sql);
+            $page_id = $this->db->sql_fetchfield('page_id');
+            $this->db->sql_freeresult($result);
+
+            if ($page_id === false)
+            {
+                return;
+            }
+
+            $route = 'phpbb_pages_dynamic_route_' . (int) $page_id;
+        }
+        else if (strpos((string) $route, 'phpbb_pages_dynamic_route_') !== 0)
+        {
+            return;
+        }
+
+        $this->template->assign_var('U_CANONICAL', $this->controller_helper->route(
+            $route, [], false, false, UrlGeneratorInterface::ABSOLUTE_URL
+        ));
     }
 
     /**
