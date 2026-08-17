@@ -7,6 +7,60 @@
 User-agent: Bytespider
 Disallow: /
 
+# ClaudeBot (Anthropic) holte am 14.-17.08.2026 rund 4.800 Seiten, davon 4.077
+# allein aus /viewtopic.php — das ist nach Bytespider die zweitgrößte Crawl-Last
+# auf dem Forum. Zurück kamen 11 Verweise von claude.ai in denselben 3,5 Tagen.
+# Claude-SearchBot bleibt bewusst offen: der speist die Suche, aus der diese
+# Verweise stammen, und holte nur 106 Seiten. Gleiche Logik wie bei Googlebot —
+# der Crawler geht, der Weg für echte Besucher bleibt. /robots.txt ist von der
+# Cloudflare-Regel ausgenommen, damit ClaudeBot diese Zeilen lesen kann.
+User-agent: ClaudeBot
+Disallow: /
+
+# Baiduspider, Applebot und GPTBot bekommen das Forum und die Startseite, aber
+# nicht die Ranking-App. Baiduspider-render führt das JavaScript aus und zieht
+# dabei jede XHR mit: 8.700 von 13.900 Anfragen (14.-17.08.2026) waren reine
+# JSON-Aufrufe unter /pthranking/, die in keinem Suchindex landen können.
+# Zurück kamen in denselben 3,5 Tagen rund 30 echte Besucher, und die stiegen
+# auf / und im Forum ein, nicht im Ranking. Baidu hält sich ohnehin nur teilweise
+# an diese Datei (420 Zugriffe auf das unten gesperrte /memberlist.php), wirksam
+# wird die Ablehnung daher erst durch die Cloudflare-Regel gleichen Namens.
+# Achtung: Crawler werten nur die eine Gruppe aus, die am genauesten auf sie
+# passt — der *-Block unten gilt für sie dann nicht mehr. Dessen Regeln sind
+# deshalb hier wiederholt; Änderungen unten müssen hier mitgezogen werden.
+User-agent: Baiduspider
+User-agent: Applebot
+User-agent: GPTBot
+Disallow: /pthranking/
+Disallow: /player
+Disallow: /adm/
+Disallow: /bin/
+Disallow: /cache/
+Disallow: /config/
+Disallow: /docs/
+Disallow: /ext/
+Disallow: /includes/
+Disallow: /language/
+Disallow: /phpbb/
+Disallow: /store/
+Disallow: /upd/
+Disallow: /vendor/
+Allow: /ext/*.css
+Allow: /ext/*.js
+Disallow: /cron.php
+Disallow: /mcp.php
+Disallow: /memberlist.php
+Disallow: /posting.php
+Disallow: /report.php
+Disallow: /search.php
+Disallow: /ucp.php
+Disallow: /viewonline.php
+Disallow: /download/file.php?avatar=
+Disallow: /*?sid=
+Disallow: /*&sid=
+Disallow: /*?view=
+Disallow: /*&view=
+
 User-agent: *
 
 # Interne Bereiche und Verzeichnisse ohne eigenständigen Inhalt
