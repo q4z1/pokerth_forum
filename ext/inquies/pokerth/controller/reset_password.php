@@ -188,7 +188,6 @@ class reset_password
 		 */
 		$vars = [
 			'user_id',
-			'username',
 			'reset_token',
 			'sql_array',
 		];
