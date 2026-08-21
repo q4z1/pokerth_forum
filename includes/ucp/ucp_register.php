@@ -117,7 +117,20 @@ class ucp_register
 			// Confirm that we have all necessary data
 			/* @var $provider_collection \phpbb\auth\provider_collection */
 			$provider_collection = $phpbb_container->get('auth.provider_collection');
-			$auth_provider = $provider_collection->get_provider($request->variable('auth_provider', ''));
+			$auth_config = $phpbb_container->get('config');
+			// SECURITY: never honour an arbitrary provider from the request. Doing so
+			// allows an attacker to pick a provider the board does not use (e.g. the
+			// apache provider, which trusts the client-supplied PHP_AUTH_USER header)
+			// and authenticate as any account without knowing its password.
+			$requested_provider = $request->variable('auth_provider', '');
+			$configured_provider = $auth_config->offsetGet('auth_method');
+
+			if ($requested_provider !== $configured_provider)
+			{
+				trigger_error('LOGIN_LINK_NO_DATA_PROVIDED');
+			}
+
+			$auth_provider = $provider_collection->get_provider($requested_provider);
 
 			$result = $auth_provider->login_link_has_necessary_data($login_link_data);
 			if ($result !== null)

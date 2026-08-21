@@ -73,6 +73,11 @@ class apache extends base
 	 */
 	public function init()
 	{
+		if (!$this->is_enabled())
+		{
+			return $this->language->lang('APACHE_SETUP_BEFORE_USE');
+		}
+
 		if (!$this->request->is_set('PHP_AUTH_USER', request_interface::SERVER) || $this->user->data['username'] !== html_entity_decode($this->request->server('PHP_AUTH_USER'), ENT_COMPAT))
 		{
 			return $this->language->lang('APACHE_SETUP_BEFORE_USE');
@@ -81,10 +86,34 @@ class apache extends base
 	}
 
 	/**
+	* Whether this provider is the board's configured authentication method.
+	*
+	* This provider derives the identity from PHP_AUTH_USER, which is supplied
+	* by the client. It must therefore never authenticate anyone unless the
+	* board is deliberately configured to use it behind a web server that
+	* actually validates those credentials.
+	*
+	* @return bool
+	*/
+	protected function is_enabled()
+	{
+		return $this->config['auth_method'] === 'apache';
+	}
+
+	/**
 	 * {@inheritdoc}
 	 */
 	public function login($username, $password)
 	{
+		if (!$this->is_enabled())
+		{
+			return array(
+				'status'		=> LOGIN_ERROR_EXTERNAL_AUTH,
+				'error_msg'		=> 'LOGIN_ERROR_EXTERNAL_AUTH_APACHE',
+				'user_row'		=> array('user_id' => ANONYMOUS),
+			);
+		}
+
 		// do not allow empty password
 		if (!$password)
 		{
