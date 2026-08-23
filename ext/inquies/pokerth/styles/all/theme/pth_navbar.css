@@ -53,3 +53,78 @@
 #quick-links .dropdown-contents li.dropdown-container .dropdown-contents li {
     padding-left: 1.25em;
 }
+
+/* ── Länderflagge unter dem Benutzernamen im Beitrag ──────────────────────── */
+/* Kommt aus dem Template, nicht mehr per XHR nachgeladen. width/height stehen
+   im <img>, damit der Platz vom ersten Paint an stimmt. */
+.postprofile .pth-post-flag {
+	display: inline-block;
+	margin-top: 2px;
+}
+
+/* ── Country-Auswahl im UCP-Profil ────────────────────────────────────────── */
+/* Beide Flächen tragen zusätzlich die phpBB-Klasse "inputbox": Farben,
+   Hintergrund und Rahmen kommen damit aus dem Style und folgen dem
+   Hell-/Dunkel-Umschalter (.fd_dark) von selbst. */
+.pth-dropdown {
+	position: relative;
+	max-width: 18rem;
+}
+
+.pth-dropdown__selected {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+	width: 100%;
+	min-height: 32px;
+	padding: 0.45rem 0.75rem;
+	border-radius: 0.35rem;
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.pth-dropdown__selected::after {
+	content: '\25BE';
+	margin-left: auto;
+}
+
+.pth-dropdown__options {
+	position: absolute;
+	top: calc(100% + 0.2rem);
+	right: 0;
+	left: 0;
+	z-index: 1000;
+	max-height: 220px;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	list-style: none;
+	border-radius: 0.45rem;
+	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.pth-dropdown__option {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+	padding: 0.45rem 0.75rem;
+	cursor: pointer;
+}
+
+.pth-dropdown__option:hover,
+.pth-dropdown__option[aria-selected='true'] {
+	background-color: rgba(127, 127, 127, 0.18);
+}
+
+.pth-dropdown__selected img,
+.pth-dropdown__option img {
+	flex-shrink: 0;
+}
+
+.pth-dropdown__selected span,
+.pth-dropdown__option span {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

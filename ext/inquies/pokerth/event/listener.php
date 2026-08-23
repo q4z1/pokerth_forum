@@ -18,6 +18,12 @@ class listener implements EventSubscriberInterface
 
     protected $dbname;
 
+    /** @var array poster_id => country_iso, gefüllt einmal pro viewtopic-Seite */
+    protected $country_cache = [];
+
+    /** @var array|null Länderliste aus countries.php, lazy geladen */
+    protected $countries = null;
+
    /**
     * Constructor
     *
@@ -59,6 +65,11 @@ class listener implements EventSubscriberInterface
             'core.ucp_profile_reg_details_data' => 'preventEmailChange',
             'core.ucp_profile_reg_details_validate' => 'validateRegDetails',
             'core.ucp_profile_reg_details_sql_ary' => 'afterRegDetails',
+            'core.ucp_profile_modify_profile_info' => 'load_profile_country',
+            'core.ucp_profile_validate_profile_info' => 'validate_profile_country',
+            'core.ucp_profile_info_modify_sql_ary' => 'save_profile_country',
+            'core.viewtopic_modify_post_data' => 'load_post_countries',
+            'core.viewtopic_modify_post_row' => 'assign_post_country',
             'core.permissions' => 'add_permission',
             'core.user_setup' => 'drop_url_sid',
             'core.page_header' => [
@@ -155,6 +166,232 @@ class listener implements EventSubscriberInterface
         $_SID = '';
     }
 
+    /**
+     * Länderliste (ISO-Wert => svg-Dateiname + Klartextname), lazy geladen.
+     *
+     * @return array
+     */
+    protected function get_countries()
+    {
+        if ($this->countries === null)
+        {
+            $this->countries = include __DIR__ . '/../countries.php';
+        }
+
+        return $this->countries;
+    }
+
+    /**
+     * Holt country_iso für eine Menge von Benutzernamen aus der Ranking-DB.
+     *
+     * @param array $usernames Liste von Benutzernamen
+     * @return array username (unverändert) => country_iso (kleingeschrieben)
+     */
+    protected function fetch_countries_by_username(array $usernames)
+    {
+        $usernames = array_values(array_unique(array_filter($usernames, 'strlen')));
+
+        if (empty($usernames))
+        {
+            return [];
+        }
+
+        // player.username ist utf8mb4_bin, phpbb_users.username hängt am Board.
+        // Deshalb keine JOIN über die beiden Spalten, sondern eine eigene
+        // Abfrage – die läuft über den führenden Teil von UNIQUE(username, email).
+        $sql = 'SELECT username, country_iso
+            FROM `' . $this->dbname . '`.`player`
+            WHERE ' . $this->db->sql_in_set('username', $usernames) . '
+                AND country_iso IS NOT NULL
+                AND country_iso <> \'\'';
+        $result = $this->db->sql_query($sql);
+
+        $countries = [];
+        while ($row = $this->db->sql_fetchrow($result))
+        {
+            $countries[$row['username']] = strtolower($row['country_iso']);
+        }
+        $this->db->sql_freeresult($result);
+
+        return $countries;
+    }
+
+    /**
+     * Lädt die Länder aller Poster einer Themenseite mit einer einzigen Abfrage.
+     *
+     * Früher holte injections.js das per XHR – ein Request pro Beitrag, jeder
+     * mit einem kompletten Laravel-Boot dahinter. Bei 25 Beiträgen pro Seite
+     * waren das 25 Requests für 25 Zeilen aus einer Tabelle.
+     *
+     * $user_cache ist bereits nach poster_id dedupliziert: Wer fünfmal im
+     * Thema geschrieben hat, steht hier trotzdem nur einmal.
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function load_post_countries($event)
+    {
+        $this->country_cache = [];
+
+        $usernames = [];
+        foreach ($event['user_cache'] as $poster_id => $poster)
+        {
+            if (!empty($poster['username']))
+            {
+                $usernames[$poster_id] = $poster['username'];
+            }
+        }
+
+        $countries = $this->fetch_countries_by_username($usernames);
+
+        foreach ($usernames as $poster_id => $username)
+        {
+            if (isset($countries[$username]))
+            {
+                $this->country_cache[$poster_id] = $countries[$username];
+            }
+        }
+    }
+
+    /**
+     * Hängt die Flaggendaten des Posters an die Template-Zeile.
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function assign_post_country($event)
+    {
+        $poster_id = $event['poster_id'];
+
+        if (!isset($this->country_cache[$poster_id]))
+        {
+            return;
+        }
+
+        $iso = $this->country_cache[$poster_id];
+        $countries = $this->get_countries();
+
+        // Unbekannter Wert in der DB: lieber keine Flagge als ein kaputtes Bild.
+        if (!isset($countries[$iso]))
+        {
+            return;
+        }
+
+        $post_row = $event['post_row'];
+        $post_row['POSTER_COUNTRY_FLAG'] = '/images/flags/' . $countries[$iso]['svg'] . '.svg';
+        $post_row['POSTER_COUNTRY_NAME'] = $countries[$iso]['title'];
+        $event['post_row'] = $post_row;
+    }
+
+    /**
+     * Füllt Country und Gender im UCP-Profilformular vor und baut die
+     * Auswahlliste für das Template.
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function load_profile_country($event)
+    {
+        $this->user->add_lang_ext('inquies/pokerth', 'pth_profile');
+
+        $username = $this->user->data['username'];
+
+        $sql = 'SELECT country_iso, gender
+            FROM `' . $this->dbname . '`.`player`
+            WHERE username = \'' . $this->db->sql_escape($username) . '\'';
+        $result = $this->db->sql_query($sql);
+        $player = $this->db->sql_fetchrow($result);
+        $this->db->sql_freeresult($result);
+
+        // Nach einem fehlgeschlagenen Absenden zeigt das Formular wieder das,
+        // was der Benutzer eingegeben hat, nicht den Stand aus der Datenbank.
+        if ($event['submit'])
+        {
+            $selected_country = strtolower($this->request->variable('pth_country', ''));
+            $selected_gender = $this->request->variable('pth_gender', '');
+        }
+        else
+        {
+            $selected_country = $player ? strtolower((string) $player['country_iso']) : '';
+            $selected_gender = $player ? (string) $player['gender'] : '';
+        }
+
+        $countries = $this->get_countries();
+
+        $this->template->assign_vars([
+            'S_PTH_PROFILE_FIELDS'  => true,
+            'PTH_COUNTRY'           => isset($countries[$selected_country]) ? $selected_country : '',
+            'PTH_COUNTRY_FLAG'      => isset($countries[$selected_country]) ? '/images/flags/' . $countries[$selected_country]['svg'] . '.svg' : '',
+            'PTH_COUNTRY_NAME'      => isset($countries[$selected_country]) ? $countries[$selected_country]['title'] : '',
+            'PTH_GENDER'            => in_array($selected_gender, ['m', 'f'], true) ? $selected_gender : '',
+        ]);
+
+        foreach ($countries as $iso => $country)
+        {
+            $this->template->assign_block_vars('pth_country', [
+                'VALUE'    => $iso,
+                'TITLE'    => $country['title'],
+                'FLAG'     => '/images/flags/' . $country['svg'] . '.svg',
+                'S_SELECTED' => ($iso === $selected_country),
+            ]);
+        }
+    }
+
+    /**
+     * Weist Werte ab, die nicht aus der Länderliste stammen.
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function validate_profile_country($event)
+    {
+        $this->user->add_lang_ext('inquies/pokerth', 'pth_profile');
+
+        $country = strtolower($this->request->variable('pth_country', ''));
+        $gender = $this->request->variable('pth_gender', '');
+
+        $errors = $event['error'];
+
+        if ($country !== '' && !isset($this->get_countries()[$country]))
+        {
+            $errors[] = 'PTH_INVALID_COUNTRY';
+        }
+
+        if (!in_array($gender, ['', 'm', 'f'], true))
+        {
+            $errors[] = 'PTH_INVALID_GENDER';
+        }
+
+        $event['error'] = $errors;
+    }
+
+    /**
+     * Schreibt Country und Gender in die Ranking-DB.
+     *
+     * Hängt am selben Event wie die Profildaten des Boards, läuft also erst,
+     * nachdem phpBB den form key geprüft hat. Der eigene sha1-Vergleich gegen
+     * user_form_salt, den der Laravel-Endpunkt dafür nachbauen musste, entfällt.
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function save_profile_country($event)
+    {
+        $country = strtolower($this->request->variable('pth_country', ''));
+        $gender = $this->request->variable('pth_gender', '');
+
+        if ($country !== '' && !isset($this->get_countries()[$country]))
+        {
+            return;
+        }
+
+        if (!in_array($gender, ['', 'm', 'f'], true))
+        {
+            return;
+        }
+
+        $sql = 'UPDATE `' . $this->dbname . '`.`player`
+            SET country_iso = \'' . $this->db->sql_escape(strtoupper($country)) . '\',
+                gender = \'' . $this->db->sql_escape($gender) . '\'
+            WHERE username = \'' . $this->db->sql_escape($this->user->data['username']) . '\'';
+        $this->db->sql_query($sql);
+    }
+
 	// Add administrative permissions to allow post deletion
 	public function add_permission($event)
 	{
@@ -178,7 +415,6 @@ class listener implements EventSubscriberInterface
         $vars = [
             'PTH_CSS_URL'        => $this->get_asset_url('/css/pth.css', $base),
             'PTH_JS_URL'         => $this->get_asset_url('/js/pth.js', $base),
-            'PTH_INJECTIONS_URL' => $this->get_asset_url('/js/injections.js', $base),
         ];
 
         // Spectool CSS + JS nur auf der Spectool-Seite in den <head> laden
@@ -200,7 +436,7 @@ class listener implements EventSubscriberInterface
         if (!$is_app_page)
         {
             $vars['PTH_JS_DEFER'] = true;
-            $vars['PTH_JS_URL_JSON'] = "'" . $vars['PTH_JS_URL'] . "','" . $vars['PTH_INJECTIONS_URL'] . "'";
+            $vars['PTH_JS_URL_JSON'] = "'" . $vars['PTH_JS_URL'] . "'";
         }
 
         $this->template->assign_vars($vars);
