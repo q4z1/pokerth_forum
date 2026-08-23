@@ -1,5 +1,5 @@
 <!-- IF S_PTH_PROFILE_FIELDS -->
-	<dl>
+	<dl class="pth-field">
 		<dt><label for="pth_country_button">{L_PTH_COUNTRY}{L_COLON}</label></dt>
 		<dd>
 			<div class="pth-dropdown" id="pth_country_dropdown">
@@ -12,7 +12,7 @@
 					<!-- ENDIF -->
 				</button>
 				<ul class="inputbox pth-dropdown__options" role="listbox" aria-labelledby="pth_country_button" hidden>
-					<li class="pth-dropdown__option" role="option" data-value="" data-title="{L_PTH_NONE}"<!-- IF not PTH_COUNTRY --> aria-selected="true"<!-- ENDIF -->><span>{L_PTH_NONE}</span></li>
+					<li class="pth-dropdown__option" role="option" data-value="" data-title="{L_PTH_NONE}"<!-- IF not PTH_COUNTRY --> aria-selected="true"<!-- ENDIF -->><i class="pth-dropdown__noflag"></i><span>{L_PTH_NONE}</span></li>
 					<!-- BEGIN pth_country -->
 						<li class="pth-dropdown__option" role="option" data-value="{pth_country.VALUE}" data-flag="{pth_country.FLAG}" data-title="{pth_country.TITLE}"<!-- IF pth_country.S_SELECTED --> aria-selected="true"<!-- ENDIF -->><img src="{pth_country.FLAG}" alt="" width="20" height="14" loading="lazy" /><span>{pth_country.TITLE}</span></li>
 					<!-- END pth_country -->

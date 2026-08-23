@@ -66,6 +66,22 @@
 /* Beide Flächen tragen zusätzlich die phpBB-Klasse "inputbox": Farben,
    Hintergrund und Rahmen kommen damit aus dem Style und folgen dem
    Hell-/Dunkel-Umschalter (.fd_dark) von selbst. */
+/* phpBB räumt Formularzeilen mit "fieldset dl { overflow: hidden }" (common.css)
+   hinter dem gefloateten dt auf. Das erzeugt zugleich einen Clipping-Kontext und
+   schneidet die ausgeklappte Liste nach wenigen Pixeln ab — gemessen blieben von
+   169 px genau 3 px stehen. Die alte JS-Variante entkam dem nur, weil sie dt und dd
+   direkt an das fieldset hängte, ganz ohne dl. Für diese eine Zeile derselbe
+   Float-Umbruch, nur ohne Clipping. */
+fieldset dl.pth-field {
+	overflow: visible;
+}
+
+fieldset dl.pth-field::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
 .pth-dropdown {
 	position: relative;
 	max-width: 18rem;
@@ -118,8 +134,15 @@
 }
 
 .pth-dropdown__selected img,
-.pth-dropdown__option img {
+.pth-dropdown__option img,
+.pth-dropdown__noflag {
 	flex-shrink: 0;
+}
+
+/* "none" hat keine Flagge – haelt den Text trotzdem auf der Fluchtlinie der uebrigen. */
+.pth-dropdown__noflag {
+	display: block;
+	width: 20px;
 }
 
 .pth-dropdown__selected span,
