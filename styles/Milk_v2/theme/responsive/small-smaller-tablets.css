@@ -65,7 +65,8 @@
 	---------------------------------------- */
 	
 	/* Turn 3 columns into 2 */
-	.forumlist_grid li.row {
+	.forumlist_grid li.row,
+	.forumlist_grid_icons li.row {
 		width: 50%;	
 	}	
 	

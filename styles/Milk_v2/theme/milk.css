@@ -89,3 +89,15 @@ span.forum_description {
 	border: 2px solid rgba(255,255,255,.4);
 	border-radius: 9999px;
 }
+
+.specialbutton, 
+.specialbutton .icon,
+.specialbutton:hover, 
+.specialbutton:hover .icon,
+.fd_dark .specialbutton .icon,
+.fd_dark .specialbutton:hover,
+.fd_dark a.button2:hover,
+.fd_dark input.button2:hover,
+.fd_dark input.button2:focus {
+	color: #FFFFFF !important;
+}

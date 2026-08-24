@@ -51,8 +51,8 @@
                 </div>
             </div>
 
-            <div class="copyright_bar" dir="ltr" style="height:47px">
-                Powered by <a href="https://www.pokerth.net/">PokerTH</a> <span></span>
+            <div class="copyright_bar" dir="ltr">
+                Powered by <a href="http://www.phpBB.com/">phpBB</a>&trade; <span class="planetstyles_credit<!-- IF STYLE_SETTINGS_CONFIG_CREDIT_LINE --> planetstyles_credit_hidden<!-- ENDIF -->">&bull; Design by <a href="http://www.planetstyles.net">PlanetStyles</a></span>
                 <!-- EVENT overall_footer_copyright_prepend -->
                 <!-- IF TRANSLATION_INFO --><br />{{ TRANSLATION_INFO }}<!-- ENDIF -->
                 <!-- EVENT overall_footer_copyright_append -->
@@ -63,15 +63,13 @@
 
             <div style="display: none;">
                 <a id="bottom" class="anchor" accesskey="z"></a>
-                <!-- IF not S_IS_BOT -->{RUN_CRON_TASK}<!-- ENDIF -->
+                {% if not S_IS_BOT %}{{ RUN_CRON_TASK }}{% endif %}
             </div>
 
-            <!-- <script type="text/javascript" src="{T_JQUERY_LINK}"></script> -->
-            <!-- IF PTH_JS_URL --><script type="module" src="{PTH_JS_URL}"></script><!-- ENDIF -->
-            <!-- IF PTH_SPECTOOL_JS_URL --><script type="module" src="{PTH_SPECTOOL_JS_URL}"></script><!-- ENDIF -->
+            <script type="text/javascript" src="{T_JQUERY_LINK}"></script>
 
             <!-- IF S_ALLOW_CDN -->
-                <!-- <script type="text/javascript">window.jQuery || document.write('\x3Cscript src="{T_ASSETS_PATH}/javascript/jquery.min.js?assets_version={T_ASSETS_VERSION}">\x3C/script>');</script> -->
+            <script>window.jQuery || document.write('\x3Cscript src="{T_ASSETS_PATH}/javascript/jquery-3.7.1.min.js?assets_version={T_ASSETS_VERSION}">\x3C/script>');</script>
             <!-- ENDIF -->
 
             <script type="text/javascript" src="{T_ASSETS_PATH}/javascript/core.js?assets_version={T_ASSETS_VERSION}"></script>
@@ -94,7 +92,7 @@
                 // clear mechanism (for testing)
                 // localStorage.removeItem('user_colour_selection');
                 // ************************************************                
-                // console.log("storage value:" + localStorage.user_colour_selection)
+                console.log("storage value:" + localStorage.user_colour_selection)
                 FDSetClass();
                 FDSetSwitch();
                 
@@ -102,43 +100,43 @@
 
                 function FDSetClass() {
                     {% if STYLE_SETTINGS_CONFIG_BASE_COLOUR == 'Dark' %}
-                        // console.log("FD Base: Dark");
+                        console.log("FD Base: Dark");
                         {% if STYLE_SETTINGS_CONFIG_ALLOW_USER_COLOUR %}
-                            // console.log("FD: Override allowed");
+                            console.log("FD: Override allowed");
                             if(localStorage.user_colour_selection == 'dark') {
-                                // console.log("FD: User selection: Dark");
+                                console.log("FD: User selection: Dark");
                                 $("html").addClass('fd_dark');
                                 localStorage.setItem("user_colour_selection", "dark");
                             } else {
                                 if (localStorage.user_colour_selection == 'cbu') {
-                                    // console.log("FD: cbu. Removing dark class...");
+                                    console.log("FD: cbu. Removing dark class...");
                                     $("html").removeClass('fd_dark');
                                 } else {
-                                    // console.log("FD: Value is empty. Setting to dark...");
+                                    console.log("FD: Value is empty. Setting to dark...");
                                     $("html").addClass('fd_dark');
                                     localStorage.setItem("user_colour_selection", "dark");                                       
                                 }                                                          
                             }
                         {% else %}
-                            // console.log("FD: Override not allowed");
-                            // console.log("Apply dark");
+                            console.log("FD: Override not allowed");
+                            console.log("Apply dark");
                             $("html").addClass('fd_dark');
                             localStorage.setItem("user_colour_selection", "dark");
                         {% endif %}
                     {% else %}
-                        // console.log("FD Base: Light");
+                        console.log("FD Base: Light");
                         {% if STYLE_SETTINGS_CONFIG_ALLOW_USER_COLOUR %}
-                            // console.log("FD: Override allowed");
+                            console.log("FD: Override allowed");
                             if(localStorage.user_colour_selection == 'dark') {
-                                // console.log("FD: User selection: Dark");
+                                console.log("FD: User selection: Dark");
                                 $("html").addClass('fd_dark');
                                 localStorage.setItem("user_colour_selection", "dark");
                             } else {
-                                // console.log("FD: User selection: Empty");
+                                console.log("FD: User selection: Empty");
                             }                        
                         {% else %}
-                            // console.log("FD: Override not allowed");
-                            // console.log("FD: Do nothing");
+                            console.log("FD: Override not allowed");
+                            console.log("FD: Do nothing");
                         {% endif %}
                     {% endif %}
                 }
@@ -158,7 +156,7 @@
                         $("a#dark_toggle_link i").addClass("fa-moon-o");
                         $("html").removeClass('fd_dark');
                         localStorage.setItem("user_colour_selection", "cbu");
-                        // console.log("Dark preference CBU (cleared by user)");
+                        console.log("Dark preference CBU (cleared by user)");
                     } else {
                         // Light
                         $("a#dark_toggle_link i").removeClass("fa-moon-o");
@@ -175,19 +173,30 @@
                 {% endif %}
             </script>
 
-            <!-- IF STYLE_SETTINGS_CONFIG_FORUMLIST_DISPLAY == 'Grid' -->                
+
+
+
+            <!-- IF STYLE_SETTINGS_CONFIG_FORUMLIST_DISPLAY == 'Grid' or STYLE_SETTINGS_CONFIG_FORUMLIST_DISPLAY == 'Grid (Icons)' -->                
                 <script>
                 // limit descriptions to 2 lines (~45px)
                 $(function() {
-                    var $xmpl = $('.forumlist_grid .forum_description');
-                    $xmpl.dotdotdot({
+                    var $grid_desc = $('.grid_image_container .forum_description');
+                    var $grid_time = $('span.mini_date time');
+                    $grid_desc.dotdotdot({
                         // Prevents the <a class="toggle" /> from being removed
                         height: 45,
                     });
+                    $grid_time.dotdotdot({
+                        // Prevents the <a class="toggle" /> from being removed
+                        height: 30,
+                    });                    
                 });                   
-                </script>          
-                <script src="{T_TEMPLATE_PATH}/jquery.dotdotdot.js"></script>      
+                </script>
+                <script src="{T_TEMPLATE_PATH}/jquery.dotdotdot.js"></script>                             
             <!-- ENDIF -->
+
+            
+           
 
             <!-- IF STYLE_SETTINGS_CONFIG_DARK_TOGGLE -->
             	<!-- INCLUDEJS js.cookie.js -->
@@ -326,7 +335,7 @@
         				"transition-delay": transitiondelay,
         				"animation-delay": transitiondelay
         			});
-        			 // console.log(transitiondelay);
+        			 console.log(transitiondelay);
                 });             
             </script>
             <!-- ENDIF -->

@@ -45,6 +45,9 @@ li.header dt {font-size: 1.2em;}
 .mini_number {font-size: 1.2em;}
 .forumlist_grid span.forum_description {font-size: 14px;}
 .forumlist_grid span.grid_cat_title {font-size: 2em;}
+.forumlist_grid_icons span.forum_description {font-size: 14px;}
+.forumlist_grid_icons span.grid_cat_title {font-size: 2em;}
+
 
 
 
@@ -104,6 +107,7 @@ a.lastsubject {font-weight: 400;text-decoration: none;}
 .grid_unread {font-weight: 300;}
 .tile_title {font-weight: 500;}
 .forumlist_grid .forum_description {font-weight: 300 !important;}
+.forumlist_grid_icons .forum_description {font-weight: 300 !important;}
 .mini_label {font-weight: 400;}
 .mini_number {font-weight: 600;}
 .grid_cat_title {font-weight: 500;}

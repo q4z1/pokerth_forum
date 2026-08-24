@@ -63,10 +63,15 @@
 
             <div style="display: none;">
                 <a id="bottom" class="anchor" accesskey="z"></a>
-                <!-- IF not S_IS_BOT -->{RUN_CRON_TASK}<!-- ENDIF -->
+                {% if not S_IS_BOT %}{{ RUN_CRON_TASK }}{% endif %}
             </div>
 
             <script type="text/javascript" src="{T_JQUERY_LINK}"></script>
+
+            <!-- IF S_ALLOW_CDN -->
+            <script>window.jQuery || document.write('\x3Cscript src="{T_ASSETS_PATH}/javascript/jquery-3.7.1.min.js?assets_version={T_ASSETS_VERSION}">\x3C/script>');</script>
+            <!-- ENDIF -->
+
             <script type="text/javascript" src="{T_ASSETS_PATH}/javascript/core.js?assets_version={T_ASSETS_VERSION}"></script>
 
             <!-- Die Vue-Bundles stehen bewusst ganz unten, hinter den phpBB-Skripten. -->
@@ -171,19 +176,30 @@
                 {% endif %}
             </script>
 
-            <!-- IF STYLE_SETTINGS_CONFIG_FORUMLIST_DISPLAY == 'Grid' -->                
+
+
+
+            <!-- IF STYLE_SETTINGS_CONFIG_FORUMLIST_DISPLAY == 'Grid' or STYLE_SETTINGS_CONFIG_FORUMLIST_DISPLAY == 'Grid (Icons)' -->                
                 <script>
                 // limit descriptions to 2 lines (~45px)
                 $(function() {
-                    var $xmpl = $('.forumlist_grid .forum_description');
-                    $xmpl.dotdotdot({
+                    var $grid_desc = $('.grid_image_container .forum_description');
+                    var $grid_time = $('span.mini_date time');
+                    $grid_desc.dotdotdot({
                         // Prevents the <a class="toggle" /> from being removed
                         height: 45,
                     });
+                    $grid_time.dotdotdot({
+                        // Prevents the <a class="toggle" /> from being removed
+                        height: 30,
+                    });                    
                 });                   
-                </script>          
-                <script src="{T_TEMPLATE_PATH}/jquery.dotdotdot.js"></script>      
+                </script>
+                <script src="{T_TEMPLATE_PATH}/jquery.dotdotdot.js"></script>                             
             <!-- ENDIF -->
+
+            
+           
 
             <!-- IF STYLE_SETTINGS_CONFIG_DARK_TOGGLE -->
             	<!-- INCLUDEJS js.cookie.js -->

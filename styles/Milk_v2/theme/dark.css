@@ -33,7 +33,6 @@
 .fd_dark .postbody .content, 
 .fd_dark .pagination li a, 
 .fd_dark select, 
-.fd_dark .button .icon, 
 .fd_dark .button-secondary, 
 .fd_dark .global_read_mine:after, 
 .fd_dark .global_read_locked_mine:after, 
@@ -87,7 +86,8 @@ html.fd_dark body,
 .fd_dark .dropdown-extended ul li:hover,
 .fd_dark .mini_label, 
 .fd_dark .mini_number, 
-.fd_dark .forumlist_grid .forum_description {
+.fd_dark .forumlist_grid .forum_description,
+.fd_dark .forumlist_grid_icons .forum_description {
 	color: #838b98;
 	
 }
@@ -123,7 +123,8 @@ html.fd_dark {
 .fd_dark .fancy_panel,
 .fd_dark .dropdown-extended .header,
 .fd_dark .forumlist_grid .grid_image_container,
-.fd_dark  body.content_block_header_stripe li.header {
+.fd_dark  body.content_block_header_stripe li.header,
+.fd_dark .forumlist_grid_icons .grid_image_container {
 	background: #242a36 !important;
 	
 }
@@ -149,7 +150,8 @@ html.fd_dark {
 .fd_dark .minitabs .activetab > a:hover, 
 .fd_dark .cp-main .pm, 
 .fd_dark .bg3 .topicreview .bg2, 
-.fd_dark .bg3 .topicreview .bg1 {
+.fd_dark .bg3 .topicreview .bg1,
+.fd_dark .forumlist_grid_icons .forabg {
 	background-color: #171b24 !important;
 	
 }
@@ -207,8 +209,8 @@ html.fd_dark {
 .fd_dark .panel blockquote, 
 .fd_dark .panel blockquote, 
 .fd_dark .panel .codebox,
-.fd_dark .login_form_forgot_link,
-.fd_dark .forumlist_grid .grid_image_container {
+.fd_dark .forumlist_grid .grid_image_container,
+.fd_dark .forumlist_grid_icons .grid_image_container {
 	border: 1px solid rgba(255,255,255,0.04);
 	
 }
@@ -263,7 +265,8 @@ html.fd_dark {
 .fd_dark .pm .postprofile, 
 .fd_dark .sidebar_content, 
 .fd_dark .profile_widget_list,
-.fd_dark .button {
+.fd_dark .button,
+.fd_dark .login_form_forgot_link {
 	border-color: rgba(255,255,255,0.04);
 	
 }

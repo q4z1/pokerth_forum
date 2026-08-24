@@ -150,13 +150,17 @@
 	---------------------------------------- */
 	
 	/* When boxed and both sidebars are enabled, reduce grid forumlist down to 2 columns */
-	body.sidebar-both.body-layout-Boxed .forumlist_grid li.row {
+	body.sidebar-both.body-layout-Boxed .forumlist_grid li.row,
+	body.sidebar-both.body-layout-Boxed .forumlist_grid_icons li.row  {
 		width: 50%;		
 	}
 	
 	/* When fluid and the right sidebar is present, reduce to 2 columns between 1200px and 1500px */
 	@media (min-width: 1200px)and (max-width: 1499px) {
-		body.sidebar-both.body-layout-Fluid .forumlist_grid li.row, body.sidebar-right-only.body-layout-Fluid .forumlist_grid li.row {
+		body.sidebar-both.body-layout-Fluid .forumlist_grid li.row, 
+		body.sidebar-right-only.body-layout-Fluid .forumlist_grid li.row,
+		body.sidebar-both.body-layout-Fluid .forumlist_grid_icons li.row, 
+		body.sidebar-right-only.body-layout-Fluid .forumlist_grid_icons li.row {
 			width: 50%;		
 		}		
 	}

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
 <head>
+{% if STYLE_SETTINGS_CONFIG_ALLOW_USER_COLOUR %}	
+	<script> if (localStorage.user_colour_selection === "dark") { document.getElementsByTagName('html')[0].classList.add('fd_dark'); }</script>	
+{% endif %}
 <meta charset="utf-8" />
-
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 {META}
@@ -37,7 +39,7 @@
 
 	(function(d) {
 		var wf = d.createElement('script'), s = d.scripts[0];
-		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+		wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js';
 		wf.async = true;
 		s.parentNode.insertBefore(wf, s);
 	})(document);
@@ -118,7 +120,7 @@
     <!-- IF STYLE_SETTINGS_CONFIG_COLOUR_PRESET == 'Custom (Use colour picker below)' -->
         <style type="text/css">
 			/* Color */
-a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, .icon.fa-file.icon-red, a:hover .icon.fa-file.icon-red, .navigation .active-subsection a, .navigation .active-subsection a:hover, .navigation a:hover, .tabs .tab > a:hover, .tabs .activetab > a, .tabs .activetab > a:hover, a.postlink, a.postlink:visited, .navbar_in_header .badge, .button:focus .icon, .button:hover .icon, .dark_base .social_links_footer a span, .dark_base h2, .dark_base h2 a, .dark_base a:link, .dark_base a:visited, .button-secondary:focus, .button-secondary:hover, .notification_unread, .topic_type {color: #{STYLE_SETTINGS_CONFIG_COLOUR_PICKER};}
+a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, .icon.fa-file.icon-red, a:hover .icon.fa-file.icon-red, .navigation .active-subsection a, .navigation .active-subsection a:hover, .navigation a:hover, .tabs .tab > a:hover, .tabs .activetab > a, .tabs .activetab > a:hover, a.postlink, a.postlink:visited, .navbar_in_header .badge, .button:focus .icon, .button:hover .icon, .dark_base .social_links_footer a span, .dark_base h2, .dark_base h2 a, .dark_base a:link, .dark_base a:visited, .button-secondary:focus, .button-secondary:hover, .notification_unread, .topic_type, .fd_dark a {color: #{STYLE_SETTINGS_CONFIG_COLOUR_PICKER};}
 			/* Background Solid  */
 			.pagination li a:hover, .pagination li.active span, .pagination li a:focus, .jumpbox-cat-link, .dropdown-contents > li > a:hover, a.button1:hover, input.button1:hover, a.button2:hover, input.button2:hover, input.button3:hover, a.no_avatar:hover, .jumpbox-cat-link:hover, input.button1:focus, input.button2:focus, input.button3:focus, .specialbutton, input.specialbutton, .panel .specialbutton, a.specialbutton, .scrollToTop, a.specialbutton, .dark_base .social_links_footer a:hover span, .grid_unread, .tile_row_2:before   {background: #{STYLE_SETTINGS_CONFIG_COLOUR_PICKER};}
 			/* Borders Dark */

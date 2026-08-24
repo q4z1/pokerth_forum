@@ -55,12 +55,12 @@
                 <a href="{forumrow.U_VIEWFORUM}" class="forumlist_grid_forum_image" style="background-image: url('{forumrow.FORUM_IMAGE_SRC}');"></a>
             <!-- ENDIF -->
 			<dl class="row-item {forumrow.FORUM_IMG_STYLE}">
-				<dt title="{forumrow.FORUM_FOLDER_IMG_ALT}">
+				<dt title="{% if forumrow.S_IS_LINK %}{{ lang('FORUM_LINK') }}{% else %}{{ forumrow.FORUM_FOLDER_IMG_ALT }}{% endif %}">
 					<!-- IF forumrow.S_UNREAD_FORUM --><a href="{forumrow.U_VIEWFORUM}" class="row-item-link"></a><!-- ENDIF -->
 					<div class="list-inner">
 						<!-- IF S_ENABLE_FEEDS and forumrow.S_FEED_ENABLED -->
 							<!--
-								<a class="feed-icon-forum" title="{L_FEED} - {forumrow.FORUM_NAME}" href="{U_FEED}?f={forumrow.FORUM_ID}">
+								<a class="feed-icon-forum" title="{L_FEED} - {forumrow.FORUM_NAME}" href="{{ path('phpbb_feed_forum', { forum_id : forumrow.FORUM_ID } ) }}">
 									<i class="icon fa-rss-square fa-fw icon-orange" aria-hidden="true"></i><span class="sr-only">{L_FEED} - {forumrow.FORUM_NAME}</span>
 								</a>
 							-->
@@ -98,7 +98,7 @@
                                 	<div class="sub-forumlist">
                                 		<!-- BEGIN subforum -->
                                     	<li>
-                                        <a href="{forumrow.subforum.U_SUBFORUM}" class="subforum<!-- IF forumrow.subforum.S_UNREAD --> unread<!-- ELSE --> read<!-- ENDIF -->" title="<!-- IF forumrow.subforum.S_UNREAD -->{L_UNREAD_POSTS}<!-- ELSE -->{L_NO_UNREAD_POSTS}<!-- ENDIF -->">
+                                        <a href="{forumrow.subforum.U_SUBFORUM}" class="subforum<!-- IF forumrow.subforum.S_UNREAD --> unread<!-- ELSE --> read<!-- ENDIF -->" title="{% if forumrow.subforum.IS_LINK %}{{ lang('FORUM_LINK') }}{% elseif forumrow.subforum.S_UNREAD %}{{ lang('UNREAD_POSTS') }}{% else %}{{ lang('NO_UNREAD_POSTS') }}{% endif %}">
                                         <i class="icon notification_unread <!-- IF forumrow.subforum.IS_LINK -->fa-external-link<!-- ELSEIF forumrow.subforum.S_UNREAD -->fa-circle<!-- ELSE -->fa-circle-o<!-- ENDIF --> fa-fw icon-md" aria-hidden="true"></i> {forumrow.subforum.SUBFORUM_NAME}
                                     </a>
                                     </li>
@@ -130,7 +130,7 @@
                                         <i class="icon fa-question fa-fw icon-blue" aria-hidden="true"></i><span class="sr-only">{L_POSTS_UNAPPROVED_FORUM}</span>
                                     </a>
                                 <!-- ENDIF -->
-                                <!-- IF forumrow.LAST_POST_TIME -->
+                                <!-- IF forumrow.LAST_POST_TIME_RFC3339 -->
                                     <dfn>{L_LAST_POST}</dfn>
                                     <!-- IF forumrow.S_DISPLAY_SUBJECT -->
                                         <!-- EVENT forumlist_body_last_post_title_prepend -->

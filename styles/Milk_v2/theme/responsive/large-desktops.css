@@ -147,23 +147,28 @@
 	---------------------------------------- */
 
 	/***** Remove desc & last post, make topics & posts wider. Reduce row 1 height & overflow */
-	body.sidebar-right-only.body-layout-Boxed .forumlist_grid .forum_description {
+	body.sidebar-right-only.body-layout-Boxed .forumlist_grid .forum_description,
+	body.sidebar-right-only.body-layout-Boxed .forumlist_grid_icons .forum_description {
 		display: none;
 	}
 
-	body.sidebar-right-only.body-layout-Boxed .forumlist_grid .tile_row_1	{
+	body.sidebar-right-only.body-layout-Boxed .forumlist_grid .tile_row_1,
+	body.sidebar-right-only.body-layout-Boxed .forumlist_grid_icons .tile_row_1	{
 		height: 75px;
 	}
 
-	body.sidebar-right-only.body-layout-Boxed .forumlist_grid .tile_row_2	{
+	body.sidebar-right-only.body-layout-Boxed .forumlist_grid .tile_row_2,
+	body.sidebar-right-only.body-layout-Boxed .forumlist_grid_icons .tile_row_2	{
 		margin-top: 0;
 	}
 
-	body.sidebar-right-only.body-layout-Boxed .forumlist_grid .tile_row_25	{
+	body.sidebar-right-only.body-layout-Boxed .forumlist_grid .tile_row_25,
+	body.sidebar-right-only.body-layout-Boxed .forumlist_grid_icons .tile_row_25	{
 		width: 50%;
 	}
 
-	body.sidebar-right-only.body-layout-Boxed .forumlist_grid .tile_row_50 {
+	body.sidebar-right-only.body-layout-Boxed .forumlist_grid .tile_row_50,
+	body.sidebar-right-only.body-layout-Boxed .forumlist_grid_icons .tile_row_50 {
 		display: none;
 	}
 	/* End minimal squishy fix */

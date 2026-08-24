@@ -23,18 +23,6 @@
 	.section-viewtopic .search-box .inputbox {
 		width: 57px;
 	}
-
-	.action-bar .search-box .inputbox ::-moz-placeholder {
-    	content: "Search...";
-  	}
-
-  	.action-bar .search-box .inputbox :-ms-input-placeholder {
-  		content: "Search...";
-  	}
-
-  	.action-bar .search-box .inputbox ::-webkit-input-placeholder {
-  		content: "Search...";
-  	}
 }
 
 @media (max-width: 500px) {
@@ -43,7 +31,7 @@
 	}
 
 	select, .inputbox {
-		max-width: 260px;
+		/* max-width: 260px; */
 	}
 
 	.captcha-panel dd.captcha {
@@ -452,6 +440,10 @@
 		float: none;
 		width: auto;
 		clear: both;
+	}
+
+	.avatar-rank-container {
+		max-width: 100%;
 	}
 
 	/* Polls

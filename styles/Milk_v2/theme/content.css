@@ -34,7 +34,7 @@ ul.topiclist dt, ul.topiclist dd {
 	float: left;
 }
 
-+ul.topiclist li.row dd {
+ul.topiclist li.row dd {
 	padding: 4px 0 999px 0;
 	margin-bottom: -995px;
 }
@@ -184,14 +184,14 @@ dl.row-item dt a {
 
 dl a.row-item-link {						/* topic row icon links */
 	display: block;
-	width: 30px;
-	height: 30px;
+	width: 34px;
+	height: 34px;
 	padding: 0;
 	position: absolute;
-	top: 50%;
+	top: 22px; /* row padding + row :before top adjustment */
 	left: 0;
 	margin-top: -15px;
-	margin-left: 9px;
+	margin-left: 11px;
 }
 
 dd.posts, dd.topics, dd.views, dd.extra, dd.mark {
@@ -557,8 +557,7 @@ blockquote .codebox {
 	clear: left;
 }
 
-.attachbox p.stats
-{
+.attachbox p.stats {
 	line-height: 110%;
 	clear: left;
 }
@@ -569,7 +568,6 @@ blockquote .codebox {
 }
 
 .attach-image img {
-/*	cursor: move; */
 	cursor: default;
 }
 
@@ -691,6 +689,10 @@ fieldset.polls dd div {
 	margin-bottom: 10px;
 }
 
+.profile-rank img {
+	max-width: 160px;
+}
+
 /* Post-profile avatars */
 .postprofile .has-avatar .avatar-container {
 	margin-bottom: 15px;
@@ -803,4 +805,8 @@ table.fixed-width-table {
 .postbody .content::-webkit-scrollbar-thumb, .topicreview::-webkit-scrollbar-thumb, .post_details::-webkit-scrollbar-thumb, .codebox code::-webkit-scrollbar-thumb, .attachbox dd::-webkit-scrollbar-thumb, .attach-image::-webkit-scrollbar-thumb, .dropdown-extended ul::-webkit-scrollbar-thumb {
 	background: rgba(0, 0, 0, .3);
 	border-radius: 3px;
+}
+
+.group-description ol, .group-description ul {
+	list-style-position: inside;
 }

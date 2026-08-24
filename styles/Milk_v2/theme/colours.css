@@ -794,7 +794,6 @@ dl.mini dt {
 ----------------------------------------*/
 /* PM Message history */
 .current {
-	color: #000000 !important;
 }
 
 /* PM marking colours */
@@ -947,10 +946,6 @@ input.button1:focus, input.button2:focus, input.button3:focus {
 
 input.disabled {
 	color: #666666;
-}
-
-.specialbutton, .specialbutton .icon, .specialbutton:hover, .specialbutton:hover .icon {
-	color: #FFFFFF !important;
 }
 
 /* Approve and unapprove */

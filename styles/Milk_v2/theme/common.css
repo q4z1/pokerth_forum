@@ -372,8 +372,10 @@ a.header-avatar:hover {
 a.header-avatar img {
 	margin-bottom: 2px;
 	max-height: 20px;
+	max-width: 20px;
 	vertical-align: middle;
 	width: auto;
+	height: auto;
 }
 
 a.header-avatar span:after {
@@ -744,6 +746,10 @@ table.info tbody th {
 	width: auto;
 	text-align: left;
 	max-width: 100%;
+}
+
+.avatar-rank-container {
+	max-width: 20%;
 }
 
 .left-box.profile-details {

@@ -55,8 +55,10 @@ body {border-top: 0px solid;}
 
 
 .fd_dark .profile_widget_avatar img {
-	width: 70px;
-	height: 70px;
+	max-width: 70px;
+	max-height: 70px;
+	width: auto;
+	height: auto;
 }
 
 
@@ -176,6 +178,7 @@ body.content_block_header_stripe li.header:before, .fancy_panel:before, .sidebar
 .profile_widget_info {
 	float: left;
 	margin-left: 30px;
+	margin-bottom: 30px;
 }
 
 .fd_dark .profile_widget_info {
@@ -394,6 +397,182 @@ span.mini_date {
 .forumlist_grid ul.topiclist dt .list-inner {
 	margin-right: 0 !important;
 }
+
+
+
+
+
+/* Simple Forumlist
+---------------------------------------- */
+
+
+
+
+
+/* Grid Forumlist (Icons)
+---------------------------------------- */
+
+/* For easy margins on grid items, we apply them to all sides. Here we need to pull the container
+margins out so that the grid items 'appear' to be flush with the container and center column */
+.forumlist_grid_icons ul.forums {
+	margin: 0;
+}
+
+.forumlist_grid_icons .forabg {
+	border: none !important;
+	margin-bottom: 60px;
+}
+
+.forumlist_grid_icons ul.forums li.row {
+	background: none !important;
+}
+
+.forumlist_grid_icons li.row {
+	margin-bottom: 0px !important;
+}
+
+/* Sets the 3 column structure */
+.forumlist_grid_icons li.row {
+	float: left;
+	display: block;
+	width: 33.3333333%;
+	border: none;
+	padding: 0;
+
+}
+
+.forumlist_grid_icons .grid_image_container {
+	margin-bottom: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    position: relative;
+    border: 1px solid rgba(0,0,0,.05);
+    transition: transform .1s;
+	background: #FFFFFF;
+}
+
+
+.grid_image_container:hover {
+    transform: scale(1.04);
+}
+
+.forumlist_grid_icons .grid_image_container:last-child {
+
+}
+
+.forumlist_grid_icons .tile_inner {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    min-height: 200px;
+}
+
+.forumlist_grid_icons .tile_row_1 {
+    background-size: 64px;
+    background-image: url('./images/comment.png');
+    background-position: left top;
+    background-repeat: no-repeat;
+    height: 100px;
+    overflow: hidden;
+}
+
+.forumlist_grid_icons .tile_row_1.tile_has_icon {
+    padding-left: 84px;
+    min-height: 100px;
+}
+
+.forumlist_grid_icons .tile_row_2 {
+    margin-top: 15px;
+}
+
+.tile_row_25 {
+    width: 25%;
+    float: left;
+}
+
+.tile_row_50 {
+    width: 50%;
+    float: left;
+}
+
+.mini_label, .mini_number {
+    display: block;
+}
+
+.mini_label, .mini_number, .forumlist_grid_icons .forum_description {
+    color: rgba(0,0,0,.4);
+}
+
+.mini_number, .mini_date {
+    padding-top: 10px;
+}
+
+.mini_date {
+    padding-top: 13px;
+}
+
+span.mini_date {
+    display: block;
+}
+
+
+
+
+.tile_row_2:before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    margin-bottom: 10px;
+}
+
+.forumlist_grid_icons .forum_description {
+    display: block;
+    margin-top: 15px;
+}
+
+.grid_cat_title {
+    margin-bottom: 15px;
+    margin-left: 15px;
+	margin-top: 15px;
+    display: block;
+}
+
+/* Since this is the only column, we don't need to push the others over to the right */
+.forumlist_grid_icons ul.topiclist dt .list-inner {
+	padding: 0;
+	margin: 0;
+}
+
+.forumlist_grid_icons li.row:hover {
+	background: none;
+}
+
+.forumlist_grid_icons a:hover {
+    text-decoration: none;
+}
+
+.forumlist_grid_icons a:hover .forumlist_grid_icons_title {
+    display: none;
+}
+
+.forumlist_grid_icons_numbers {
+	bottom: 0;
+}
+
+.grid_desc {
+	padding: 20px;
+	box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+	overflow: hidden;
+}
+
+/* Stop the responsive breakpoints affecting the grid layout */
+.forumlist_grid_icons ul.topiclist dt .list-inner {
+	margin-right: 0 !important;
+}
+
+
+
 
 
 
