@@ -7,6 +7,9 @@ cache/*
 !cache/.htaccess
 !cache/index.html
 composer.phar
+/backups/
+styles/*.zip
+/styles/Milk_v2_upstream/
 /config.php
 log_file_analysis/config/upload_defs.php
 files/*
