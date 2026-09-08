@@ -290,16 +290,18 @@ a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, 
 		.headerbar { min-height: 557px; }
 	}
 
-	/* Die Navbar rendert zunächst mehrzeilig (gemessen 98 px) und fällt erst
-	   auf eine Zeile (38 px) zusammen, wenn forum_fn.js die überzähligen
-	   Einträge ausblendet und #nav-main die Klasse "compact" gibt. Der Sprung
-	   verschiebt die ganze Seite und trat je nach Ladereihenfolge mal vor,
-	   mal nach dem ersten Paint ein. Hier wird die Endhöhe vorweggenommen,
-	   bis das Skript übernimmt; bleibt es aus, ist die Leiste einzeilig
-	   beschnitten – die Quick-Links stehen als erster Eintrag weiter bereit. */
-	@media (max-width: 767px) {
-		#nav-main:not(.compact) { max-height: 38px; overflow: hidden; }
-	}
+	/* Die Navbar rendert vor dem Reflow durch forum_fn.js mehrzeilig und fällt
+	   danach auf eine Zeile zusammen – das kostet etwas CLS. Ein früherer
+	   Versuch, das per "#nav-main:not(.compact) { max-height: 38px;
+	   overflow: hidden }" zu kaschieren, hat das Mobil-Menü lahmgelegt:
+	   - overflow:hidden beschneidet auch das Quick-Links-Dropdown, das als
+	     Nachfahre von #nav-main hängt -> Tippen auf ☰ zeigt nichts;
+	   - forum_fn.js misst dann nur noch die beschnittenen 38 px, hält die
+	     Leiste für einzeilig und vergibt die Klasse "compact" nie -> der
+	     Reflow, der die Beschneidung wieder aufheben würde, läuft nie.
+	   Deshalb hier keine Höhenklemme mehr. Falls der CLS wieder stört, gehört
+	   die Lösung in den Reflow (check() nach Font-Load erneut anstoßen), nicht
+	   in eine CSS-Klemme auf #nav-main. */
 </style>
 </head>
 <body id="phpbb" class="nojs notouch section-{SCRIPT_NAME} {S_CONTENT_DIRECTION} {BODY_CLASS}<!-- IF STYLE_SETTINGS_CONFIG_SIDEBARS and STYLE_SETTINGS_CONFIG_SIDEBAR_PLACEMENT == 'Right Only' --> sidebar-right-only<!-- ELSEIF STYLE_SETTINGS_CONFIG_SIDEBARS and STYLE_SETTINGS_CONFIG_SIDEBAR_PLACEMENT == 'Left Only' --> sidebar-left-only<!-- ELSEIF STYLE_SETTINGS_CONFIG_SIDEBARS --> sidebar-both<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_LAYOUT_TYPE --> body-layout-{STYLE_SETTINGS_CONFIG_LAYOUT_TYPE}<!-- ENDIF --> content_block_header_<!-- IF STYLE_SETTINGS_CONFIG_CONTENT_BLOCK_HEADER == 'Stripe' -->stripe<!-- ELSE -->block<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_HIGH_CONTRAST_LINKS --> high_contrast_links<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_NAVBAR_POSITION == 'Inside Header' --> navbar_i_header<!-- ELSE --> navbar_o_header<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_ROUNDED_AVATARS --> force_rounded_avatars<!-- ENDIF --><!-- IF STYLE_SETTINGS_CONFIG_CSS_IMAGE_REPLACE --> css_icons_disabled<!-- ELSE --> css_icons_enabled<!-- ENDIF -->">
