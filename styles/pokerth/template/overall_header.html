@@ -146,6 +146,10 @@ a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, 
 	<link href="{T_THEME_PATH}/colour-presets/default.css?assets_version={T_ASSETS_VERSION}" rel="stylesheet">
 <!-- ENDIF -->
 
+<!-- Light-Mode Kontraskorrekturen: MUSS nach stylesheet.css und nach dem
+     Farb-Preset laden, damit html:not(.fd_dark)-Regeln gewinnen. -->
+<link href="{T_THEME_PATH}/contrast-light.css?assets_version={T_ASSETS_VERSION}" rel="stylesheet">
+
 <!-- IF not STYLE_SETTINGS_CONFIG_DISABLE_CSS_ANIMATIONS -->
 <!-- animate.css (71 KB) liefert nur Einblend-Effekte und blockiert als
      gewöhnliches Stylesheet trotzdem den ersten Paint. Über media="print"

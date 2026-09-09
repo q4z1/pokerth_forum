@@ -1,0 +1,142 @@
+/* ============================================================================
+   Light-Mode Kontrast- und Flächenkorrekturen
+   ----------------------------------------------------------------------------
+   Wird in overall_header.html NACH stylesheet.css UND nach dem Farb-Preset
+   (colour-presets/Titanium.css) eingebunden und überschreibt gezielt die
+   Stellen, an denen der Light Mode gegen WCAG AA (4.5:1) verstößt.
+
+   Alles ist mit html:not(.fd_dark) gescoped – der Dark Mode kann davon
+   NICHT betroffen sein.
+
+   Analyse: siehe Puppeteer-Audit 2026-09-09. Kernprobleme waren:
+     - colours.css:  html,body { color: rgba(0,0,0,.4) }  → Basis-Text ~#999
+     - colours.css:  p.author  { color: #bec4c9 }          → Beitragsdatum 1.8:1
+     - Titanium.css: Akzent #859398 als Textfarbe auf hellem Grund → 3.2:1
+     - reinweißer #inner-wrap über die volle Spalte, Flächen ~#f9f9f9
+   ========================================================================== */
+
+/* ----------------------------------------------------------------------------
+   1. Textfarben
+   ------------------------------------------------------------------------- */
+
+/* Basis: rgba(0,0,0,.4) → kräftig genug für Fließtext, der keine eigene
+   Regel hat. Primär-Inhalt (.content/.postbody) setzt ohnehin eigenes #333. */
+html:not(.fd_dark) body {
+	color: rgba(0, 0, 0, .8);
+}
+
+/* Bewusst gedämpfter Sekundärtext – aber lesbar (~#616268 ≈ 5:1 auf Weiß)
+   statt ausgewaschen. Zähler, Datumsangaben, Beschreibungen, Paginierung. */
+html:not(.fd_dark) .mini_label,
+html:not(.fd_dark) .mini_number,
+html:not(.fd_dark) .mini_date,
+html:not(.fd_dark) .forumlist_grid .forum_description,
+html:not(.fd_dark) span.forum_description,
+html:not(.fd_dark) .pagination,
+html:not(.fd_dark) li.row .responsive-show,
+html:not(.fd_dark) .topiclist dfn,
+html:not(.fd_dark) dl.row-item dfn,
+html:not(.fd_dark) dfn,
+html:not(.fd_dark) .postprofile,
+html:not(.fd_dark) p.author,
+html:not(.fd_dark) p.author a {
+	color: #5f6067;
+}
+
+/* Beitragsdatum-Zeile: Preset/colours.css gaben #bec4c9 (1.8:1). */
+html:not(.fd_dark) p.author time,
+html:not(.fd_dark) .postbody p.author,
+html:not(.fd_dark) .search .author {
+	color: #5f6067;
+}
+
+/* ----------------------------------------------------------------------------
+   2. Akzentfarbe als Text auf hellem Grund
+   Titanium.css färbt eine große Selektor-Gruppe mit #859398 (3.2:1).
+   Für die Fälle, die auf hellem Grund landen, dunkleres Titanium (~4.7:1).
+   Dark-Kontexte (.fd_dark a, .dark_base …, Tabs auf Verlauf) bleiben unberührt.
+   ------------------------------------------------------------------------- */
+html:not(.fd_dark) a:hover,
+html:not(.fd_dark) a.postlink,
+html:not(.fd_dark) a.postlink:visited,
+html:not(.fd_dark) .button-secondary:hover,
+html:not(.fd_dark) .button-secondary:focus,
+html:not(.fd_dark) .notification_unread,
+html:not(.fd_dark) .navigation a:hover {
+	color: #566a72;
+}
+
+/* Standard-Linkfarbe #676767 ist ok (5.2:1); Hover soll erkennbar dunkler,
+   nicht heller werden. */
+html:not(.fd_dark) a:hover {
+	text-decoration: underline;
+}
+
+/* Primär-Buttons ("New Topic", "Post Reply" …): weiß auf #859398 = 3.2:1.
+   Grund abdunkeln (#4f5d63 → weiß = 6.0:1). */
+html:not(.fd_dark) .specialbutton,
+html:not(.fd_dark) a.specialbutton,
+html:not(.fd_dark) input.specialbutton,
+html:not(.fd_dark) .panel .specialbutton,
+html:not(.fd_dark) .button-secondary,
+html:not(.fd_dark) a.button1,
+html:not(.fd_dark) input.button1,
+html:not(.fd_dark) a.button2,
+html:not(.fd_dark) input.button2 {
+	background: #4f5d63;
+	border-color: #414d52;
+	color: #ffffff;
+}
+html:not(.fd_dark) .specialbutton:hover,
+html:not(.fd_dark) a.specialbutton:hover,
+html:not(.fd_dark) input.specialbutton:hover,
+html:not(.fd_dark) .button-secondary:hover,
+html:not(.fd_dark) a.button1:hover,
+html:not(.fd_dark) input.button1:hover,
+html:not(.fd_dark) a.button2:hover,
+html:not(.fd_dark) input.button2:hover {
+	background: #414d52;
+	color: #ffffff;
+}
+
+/* Codebox-Text (#2e8b57 auf #f8f8f8 = 4.0:1) minimal abdunkeln. */
+html:not(.fd_dark) .codebox code,
+html:not(.fd_dark) code {
+	color: #216e45;
+}
+
+/* ----------------------------------------------------------------------------
+   3. Flächen: Off-White-Canvas + weiße Karten
+   #inner-wrap war reinweiß über die volle Spalte, Container ~#f9f9f9 →
+   praktisch keine Figur/Grund-Trennung.
+   ------------------------------------------------------------------------- */
+html:not(.fd_dark) #inner-wrap {
+	background-color: #f1f3f6;
+}
+
+/* Die Inhalts-Container werden zu weißen Karten mit Haarlinie. */
+html:not(.fd_dark) .forabg,
+html:not(.fd_dark) .forumbg,
+html:not(.fd_dark) .viewtopic_wrapper,
+html:not(.fd_dark) .panel {
+	background-color: #ffffff;
+	border: 1px solid #e4e7ec;
+}
+
+/* Zeilen in den Listen bleiben weiß, Trennlinie etwas deutlicher. */
+html:not(.fd_dark) .panel-container .panel li.row {
+	background-color: #ffffff;
+	border-bottom-color: #eaecf0;
+}
+
+/* Beiträge als eigene Karten. */
+html:not(.fd_dark) .post {
+	background-color: #ffffff;
+	border-color: #e4e7ec;
+}
+
+/* Codeboxen / Zitate leicht vom Kartenweiß abheben. */
+html:not(.fd_dark) .codebox,
+html:not(.fd_dark) blockquote {
+	background-color: #f5f6f8;
+}
