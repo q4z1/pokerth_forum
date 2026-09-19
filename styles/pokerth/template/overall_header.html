@@ -261,12 +261,14 @@ a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, 
 	#discw { min-height: 500px; }
 
 	/* Die Download-Karte im Header kommt aus einer Vue-Komponente und klappt
-	   beim Mounten auf. Gemessene Endhöhen: 250 px mobil, 150 px ab Tablet.
+	   beim Mounten auf. Gemessene Endhöhen: 250 px mobil, 150 px ab Tablet,
+	   seit dem Google-Play-Badge (2026-09-15) je +64 px (52 px Badge + 12 px
+	   Abstand) – gerechnet, nicht gemessen.
 	   Für #rightcolumn wurde dasselbe versucht und wieder verworfen – die
 	   Spalte ist je nach Seite unterschiedlich hoch, eine feste Reservierung
 	   hat den CLS auf dem Leaderboard von 0,038 auf 0,193 verschlechtert. */
-	#vue-header { min-height: 250px; }
-	@media (min-width: 768px) { #vue-header { min-height: 150px; } }
+	#vue-header { min-height: 314px; }
+	@media (min-width: 768px) { #vue-header { min-height: 214px; } }
 
 	/* Die grossen Tabellen der App-Seiten. Beide Tags stehen bereits im
 	   ausgelieferten HTML, die Reservierung greift also vor dem Mounten –
@@ -286,12 +288,13 @@ a:hover, .navbar_footer a, .copyright_bar a, .social_links_footer a:hover span, 
 	   Gemessener Verlauf bei 412 px: 179 -> 289 -> 389 -> 539 px, der letzte
 	   Sprung nach 13,6 s. Das verschiebt die komplette Seite darunter und war
 	   der größte Einzelposten beim CLS. Endhöhen aus der Messung:
-	   412 px -> 539, 768 px -> 557, ab 1024 px wächst sie praktisch nicht mehr. */
+	   412 px -> 539, 768 px -> 557, ab 1024 px wächst sie praktisch nicht mehr.
+	   Seit dem Google-Play-Badge in der Header-Karte (2026-09-15) je +64 px. */
 	@media (max-width: 767px) {
-		.headerbar { min-height: 539px; }
+		.headerbar { min-height: 603px; }
 	}
 	@media (min-width: 768px) and (max-width: 1023px) {
-		.headerbar { min-height: 557px; }
+		.headerbar { min-height: 621px; }
 	}
 
 	/* Die Navbar rendert vor dem Reflow durch forum_fn.js mehrzeilig und fällt
