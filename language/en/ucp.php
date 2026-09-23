@@ -47,17 +47,61 @@ $lang = array_merge($lang, array(
 	You agree that “%1$s” reserves the right to remove, edit, move, or close any topic at any time, at our sole discretion. As a user, you agree that any information you enter may be stored in a database. While this information will not be disclosed to any third party without your consent, neither “%1$s” nor phpBB shall be held responsible for any hacking attempt that may lead to data being compromised.
 	',
 
-	'PRIVACY_POLICY'		=> 'This policy explains in detail how “%1$s” and its affiliated companies (hereinafter “we”, “us”, “our”, “%1$s”, “%2$s”) and phpBB (hereinafter “they”, “them”, “their”, “phpBB software”, “www.phpbb.com”, “phpBB Limited”, “phpBB Teams”) use information collected during your use of this site (hereinafter “your information”).
-	<br><br>
-	Your information is collected in two ways. When you browse “%1$s”, the phpBB software will create several cookies. Cookies are small text files stored in your web browser’s temporary files. The first two cookies contain a user identifier (hereinafter “user-id”) and an anonymous session identifier (hereinafter “session-id”), both automatically assigned by the phpBB software. A third cookie will be created once you have browsed topics within “%1$s”. It stores information about which topics you have read, thereby improving your user experience.
-	<br><br>
-	We may also create cookies external to the phpBB software while you are browsing “%1$s”. These fall outside the scope of this document, which only covers cookies created by the phpBB software.
-	<br><br>
-	The second way we collect information is through what you submit to us. This includes but is not limited to: posting as an anonymous user (hereinafter “anonymous posts”), registering on “%1$s” (hereinafter “your account”), posts you submit after registering and while logged in (hereinafter “your posts”).
-	<br><br>
-	Your account will contain at a minimum: a unique username (hereinafter “your username”), a personal password used to log in (hereinafter “your password”), a valid email address (hereinafter “your email”). Your account information on “%1$s” is protected by the data-protection laws applicable in the country that hosts us. Any information beyond your username, password, and email address that is requested during registration may be mandatory or optional, at the discretion of “%1$s”. In all cases, you may choose what information in your account is publicly displayed. You may also opt in or out of automatically generated emails from the phpBB software.
-	<br><br>
-	Your password is stored as a one-way hash to ensure security. However, we recommend that you do not reuse the same password across multiple websites. Your password is the key to your account on “%1$s”, so please keep it secure. Under no circumstances will anyone affiliated with “%1$s”, phpBB, or any third party legitimately ask for your password. If you forget your password, you can use the “I forgot my password” feature provided by the phpBB software. This process requires you to submit your username and email address, after which the phpBB software will generate a new password for you to regain access to your account.
+	'PRIVACY_POLICY'		=> '<p><em>Last updated: 23 September 2026</em></p>
+	<p>This privacy policy explains which personal data is processed when you use the PokerTH game client, the official PokerTH game server and the website www.pokerth.net including the forum.</p>
+
+	<h3>1. Controller</h3>
+	<p>Kai Philipp<br>St.-Jürgen-Str. 9, 24937 Flensburg, Germany<br>E-mail: <a href="mailto:webmaster@pokerth.net">webmaster@pokerth.net</a></p>
+
+	<h3>2. The PokerTH game client</h3>
+	<p>The PokerTH client contains no advertising, no analytics and no tracking. It does not send any data to other systems unless you start a feature that needs a network connection. These are:</p>
+	<ul>
+		<li>playing on the official internet server, on another internet server or in a local network game (see section 3),</li>
+		<li>opening links to the website or to a player profile in your browser,</li>
+		<li>uploading a game log file for analysis (see section 5),</li>
+		<li>translating a chat message (see section 6).</li>
+	</ul>
+	<p>Single-player games against computer opponents work completely offline.</p>
+
+	<h3>3. Playing on the official game server</h3>
+	<p>When you connect to the official server, the following data is processed:</p>
+	<p><strong>Account data</strong> (registered players only): nickname, password (stored only as a hash), the e-mail address given at registration, the optional country and gender information, your avatar picture if you set one, the date of registration and of the last login, and the IP address of the last login.</p>
+	<p><strong>Connection and session data:</strong> nickname used for the session, whether you play as a guest, client type and version, operating system type (Windows, Linux, macOS, Android, iOS), the country derived from your IP address, your IP address, the time of connecting and disconnecting, and the game you were in when the session ended.</p>
+	<p><strong>Game data:</strong> the games you join (game name, start and end time) and your results in them. For ranking games your ranking position and statistics are shown publicly on the website under your nickname.</p>
+	<p><strong>Chat and messages:</strong> messages you write in the lobby and in games are sent to the other players. They are not logged on the server. Private messages to a player who is not online are stored on the server until they can be delivered.</p>
+	<p><strong>Avatar:</strong> if you choose an avatar picture, it is sent to the other players in your games.</p>
+	<p><strong>Purpose and legal basis:</strong> providing the online game you asked for (Art. 6(1)(b) GDPR). The IP address is additionally kept to handle abuse such as cheating, spam or ban evasion, and session data without the IP address is used for anonymous usage statistics shown on the website; both are based on our legitimate interest in running a fair and stable server (Art. 6(1)(f) GDPR).</p>
+	<p><strong>Retention:</strong> IP addresses are kept only as long as they are needed to handle abuse and are then removed. Account data is kept until you delete your account. Session records without an IP address are kept for statistics.</p>
+
+	<h3>4. Website and forum (www.pokerth.net)</h3>
+	<p><strong>Cloudflare:</strong> the website is delivered through Cloudflare, Inc. (USA), which protects it against attacks and speeds up delivery. Every request, including your IP address, the requested page, and your browser’s identification, passes through Cloudflare’s servers. Legal basis: our legitimate interest in a secure and available website (Art. 6(1)(f) GDPR). Cloudflare is certified under the EU-US Data Privacy Framework. Privacy policy: <a href="https://www.cloudflare.com/privacypolicy/">https://www.cloudflare.com/privacypolicy/</a></p>
+	<p><strong>Server log files:</strong> for every request the web server records the IP address, time, requested page, HTTP status, referring page and browser identification. We use these logs to detect and block attacks and abuse (Art. 6(1)(f) GDPR). They are kept only as long as needed for this purpose and are then deleted.</p>
+	<p><strong>Cookies:</strong> the forum software phpBB sets technically necessary cookies: a user identifier and an anonymous session identifier to keep you logged in, and a cookie that stores which topics you have read. No cookies are used for advertising or tracking. Legal basis: § 25(2) no. 2 TDDDG and Art. 6(1)(f) GDPR.</p>
+	<p><strong>Forum account and posts:</strong> when you register in the forum, your username, password (stored only as a one-way hash) and e-mail address are stored, plus any further profile information you choose to enter. You decide which of it is shown publicly, and you can opt in or out of e-mails sent by the forum. The content of your posts and private messages is stored, and the IP address of every post is recorded to enforce the forum rules. Legal basis: providing the forum you registered for (Art. 6(1)(b) GDPR) and our legitimate interest in preventing abuse (Art. 6(1)(f) GDPR).</p>
+	<p>Nobody affiliated with PokerTH will ever ask you for your password. If you forget it, use the “I forgot my password” function.</p>
+	<p><strong>Advertising:</strong> the website may show text links to partner sites. These are plain links without tracking.</p>
+
+	<h3>5. Log file analysis</h3>
+	<p>You can upload a game log file to the log file analysis on pokerth.net. This happens only when you start the upload. The log file contains the course of your games including the nicknames of the players involved. The uploaded file and your IP address (used to limit the number of uploads) are deleted after 24 hours. A number of older log files are kept as a historical record because the games in them are relevant to the ranking.</p>
+	<p>Legal basis: your request (Art. 6(1)(b) GDPR).</p>
+
+	<h3>6. Chat translation</h3>
+	<p>The client can translate a single chat message when you click the globe symbol next to it. Only that message is sent, directly from your computer, to Google Translate (translate.googleapis.com) and, if that fails, to MyMemory (api.mymemory.translated.net). No account data is sent. The providers receive your IP address and the message text and process them under their own privacy policies:</p>
+	<ul>
+		<li>Google: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></li>
+		<li>MyMemory / Translated: <a href="https://translated.com/confidentiality">https://translated.com/confidentiality</a></li>
+	</ul>
+	<p>You can switch this feature off in the client settings (“Offer chat translation”). Legal basis: your request (Art. 6(1)(b) GDPR).</p>
+
+	<h3>7. Hosting</h3>
+	<p>The game server and the website run on a privately operated server in the United States. Your data is therefore processed in the USA, a country outside the European Union whose level of data protection may be lower than in the EU. The transfer is necessary to provide the game and the website you use (Art. 49(1)(b) GDPR).</p>
+
+	<h3>8. Your rights</h3>
+	<p>You have the right to access your personal data, to have it corrected or deleted, to restrict its processing, to data portability, and to object to processing based on legitimate interest (Art. 15–21 GDPR). To exercise these rights, or to have your account deleted, contact <a href="mailto:webmaster@pokerth.net">webmaster@pokerth.net</a>.</p>
+	<p>You also have the right to lodge a complaint with a data protection supervisory authority, for example the one responsible for your place of residence or the one responsible for us: Unabhängiges Landeszentrum für Datenschutz Schleswig-Holstein (ULD), Kiel.</p>
+
+	<h3>9. Changes</h3>
+	<p>We update this policy when the software or the server changes. The current version is always available at <a href="https://www.pokerth.net/ucp.php?mode=privacy">https://www.pokerth.net/ucp.php?mode=privacy</a>.</p>
 	',
 ));
 
