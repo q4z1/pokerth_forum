@@ -1,0 +1,77 @@
+# PokerTH
+
+> Free, open-source Texas Hold’em poker for desktop and browser. Play online with the PokerTH community, host or join LAN and dedicated servers, practise offline against computer opponents, and take part in free community competitions. No ads and no real-money gambling.
+
+PokerTH is a free, open-source Texas Hold’em poker game developed since 2006. The project includes native desktop clients, a browser-based Progressive Web App, multiplayer server software, and a community ecosystem for rankings and tournaments. The clients connect to the PokerTH online network; the browser client does not create a separate player network.
+
+## Quick answers
+
+- Free: yes — no ads, no in-app purchases, no real-money gambling.
+- Platforms: native desktop clients and a browser client for desktop and mobile devices.
+- Account: a pokerth.net account provides access to account-based features such as Ranking games; guest play is available for supported normal games. LAN and dedicated servers can be joined with a nickname.
+- Offline play: practise against computer opponents without joining an online game.
+- Open source: PokerTH core software is licensed under the GPL; the web client is licensed under AGPL-3.0. Consult the respective repositories for exact license files and third-party notices.
+- Community: players can use the project website and forum, play on the official network, and join community-organized competitions.
+
+## Play PokerTH
+
+- Web client: https://webclient.pokerth.net/ — play in a browser or install the Progressive Web App on a supported device.
+- Desktop client and downloads: https://www.pokerth.net/app.php/download — official download entry point for available releases and platforms.
+- Web client FAQ: https://webclient.pokerth.net/faq
+- How to play: https://webclient.pokerth.net/how-to-play
+- Texas Hold’em rules: https://webclient.pokerth.net/rules
+- Poker hand rankings: https://webclient.pokerth.net/hand-rankings
+- Poker glossary: https://webclient.pokerth.net/glossary
+
+## Game modes and servers
+
+- Official online network: play on pokerth.net, using a guest login where supported or a free account for account-based features.
+- LAN and dedicated servers: join a PokerTH server using a nickname; the web client supports connecting to PokerTH servers beyond the official network.
+- Offline training: play against computer opponents.
+- Private tables: invite friends to a table; the web client can create an invitation link for supported games.
+- Community servers: the web client provides a server list and a way to propose community servers for listing, subject to administrator approval.
+
+The desktop and browser clients are different interfaces to the PokerTH game ecosystem. Online play uses the PokerTH server infrastructure rather than an independent web-client network.
+
+## Community and competitions
+
+PokerTH includes regular online play and community-run competitions. Competition websites and schedules are maintained separately from the main project website.
+
+- BBC: https://bbc.pokerth.net/registration — competition registration and calendar; https://bbc.pokerth.net/results — results.
+- WeCup (WEC): https://wec.pokerth.net/results — results; https://wec.pokerth.net/results/ranking — rankings.
+- Monthly Cup: https://monthlycup.pokerth.net/
+- Web client competitions and upcoming dates: https://webclient.pokerth.net/competitions
+- Official project website and community entry point: https://www.pokerth.net/
+
+The competition platforms are connected to the wider PokerTH community, but each competition site manages its own pages, schedules and results.
+
+## Key facts
+
+- Texas Hold’em poker with play money only.
+- Up to 10 players per table; spectators can watch running games where supported.
+- The web client supports 83 interface languages; standard poker action terms remain in English.
+- The browser client is a Progressive Web App and can be installed on supported devices.
+- The web client supports online play, LAN/dedicated servers, and offline practice against computer opponents.
+- Features and platform availability may vary by client and release.
+
+## Development and source code
+
+- Official PokerTH game and server source code: https://github.com/pokerth/pokerth
+- Web client source code: https://github.com/narmod/pokerth-web-client
+- Official website and community information: https://www.pokerth.net/
+
+The main PokerTH repository contains the native game and server code. The web client has its own repository and browser-focused implementation. Both belong to the broader PokerTH open-source ecosystem.
+
+## Project relationships
+
+- PokerTH core project: the game, native clients, server software and official online multiplayer ecosystem.
+- Desktop clients: native applications for supported operating systems, distributed through the official download page and relevant package stores.
+- Web client: browser-based and installable PWA interface that connects to PokerTH servers.
+- Official online network: shared multiplayer infrastructure used by compatible clients; the web client is not a separate network.
+- Community website and forum: project information, announcements, discussion, support and feedback.
+- BBC, WeCup and Monthly Cup: community competition platforms for organized play, results and rankings.
+- Source repositories: the main repository covers the core game and server; the web-client repository covers the browser client.
+
+## Further information
+
+For current releases, supported platforms, installation instructions and feature availability, use the official download page and the relevant source repositories. Competition schedules and results should be checked on the respective competition websites.
