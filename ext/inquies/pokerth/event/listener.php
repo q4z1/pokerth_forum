@@ -7,6 +7,31 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class listener implements EventSubscriberInterface
 {
+    /**
+     * Longest password we accept for new/changed passwords.
+     * pokerth_ranking.player.password is VARBINARY(64) and AES_ENCRYPT pads
+     * to the next 16-byte block, so 63 characters is the hard maximum.
+     * 50 keeps headroom and is still plenty for generated passwords.
+     */
+    const MAX_PASSWORD_LENGTH = 50;
+
+    /**
+     * Error text for passwords outside the allowed charset or length,
+     * or null when the password is fine.
+     */
+    public static function password_error($password)
+    {
+        if (!preg_match('/^[A-Za-z0-9.,_-]+$/', $password))
+        {
+            return "Password contains invalid characters. Only letters, numbers and the characters . , _ - are allowed.";
+        }
+        if (strlen($password) > self::MAX_PASSWORD_LENGTH)
+        {
+            return "Password is too long (" . strlen($password) . " characters). Please use at most " . self::MAX_PASSWORD_LENGTH . " characters.";
+        }
+        return null;
+    }
+
     protected $db;
     protected $request;
     protected $template;
@@ -537,10 +562,10 @@ class listener implements EventSubscriberInterface
 
         if(is_array($event['error']) && count($event['error']) > 0) return;
 
-        // Restrict password characters to allowed set for new registrations
-        if (!preg_match('/^[A-Za-z0-9.,_-]+$/', $event['data']['new_password']))
+        // Restrict password characters and length for new registrations
+        if ($password_error = self::password_error($event['data']['new_password']))
         {
-            $event['error'] = ["Password contains invalid characters. Only letters, numbers and the characters . , _ - are allowed."];
+            $event['error'] = [$password_error];
             return;
         }
 
@@ -589,6 +614,7 @@ class listener implements EventSubscriberInterface
 
     /**
      * Restrict password characters to the set the game client supports
+     * (and the length to what fits the ranking db)
      * when the password is changed via UCP -> Profile -> Edit account settings.
      *
      * @param \phpbb\event\data $event The event object
@@ -599,10 +625,10 @@ class listener implements EventSubscriberInterface
 
         if (empty($data['new_password'])) return;
 
-        if (!preg_match('/^[A-Za-z0-9.,_-]+$/', $data['new_password']))
+        if ($password_error = self::password_error($data['new_password']))
         {
             $error = $event['error'];
-            $error[] = "Password contains invalid characters. Only letters, numbers and the characters . , _ - are allowed.";
+            $error[] = $password_error;
             $event['error'] = $error;
         }
     }

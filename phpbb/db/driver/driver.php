@@ -984,33 +984,41 @@ abstract class driver implements driver_interface
 
 		if (!$this->return_on_error)
 		{
-			$message = 'SQL ERROR [ ' . $this->sql_layer . ' ]<br /><br />' . $this->sql_error_returned['message'] . ' [' . $this->sql_error_returned['code'] . ']';
-
-			// Show complete SQL error and path to administrators only
-			// Additionally show complete error on installation or if extended debug mode is enabled
-			// The DEBUG constant is for development only!
-			if ((isset($auth) && $auth->acl_get('a_')) || defined('IN_INSTALL') || $this->debug_sql_explain)
+			// PokerTH: never show the database error or the SQL to anybody,
+			// administrators included. Queries against the ranking db carry
+			// APP_SALT and plaintext passwords (AES_ENCRYPT). The full details
+			// go to the server error log only, redacted, tagged with a reference.
+			$error_ref = substr(md5(uniqid('', true)), 0, 10);
+			$log_sql = (string) $sql;
+			if (defined('APP_SALT') && APP_SALT !== '')
 			{
-				$message .= ($sql) ? '<br /><br />SQL<br /><br />' . htmlspecialchars($sql, ENT_COMPAT) : '';
+				$log_sql = str_replace(APP_SALT, '[APP_SALT]', $log_sql);
+			}
+			$log_sql = preg_replace("/AES_(EN|DE)CRYPT\\s*\\(\\s*'(?:[^'\\\\]|\\\\.)*'/i", "AES_$1CRYPT('[redacted]'", $log_sql);
+			$log_message = $this->sql_error_returned['message'];
+			if (defined('APP_SALT') && APP_SALT !== '')
+			{
+				$log_message = str_replace(APP_SALT, '[APP_SALT]', $log_message);
+			}
+			error_log('phpBB SQL ERROR [' . $error_ref . '] [' . $this->sql_layer . '] ' . $log_message . ' [' . $this->sql_error_returned['code'] . '] SQL: ' . preg_replace('/\\s+/', ' ', $log_sql));
+
+			$message = 'Database error (reference: ' . $error_ref . ')';
+
+			// If error occurs in initiating the session we need to use a pre-defined language string
+			// This could happen if the connection could not be established for example (then we are not able to grab the default language)
+			if (!isset($user->lang['SQL_ERROR_OCCURRED']))
+			{
+				$message .= '<br /><br />An sql error occurred while fetching this page. Please contact an administrator if this problem persists.';
 			}
 			else
 			{
-				// If error occurs in initiating the session we need to use a pre-defined language string
-				// This could happen if the connection could not be established for example (then we are not able to grab the default language)
-				if (!isset($user->lang['SQL_ERROR_OCCURRED']))
+				if (!empty($config['board_contact']))
 				{
-					$message .= '<br /><br />An sql error occurred while fetching this page. Please contact an administrator if this problem persists.';
+					$message .= '<br /><br />' . sprintf($user->lang['SQL_ERROR_OCCURRED'], '<a href="mailto:' . htmlspecialchars($config['board_contact'], ENT_COMPAT) . '">', '</a>');
 				}
 				else
 				{
-					if (!empty($config['board_contact']))
-					{
-						$message .= '<br /><br />' . sprintf($user->lang['SQL_ERROR_OCCURRED'], '<a href="mailto:' . htmlspecialchars($config['board_contact'], ENT_COMPAT) . '">', '</a>');
-					}
-					else
-					{
-						$message .= '<br /><br />' . sprintf($user->lang['SQL_ERROR_OCCURRED'], '', '');
-					}
+					$message .= '<br /><br />' . sprintf($user->lang['SQL_ERROR_OCCURRED'], '', '');
 				}
 			}
 
