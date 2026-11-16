@@ -433,21 +433,25 @@ class listener implements EventSubscriberInterface
      */
     public function add_pth_assets($event)
     {
-        // Vite erzeugt stabile Dateinamen – kein Manifest nötig.
-        // Cache-Busting via Dateizeitstempel.
+        // Vite hasht alle Dateinamen und schreibt sie ins Manifest
+        // (pthranking/public/.vite/manifest.json) – neue Version = neue URL,
+        // kein Cloudflare-Purge nötig. Fehlt das Manifest, greift der alte
+        // feste Name mit ?v=filemtime.
         $base = $this->phpbb_root_path . 'pthranking/public';
+        $pth = $this->get_vite_entry('resources/js/app.js', $base);
 
         $vars = [
-            'PTH_CSS_URL'        => $this->get_asset_url('/css/pth.css', $base),
-            'PTH_JS_URL'         => $this->get_asset_url('/js/pth.js', $base),
+            'PTH_CSS_URL'        => $pth['css'] ?? $this->get_asset_url('/css/pth.css', $base),
+            'PTH_JS_URL'         => $pth['js'] ?? $this->get_asset_url('/js/pth.js', $base),
         ];
 
         // Spectool CSS + JS nur auf der Spectool-Seite in den <head> laden
         $request_uri = $this->request->server('REQUEST_URI');
         if (strpos($request_uri, '/spectool') !== false)
         {
-            $vars['PTH_SPECTOOL_CSS_URL'] = $this->get_asset_url('/css/spectool.css', $base);
-            $vars['PTH_SPECTOOL_JS_URL']  = $this->get_asset_url('/js/spectool.js', $base);
+            $spectool = $this->get_vite_entry('resources/js/spectool.js', $base);
+            $vars['PTH_SPECTOOL_CSS_URL'] = $spectool['css'] ?? $this->get_asset_url('/css/spectool.css', $base);
+            $vars['PTH_SPECTOOL_JS_URL']  = $spectool['js'] ?? $this->get_asset_url('/js/spectool.js', $base);
         }
 
         // Auf klassischen phpBB-Seiten steuert das Vue-Bundle nur die
@@ -465,6 +469,34 @@ class listener implements EventSubscriberInterface
         }
 
         $this->template->assign_vars($vars);
+    }
+
+    /**
+     * Gehashte URLs eines Vite-Einstiegs aus dem Manifest (siehe
+     * pthranking/vite.config.js und App\Support\ViteAssets).
+     *
+     * @return array{js?: string, css?: string} leer, wenn das Manifest fehlt
+     */
+    private function get_vite_entry($src, $base)
+    {
+        static $manifest = null;
+        if ($manifest === null)
+        {
+            $file = $base . '/.vite/manifest.json';
+            $data = is_readable($file) ? json_decode((string) file_get_contents($file), true) : null;
+            $manifest = is_array($data) ? $data : [];
+        }
+        if (empty($manifest[$src]['file']))
+        {
+            return [];
+        }
+        $out = ['js' => '/pthranking/' . $manifest[$src]['file']];
+        // Ein Einstieg hat hier genau ein Stylesheet; die Templates binden eins ein.
+        if (!empty($manifest[$src]['css'][0]))
+        {
+            $out['css'] = '/pthranking/' . $manifest[$src]['css'][0];
+        }
+        return $out;
     }
 
     /**
