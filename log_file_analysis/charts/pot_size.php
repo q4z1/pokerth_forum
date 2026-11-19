@@ -3,6 +3,9 @@
 header("Last-Modified: ".date(DATE_RFC822));
 
 if(isset($_GET['ID'])) {
+	// Same filters as index.php: ID is a hex file name, UniqueGameID a number (2026-11-19).
+	$_GET['ID'] = preg_replace('/[^abcdef0123456789]/','',$_GET['ID']);
+	$_GET['UniqueGameID'] = isset($_GET['UniqueGameID']) ? (int) $_GET['UniqueGameID'] : 0;
 
 	$log_file = "../upload/".$_GET['ID'].".pdb";
 		

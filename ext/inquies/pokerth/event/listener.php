@@ -544,8 +544,9 @@ class listener implements EventSubscriberInterface
      */
     public function afterActivation($event)
     {
+        $username = $this->db->sql_escape($event['user_row']['username']);
         $sql = 'SELECT `player_id` FROM `'.$this->dbname.'`.`player`
-            WHERE username = \''.$event['user_row']['username'].'\';';
+            WHERE username = \''.$username.'\';';
         $result = $this->db->sql_query($sql);
         $player = $this->db->sql_fetchrow($result);
         if(!$player) {
@@ -556,15 +557,15 @@ class listener implements EventSubscriberInterface
 
         $sql = 'UPDATE `'.$this->dbname.'`.`player`
             set active = 1
-            WHERE player_id = \''.$player['player_id'].'\'';
+            WHERE player_id = '.(int) $player['player_id'];
         $result = $this->db->sql_query($sql);
         $this->db->sql_freeresult($result);
 
          $sql = '
             INSERT INTO `'.$this->dbname.'`.`player_ranking` (`player_id`, `username`, `final_score`, `points_sum`, `season_games`, `average_score`)
             VALUES(
-                '.$player['player_id'].',
-                \''.$event['user_row']['username'].'\',
+                '.(int) $player['player_id'].',
+                \''.$username.'\',
                 0,
                 0,
                 0,
@@ -585,8 +586,9 @@ class listener implements EventSubscriberInterface
      */
     public function afterReg($event)
     {
-        $username = $event['data']['username'];
-        $email = $event['data']['email'];
+        // Escaped: both come straight from the registration form (an email may contain ').
+        $username = $this->db->sql_escape($event['data']['username']);
+        $email = $this->db->sql_escape($event['data']['email']);
 
         // $username = "sp0ckss";
         // $email = "dummy36@pokerth.netss";

@@ -282,7 +282,7 @@ class reset_password
 
 				$sql = 'UPDATE `'.$this->dbname.'`.`player`
 							SET `password` = '.\inquies\pokerth\event\listener::ranking_password_sql($data['new_password']).'
-							WHERE `username` = \'' . $user_row['username'] . '\'';
+							WHERE `username` = \'' . $this->db->sql_escape($user_row['username']) . '\'';
 				$this->db->sql_query($sql);
 
 				$this->user->reset_login_keys();

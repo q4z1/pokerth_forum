@@ -154,27 +154,28 @@ class main_module
 		// Delete the user (and the posts if requested otherwise we keep them with the new username)
 		user_delete($delete_type, $this->user->data['user_id'], true);
 
+        $username = $db->sql_escape($this->user->data['username']);
         $sql = 'SELECT `player_id` FROM `'.$dbname.'`.`player`
-            WHERE username = \''.$this->user->data['username'].'\';';
+            WHERE username = \''.$username.'\';';
         $result = $db->sql_query($sql);
         $player = $db->sql_fetchrow($result);
         if($player) {
 			$sql = 'UPDATE `'.$dbname.'`.`player`
 				set active = 0, username = \'deleted_' . $player['player_id'] . '\', email = \'deleted_' . $player['player_id'] . '\'
-				WHERE username = \''.$this->user->data['username'].'\'';
+				WHERE username = \''.$username.'\'';
 			$result = $db->sql_query($sql);
 			$db->sql_freeresult($result);
         }
         $db->sql_freeresult($result);
 
         $sql = 'SELECT `player_id` FROM `'.$dbname.'`.`player_ranking`
-            WHERE username = \''.$this->user->data['username'].'\';';
+            WHERE username = \''.$username.'\';';
         $result = $db->sql_query($sql);
         $player_ranking = $db->sql_fetchrow($result);
         if($player_ranking) {
 			$sql = 'UPDATE `'.$dbname.'`.`player_ranking`
 				set username = \'deleted_' . $player_ranking['player_id'] . '\'
-				WHERE username = \''.$this->user->data['username'].'\'';
+				WHERE username = \''.$username.'\'';
 			$result = $db->sql_query($sql);
 			$db->sql_freeresult($result);
         }
@@ -185,8 +186,8 @@ class main_module
 			$sql = '
 				INSERT INTO `'.$dbname.'`.`suspended_nicknames` (`player_id`, `nickname`)
 				VALUES(
-					'.$player_id.',
-					\''.$this->user->data['username'].'\'
+					'.(int) $player_id.',
+					\''.$username.'\'
 				);
 			';
 			$result = $db->sql_query($sql);
