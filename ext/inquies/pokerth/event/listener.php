@@ -32,6 +32,28 @@ class listener implements EventSubscriberInterface
         return null;
     }
 
+    /**
+     * SQL literal (0x...) for pokerth_ranking.player.password: byte-identical to
+     * MariaDB AES_ENCRYPT(password, APP_SALT) with block_encryption_mode
+     * aes-128-ecb, but computed in PHP. Neither APP_SALT nor the plaintext
+     * password ever appear in SQL text (processlist, query logs, error pages).
+     */
+    public static function ranking_password_sql($password)
+    {
+        $key = str_repeat("\0", 16);
+        $salt = (string) APP_SALT;
+        for ($i = 0, $n = strlen($salt); $i < $n; $i++)
+        {
+            $key[$i % 16] = chr(ord($key[$i % 16]) ^ ord($salt[$i]));
+        }
+        $cipher = openssl_encrypt((string) $password, 'aes-128-ecb', $key, OPENSSL_RAW_DATA);
+        if ($cipher === false)
+        {
+            trigger_error('Password encryption failed.', E_USER_ERROR);
+        }
+        return '0x' . bin2hex($cipher);
+    }
+
     protected $db;
     protected $request;
     protected $template;
@@ -605,7 +627,7 @@ class listener implements EventSubscriberInterface
             INSERT INTO `'.$this->dbname.'`.`player` (`username`, `password`, `email`, `created`, `blocked`, `active`)
             VALUES(
                 \''.$username.'\',
-                AES_ENCRYPT(\''.$event['data']['new_password'].'\', \''.APP_SALT.'\'),
+                '.self::ranking_password_sql($event['data']['new_password']).',
                 \''.$email.'\',
                 \''.date("Y-m-d H:i:s").'\',
                 0,
@@ -681,10 +703,9 @@ class listener implements EventSubscriberInterface
         // The phpBB users table is only updated after this event, so
         // $this->user->data still holds the username the player row is keyed on.
         $username = $this->db->sql_escape($this->user->data['username']);
-        $password = $this->db->sql_escape($data['new_password']);
 
         $sql = 'UPDATE `'.$this->dbname.'`.`player`
-            SET `password` = AES_ENCRYPT(\''.$password.'\', \''.APP_SALT.'\')
+            SET `password` = '.self::ranking_password_sql($data['new_password']).'
             WHERE `username` = \''.$username.'\'';
         $result = $this->db->sql_query($sql);
         $this->db->sql_freeresult($result);

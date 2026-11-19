@@ -281,7 +281,7 @@ class reset_password
 				$this->db->sql_query($sql);
 
 				$sql = 'UPDATE `'.$this->dbname.'`.`player`
-							SET `password` = AES_ENCRYPT(\''.$data['new_password'].'\', \''.APP_SALT.'\')
+							SET `password` = '.\inquies\pokerth\event\listener::ranking_password_sql($data['new_password']).'
 							WHERE `username` = \'' . $user_row['username'] . '\'';
 				$this->db->sql_query($sql);
 
