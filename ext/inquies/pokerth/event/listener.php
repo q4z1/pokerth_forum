@@ -561,8 +561,10 @@ class listener implements EventSubscriberInterface
         $result = $this->db->sql_query($sql);
         $this->db->sql_freeresult($result);
 
-         $sql = '
-            INSERT INTO `'.$this->dbname.'`.`player_ranking` (`player_id`, `username`, `final_score`, `points_sum`, `season_games`, `average_score`)
+        // INSERT IGNORE: pth_forum has only SELECT/INSERT on player_ranking (no UPDATE),
+        // and an existing ranking row must not be reset on re-activation anyway.
+        $sql = '
+            INSERT IGNORE INTO `'.$this->dbname.'`.`player_ranking` (`player_id`, `username`, `final_score`, `points_sum`, `season_games`, `average_score`)
             VALUES(
                 '.(int) $player['player_id'].',
                 \''.$username.'\',
@@ -571,8 +573,6 @@ class listener implements EventSubscriberInterface
                 0,
                 0
             )
-            ON DUPLICATE KEY UPDATE final_score = 0, points_sum = 0, season_games = 0, average_score = 0;    
-            ;
         ';
         $result = $this->db->sql_query($sql);
         $this->db->sql_freeresult($result);       
