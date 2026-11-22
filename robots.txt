@@ -30,7 +30,6 @@ Disallow: /
 # deshalb hier wiederholt; Änderungen unten müssen hier mitgezogen werden.
 User-agent: Baiduspider
 User-agent: Applebot
-User-agent: GPTBot
 Disallow: /pthranking/
 Disallow: /player
 Disallow: /adm/
@@ -56,6 +55,46 @@ Disallow: /search.php
 Disallow: /ucp.php
 Disallow: /viewonline.php
 Disallow: /download/file.php?avatar=
+Disallow: /*?sid=
+Disallow: /*&sid=
+Disallow: /*?view=
+Disallow: /*&view=
+
+# GPTBot hat eine eigene Gruppe bekommen, damit er zusätzlich /gamelog und die
+# Anhänge (/download/file.php) auslässt. Am 22.11.2026 arbeitete er von
+# 74.7.227.16 die Sitemap mit rund 1,5 Anfragen pro Sekunde ab: 2.302
+# viewtopic.php, 132 gamelog (Spielprotokolle, kein Text für einen Index) und
+# 75 file.php-Screenshots in 20 Minuten. Das schaltete den Cloudflare-Filter für
+# eine Stunde ein. Er hält sich an diese Datei, daher wird seine Last hier
+# gesteuert; AttackCheck zählt seine IP-Bereiche seitdem nicht mehr mit.
+# Sonst gilt dasselbe wie für die Gruppe darüber, Änderungen dort mitziehen.
+User-agent: GPTBot
+Disallow: /gamelog
+Disallow: /download/file.php
+Disallow: /pthranking/
+Disallow: /player
+Disallow: /adm/
+Disallow: /bin/
+Disallow: /cache/
+Disallow: /config/
+Disallow: /docs/
+Disallow: /ext/
+Disallow: /includes/
+Disallow: /language/
+Disallow: /phpbb/
+Disallow: /store/
+Disallow: /upd/
+Disallow: /vendor/
+Allow: /ext/*.css
+Allow: /ext/*.js
+Disallow: /cron.php
+Disallow: /mcp.php
+Disallow: /memberlist.php
+Disallow: /posting.php
+Disallow: /report.php
+Disallow: /search.php
+Disallow: /ucp.php
+Disallow: /viewonline.php
 Disallow: /*?sid=
 Disallow: /*&sid=
 Disallow: /*?view=
